@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Class-Path: /%CXF_HOME%\lib\cxf-manifest.jar
+
