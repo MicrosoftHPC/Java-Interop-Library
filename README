@@ -1,0 +1,37 @@
+Introduction
+============
+
+	This is the Java library providing interop capability with the SOA feature
+	on Windows HPC cluster.
+
+	All the source code reside in src\ folder. Samples are put under samples\.
+	
+Prerequisites
+=============
+
+    1) JDK 1.6.0.23
+       Please follow JDK's instructions on how to install.
+       
+    2) CXF 2.4.0 (Warning: other versions of CXF may not work.)
+       Download apache-cxf-2.4.0.zip to home directory. unzip it there.
+
+How to build
+============
+
+	Assuming you are on Linux,
+
+	1) On client machine download and install all "Prerequisites".
+	
+	2) Switch to src\ directory and edit makejar.sh 
+	   ( makejar.cmd if you are one Windows ).
+	
+	3) Make sure CXF_HOME points to the correct location.
+	   E.g., "export CXF_HOME=~/apache-cxf-2.4.0".
+	   
+	4) Run "makejar.sh" without any argument.
+	
+How to use
+==========
+
+	Refer to sample\helloworld\README.Linux.txt for how to use this library.
+	
