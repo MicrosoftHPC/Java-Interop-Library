@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Class-Path: "%CCP_HOME%\Bin\Microsoft-HpcSession-3.0.jar"
+

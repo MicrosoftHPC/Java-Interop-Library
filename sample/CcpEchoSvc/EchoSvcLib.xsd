@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/EchoSvcLib" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/EchoSvcLib" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="StatisticInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="endTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="startTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="taskId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="StatisticInfo" nillable="true" type="tns:StatisticInfo" />
+</xs:schema>

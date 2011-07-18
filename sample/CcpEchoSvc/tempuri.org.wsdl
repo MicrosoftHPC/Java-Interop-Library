@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://tempuri.org/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" schemaLocation="tempuri.org.xsd" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" schemaLocation="schemas.microsoft.com.2003.10.Serialization.xsd" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/EchoSvcLib" schemaLocation="EchoSvcLib.xsd" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IEchoSvc_Echo_InputMessage">
+    <wsdl:part name="parameters" element="tns:Echo" />
+  </wsdl:message>
+  <wsdl:message name="IEchoSvc_Echo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EchoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEchoSvc_EchoData_InputMessage">
+    <wsdl:part name="parameters" element="tns:EchoData" />
+  </wsdl:message>
+  <wsdl:message name="IEchoSvc_EchoData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EchoDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IEchoSvc_GenerateLoad_InputMessage">
+    <wsdl:part name="parameters" element="tns:GenerateLoad" />
+  </wsdl:message>
+  <wsdl:message name="IEchoSvc_GenerateLoad_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GenerateLoadResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IEchoSvc">
+    <wsdl:operation name="Echo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEchoSvc/Echo" message="tns:IEchoSvc_Echo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEchoSvc/EchoResponse" message="tns:IEchoSvc_Echo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EchoData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEchoSvc/EchoData" message="tns:IEchoSvc_EchoData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEchoSvc/EchoDataResponse" message="tns:IEchoSvc_EchoData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GenerateLoad">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEchoSvc/GenerateLoad" message="tns:IEchoSvc_GenerateLoad_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEchoSvc/GenerateLoadResponse" message="tns:IEchoSvc_GenerateLoad_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DefaultBinding_IEchoSvc" type="tns:IEchoSvc">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Echo">
+      <soap:operation soapAction="http://tempuri.org/IEchoSvc/Echo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EchoData">
+      <soap:operation soapAction="http://tempuri.org/IEchoSvc/EchoData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateLoad">
+      <soap:operation soapAction="http://tempuri.org/IEchoSvc/GenerateLoad" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="EchoSvc">
+      <wsdl:port name="DefaultBinding_IEchoSvc" binding="tns:DefaultBinding_IEchoSvc">
+          <soap:address location="https://localhost/Broker" />
+      </wsdl:port>
+  </wsdl:service>
+
+</wsdl:definitions>
