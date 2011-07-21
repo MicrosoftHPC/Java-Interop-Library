@@ -273,7 +273,8 @@ public class SessionBase
             }
             else {
                 if(eprs == null) {
-                    SessionAttachInfo attachInfo = new SessionAttachInfo(startInfo.getHeadnode(), sessionid);
+                    SessionAttachInfo attachInfo = new SessionAttachInfo(startInfo.getHeadnode(), sessionid, 
+                            startInfo.getUsername(), startInfo.getPassword());
                     return attachInternal(attachInfo, timeoutMilliseconds);
                 }
             }
