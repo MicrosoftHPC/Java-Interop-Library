@@ -501,7 +501,7 @@ public class SessionBase
 
         SessionBase session;
         if (!info.isDurable()) {
-            session = new Session(info, attachInfo.getHeadnode(), false);
+            session = new Session(info, attachInfo.getHeadnode(), true);
         } else {
             session = new DurableSession(info, attachInfo.getHeadnode());
         }
