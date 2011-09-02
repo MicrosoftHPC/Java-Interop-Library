@@ -57,10 +57,5 @@ Service deployment:
     - Copy JavaEchoSvc.config to the service registrion directory.
 
 Consume the sample service using sample client:
-    - Open the ---???--- folder.
-
-    - Open SampleClient.sln using Visual Studio.
-
-    - In the source code, replace the headnode variable with its actual name.
-
-    - Build the solution and run.
+    - Go to ..\helloworld folder
+    - Refer to the README file and run the java sample client 

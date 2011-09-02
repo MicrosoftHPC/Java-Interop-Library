@@ -13,10 +13,10 @@ import com.microsoft.hpc.scheduler.session.*;
 
 public class HelloWorld
 {
-    public static String username = "";
-    public static String password = "";  
-    private static String headnode = "";
-    private static String serviceName = "CcpEchoSvc";
+    public static String username = ""; // valid username to submit SOA job
+    public static String password = "";  // valid user password 
+    private static String headnode = ""; // HPC cluster headnode hostname
+    private static String serviceName = "JavaEchoSvc";
     private static int nrequests = 12;
 
     public static void main(String[] args)
