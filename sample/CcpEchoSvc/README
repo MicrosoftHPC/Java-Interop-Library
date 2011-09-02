@@ -16,10 +16,10 @@ How to create the jar
         set dllFile=EchoSvcLib.dll
         set ServiceWSDL=tempuri.org.wsdl
 
-        set JAVA_HOME=c:\Program Files\Java\jdk1.6.0_07
-        set CXF_HOME=C:\java\apache-cxf-2.1.4
+        set JAVA_HOME=c:\Program Files\Java\jdk1.6.0_23
+        set CXF_HOME=C:\java\apache-cxf-2.4.0
     
-    - Run: CreateSvcJar.cmd
+    - Run: makejar.cmd
     
 
 Prerequisites:

@@ -10,7 +10,7 @@ import java.net.InetAddress;
 import org.datacontract.schemas._2004._07.echosvclib.StatisticInfo;
 
 import com.microsoft.hpc.scheduler.session.DataClient;
-import com.microsoft.hpc.scheduler.session.ServiceContext;
+import com.microsoft.hpc.scheduler.session.servicecontext.ServiceContext;
 
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
