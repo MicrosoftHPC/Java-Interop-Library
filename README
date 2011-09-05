@@ -59,10 +59,10 @@ How to get WSDL
 
 	Normally, WSDL is not needed since the Java Session API has already been
 	created. However, if you wish to develope your own client (e.g., a python
-	API), you need to configure the cluster to expose WSDL. To do this,
+	API), you need to configure the cluster to expose WSDL correctly. 
 	
-	1) On head node, edit %CCP_HOME%Bin\HpcSession.exe.config. Replace 
-	   "localhost:443" with your <headnode>:443.
+	To do this, on head node, edit %CCP_HOME%Bin\HpcSession.exe.config. Replace 
+	"localhost:443" with your <headnode>:443.
 
 	For example, assume your headnode is called "HeadNode1"
    
@@ -76,17 +76,3 @@ How to get WSDL
 			...
 	</service>
         
-    2) On broker node, edit %CCP_HOME%Bin\HpcBroker.exe.config. Add or replace
-	   the host section.
-
-       For example, assume your brokernode is called "BrokerNode1"
-       
-        <services>
-            <service name="Microsoft.Hpc.Scheduler.Session.Internal.BrokerLauncher.BrokerLauncher" behaviorConfiguration="EnableMetadata">
-                <host>
-                    <baseAddresses>
-                        <add baseAddress="https://BrokerNode1:443/BrokerLauncher"/>
-                    </baseAddresses>
-                </host>            
-                ...
-        </service>
