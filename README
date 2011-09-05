@@ -29,9 +29,27 @@ How to build
 	   E.g., "export CXF_HOME=~/apache-cxf-2.4.0".
 	   
 	4) Run "makejar.sh" without any argument.
+
+How to setup the system
+=======================
+        On both head node and broker node, setup certificate. 
+        (NOTE: if your broker node is your head node, only do it for once.)
+          a) make sure makecert.exe is in your PATH.
+
+          b) Create a self-signed certificate. Run the following command in 
+	     elevated console:
+               createcert.cmd <nodename>
+            
+          c) Install the certificate.
+             In PowerShell, run as an admin user,
+             - Set-ExecutionPolicy Unrestricted
+             - installcert.ps1 install
+             - select the new certificate just created above. It's the one named 
+               "CN=<nodename>". Normally it should be the last one.
 	
 How to use
 ==========
 
 	Refer to sample\helloworld\README.Linux.txt for how to use this library.
-	
+
+
