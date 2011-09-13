@@ -1,51 +1,35 @@
 Introduction
 
-    This will create a CcpEchoSvc.jar for using CcpEchoSvc service.
+    This will create a CcpEchoSvc.jar for using Java based CcpEchoSvc service.
 
-How to create the jar
-
-    - Copy svc dll file. For example, for CcpEchoSvc, copy EchoSvcLib.dll 
-      from your cluster's head node %CCP_HOME%Bin directory.
-
-    - Get SvcUtil.exe from windows SDK.
-    
-    - Check CreateSvcJar.cmd for the following part. Make changes if the default
-      values are not what you want.
-      
-        set serviceName=CcpEchoSvc
-        set dllFile=EchoSvcLib.dll
-        set ServiceWSDL=tempuri.org.wsdl
-
-        set JAVA_HOME=c:\Program Files\Java\jdk1.6.0_23
-        set CXF_HOME=C:\java\apache-cxf-2.4.0
-    
-    - Run: makejar.cmd
     
 
 Prerequisites:
+    JDK & Apache CXF installation on compute nodes
     - JDK. The version we support is 1.6.0_23.
       After installation, set environment variable JAVA_HOME to the home directory of JDK. Add JRE\bin to path variable.
 	
     - Apache CXF. The version we support is 2.4.0.
-      After installation, set environment variable CXF_HOME to the home directory of Apache CXF.
+      After installation(c:\java\apache-cxf-2.4.0), set environment variable CXF_HOME to the home directory of Apache CXF.
 
-Java Session API and Java Service Host:
-    - Open the ---???--- folder.
+How to create Java Session API and Java Service Host jar files:
+    - Open the JAVA-INTEROP-LIBRARY/src folder.
 
-    - Open manifestclient and manifesthost, replace %CXF_HOME% with home directory of Apache CXF, then save and exit.
+    - Open manifestclient and manifesthost, replace %CXF_HOME% with home directory of Apache CXF(c:\java\apache-cxf-2.4.0), then save and exit.
 
     - Double-click makejar.cmd. 
       After completion, two files named Microsoft-HpcSession-3.0.jar and Microsoft-HpcServiceHost-3.0.jar will appear.
 
-    - Copy these two .jar files to %CCP_HOME%\bin on each node.
+    - Copy these two .jar files to %CCP_HOME%\bin on each compute node.
+
+How to create the jar
+    - Open Java-Interop-Library/sample/CcpEchoSvc
+    - Copy Microsoft-HpcSession-3.0.jar to the current folder
+    - Replace replace %CXF_HOME% with home directory of Apache CXF(c:\java\apache-cxf-2.4.0), then save and exit.
+    - Run: makejar.cmd
+
 
 Service deployment:
-    - Open the ---???--- folder.
-
-    - Copy Microsoft-HpcSession-3.0.jar generated in the previous step to current folder.
-
-    - Double-click makejar.cmd. After completion, a file named JavaEchoSvc.jar will appear.
-
     - Copy the following files to C:\JavaSvcHostTest\ on each Compute Node.
 
         JavaEchoSvc.jar
@@ -54,7 +38,7 @@ Service deployment:
         schemas.microsoft.com.2003.10.Serialization.xsd
         tempuri.org.xsd
         
-    - Copy JavaEchoSvc.config to the service registrion directory.
+    - Copy JavaEchoSvc.config to the service registrion directory(%CCP_HOME%\ServiceRegistration) on head node.
 
 Consume the sample service using sample client:
     - Go to ..\helloworld folder
