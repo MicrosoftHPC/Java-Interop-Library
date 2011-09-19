@@ -8,6 +8,8 @@
 //------------------------------------------------------------------------------
 
 import org.tempuri.*;
+import javax.xml.soap.SOAPException;
+import javax.xml.ws.soap.SOAPFaultException;
 
 import com.microsoft.hpc.scheduler.session.*;
 
@@ -25,7 +27,8 @@ public class HelloWorld
         nerrs += ParseCmdLine(args);
         if (nerrs == 0) {
             try {
-                nerrs += RunTests();                                
+                nerrs += RunBasicTest();                                
+		nerrs += RunResponseHandlerTest();
             }
             catch(Exception e) {
                 nerrs++;
@@ -71,7 +74,7 @@ public class HelloWorld
     }
 
 
-    private static int RunTests()
+    private static int RunBasicTest()
     {
         int nerrs = 0;
         SessionStartInfo info = new SessionStartInfo(headnode, serviceName, username, password);    
@@ -122,5 +125,76 @@ public class HelloWorld
         return nerrs;
     }
 
-    
+    private static int RunResponseHandlerTest()
+    {
+        int nerrs = 0;
+        SessionStartInfo info = new SessionStartInfo(headnode, serviceName, username, password);    
+        System.out.printf("Creating a session for %s...\n", serviceName);
+        
+        try
+        {
+            final DurableSession session = DurableSession.createSession(info);
+            System.out.printf("new session id = %d\n", session.getId());
+                    
+            BrokerClient<CcpEchoSvc> client = new BrokerClient<CcpEchoSvc>(session, CcpEchoSvc.class);
+
+	    client.setResponseHandler(EchoResponse.class,
+	    				new ResponseListener<EchoResponse>() {
+						int fetchedCount = 0;
+
+						@Override
+						public void endOfMessage() {
+							synchronized(session) {
+								session.notify();
+							}
+						}
+
+						@Override
+						public void raiseError(Exception e) {
+							e.printStackTrace();
+						}
+
+						@Override
+						public void responseReturned(BrokerResponse<EchoResponse> response) {
+							try {
+                    						String reply = response.getResult().getEchoResult().getValue();
+                    						System.out.printf("\tReceived response for request %s: %s%n", response.getUserData(), reply);
+							} catch(SOAPFaultException e) {
+								e.printStackTrace();
+							} catch(SOAPException e) {
+								e.printStackTrace();
+							}
+
+						}
+							
+					});
+
+            System.out.printf("Sending %d requests...\n", nrequests);
+            for(int i = 0; i < nrequests; i++)
+            {
+                ObjectFactory of = new ObjectFactory();
+                Echo request = of.createEcho();
+                request.setInput(of.createEchoInput("hello world!"));
+                client.sendRequest(request, i);
+            }
+            System.out.println("call endRequests() ...");
+            client.endRequests();       
+            
+            System.out.println("Retrieving responses...");
+            
+            System.out.printf("Done retrieving %d responses%n", nrequests);
+	    synchronized(session) {
+	    	session.wait();
+	    }
+            session.close(true);
+        } 
+        catch (Throwable e)
+        {
+            nerrs++;
+            e.printStackTrace();
+        }       
+        
+        return nerrs;
+    }
+   
 }
