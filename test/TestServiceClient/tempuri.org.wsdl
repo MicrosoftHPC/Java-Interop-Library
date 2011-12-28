@@ -1,0 +1,681 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://tempuri.org/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" schemaLocation="tempuri.org.xsd" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" schemaLocation="schemas.microsoft.com.2003.10.Serialization.xsd" />
+      <xsd:import namespace="http://hpc.microsoft.com/session/" schemaLocation="hpc.microsoft.com.session.xsd" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/services" schemaLocation="services.xsd" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" schemaLocation="schemas.microsoft.com.2003.10.Serialization.Arrays.xsd" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/System" schemaLocation="System.xsd" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/AITestLib.Helper" schemaLocation="AITestLib.Helper.xsd" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ITestService_Ping_InputMessage">
+    <wsdl:part name="parameters" element="tns:Ping" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_Ping_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PingResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_SerializationTest_InputMessage">
+    <wsdl:part name="parameters" element="tns:SerializationTest" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_SerializationTest_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SerializationTestResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_Echo_InputMessage">
+    <wsdl:part name="parameters" element="tns:Echo" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_Echo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EchoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_Echo_AuthenticationFailureFault_FaultMessage">
+    <wsdl:part name="detail" xmlns:q1="http://hpc.microsoft.com/session/" element="q1:AuthenticationFailure" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_Echo_RetryOperationErrorFault_FaultMessage">
+    <wsdl:part name="detail" xmlns:q2="http://hpc.microsoft.com/session/" element="q2:RetryOperationError" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoException_InputMessage">
+    <wsdl:part name="parameters" element="tns:EchoException" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoException_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EchoExceptionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoFault_InputMessage">
+    <wsdl:part name="parameters" element="tns:EchoFault" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoFault_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EchoFaultResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoFault_ArgumentNullExceptionFault_FaultMessage">
+    <wsdl:part name="detail" xmlns:q3="http://schemas.datacontract.org/2004/07/System" element="q3:ArgumentNullException" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoFault_ExceptionFault_FaultMessage">
+    <wsdl:part name="detail" xmlns:q4="http://schemas.datacontract.org/2004/07/System" element="q4:Exception" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoFault_OutOfMemoryExceptionFault_FaultMessage">
+    <wsdl:part name="detail" xmlns:q5="http://schemas.datacontract.org/2004/07/System" element="q5:OutOfMemoryException" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoFault_DivideByZeroExceptionFault_FaultMessage">
+    <wsdl:part name="detail" xmlns:q6="http://schemas.datacontract.org/2004/07/System" element="q6:DivideByZeroException" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoFaultWithName_InputMessage">
+    <wsdl:part name="parameters" element="tns:EchoFaultWithName" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoFaultWithName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EchoFaultWithNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoFaultWithName_OutOfMemoryExceptionFault_FaultMessage">
+    <wsdl:part name="detail" xmlns:q7="http://schemas.datacontract.org/2004/07/System" element="q7:OutOfMemoryException" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoFaultWithName_ArgumentNullExceptionFault_FaultMessage">
+    <wsdl:part name="detail" xmlns:q8="http://schemas.datacontract.org/2004/07/System" element="q8:ArgumentNullException" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoFaultWithName_DivideByZeroExceptionFault_FaultMessage">
+    <wsdl:part name="detail" xmlns:q9="http://schemas.datacontract.org/2004/07/System" element="q9:DivideByZeroException" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoFaultWithName_ExceptionFault_FaultMessage">
+    <wsdl:part name="detail" xmlns:q10="http://schemas.datacontract.org/2004/07/System" element="q10:Exception" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoWithDelay_InputMessage">
+    <wsdl:part name="parameters" element="tns:EchoWithDelay" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoWithDelay_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EchoWithDelayResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoWithDelay_AuthenticationFailureFault_FaultMessage">
+    <wsdl:part name="detail" xmlns:q11="http://hpc.microsoft.com/session/" element="q11:AuthenticationFailure" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoWithDelay_RetryOperationErrorFault_FaultMessage">
+    <wsdl:part name="detail" xmlns:q12="http://hpc.microsoft.com/session/" element="q12:RetryOperationError" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoWithDelayOnSelectedNode_InputMessage">
+    <wsdl:part name="parameters" element="tns:EchoWithDelayOnSelectedNode" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoWithDelayOnSelectedNode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EchoWithDelayOnSelectedNodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoWithFail_InputMessage">
+    <wsdl:part name="parameters" element="tns:EchoWithFail" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoWithFail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EchoWithFailResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoWithFail_AuthenticationFailureFault_FaultMessage">
+    <wsdl:part name="detail" xmlns:q13="http://hpc.microsoft.com/session/" element="q13:AuthenticationFailure" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoWithFail_RetryOperationErrorFault_FaultMessage">
+    <wsdl:part name="detail" xmlns:q14="http://hpc.microsoft.com/session/" element="q14:RetryOperationError" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoWithParam_InputMessage">
+    <wsdl:part name="parameters" element="tns:EchoWithParam" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoWithParam_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EchoWithParamResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoStruct_InputMessage">
+    <wsdl:part name="parameters" element="tns:EchoStruct" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoStruct_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EchoStructResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoWithOnExit_InputMessage">
+    <wsdl:part name="parameters" element="tns:EchoWithOnExit" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoWithOnExit_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EchoWithOnExitResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoAppSettings_InputMessage">
+    <wsdl:part name="parameters" element="tns:EchoAppSettings" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoAppSettings_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EchoAppSettingsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoDouble_InputMessage">
+    <wsdl:part name="parameters" element="tns:EchoDouble" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoDouble_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EchoDoubleResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoClass_InputMessage">
+    <wsdl:part name="parameters" element="tns:EchoClass" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoClass_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EchoClassResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoObject_InputMessage">
+    <wsdl:part name="parameters" element="tns:EchoObject" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoObject_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EchoObjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoObject2_InputMessage">
+    <wsdl:part name="parameters" element="tns:EchoObject2" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoObject2_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EchoObject2Response" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoObject3_InputMessage">
+    <wsdl:part name="parameters" element="tns:EchoObject3" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoObject3_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EchoObject3Response" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoObject4_InputMessage">
+    <wsdl:part name="parameters" element="tns:EchoObject4" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoObject4_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EchoObject4Response" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_ConsumeCPU_InputMessage">
+    <wsdl:part name="parameters" element="tns:ConsumeCPU" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_ConsumeCPU_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ConsumeCPUResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_LastTime_InputMessage">
+    <wsdl:part name="parameters" element="tns:LastTime" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_LastTime_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LastTimeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_Kill_InputMessage">
+    <wsdl:part name="parameters" element="tns:Kill" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_Kill_OutputMessage">
+    <wsdl:part name="parameters" element="tns:KillResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_Trace_InputMessage">
+    <wsdl:part name="parameters" element="tns:Trace" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_Trace_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TraceResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_GenerateLoad_InputMessage">
+    <wsdl:part name="parameters" element="tns:GenerateLoad" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_GenerateLoad_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GenerateLoadResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_GenerateLoadWithResponseData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GenerateLoadWithResponseData" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_GenerateLoadWithResponseData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GenerateLoadWithResponseDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_GenerateLoadWithInputFile_InputMessage">
+    <wsdl:part name="parameters" element="tns:GenerateLoadWithInputFile" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_GenerateLoadWithInputFile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GenerateLoadWithInputFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_ServiceSideAsyncEcho_InputMessage">
+    <wsdl:part name="parameters" element="tns:ServiceSideAsyncEcho" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_ServiceSideAsyncEcho_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ServiceSideAsyncEchoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_RunInprocSoaJob_InputMessage">
+    <wsdl:part name="parameters" element="tns:RunInprocSoaJob" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_RunInprocSoaJob_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RunInprocSoaJobResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_GetCommonData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCommonData" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_GetCommonData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCommonDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_GetCommonData_CommonDataErrorFault_FaultMessage">
+    <wsdl:part name="detail" xmlns:q15="http://schemas.datacontract.org/2004/07/AITestLib.Helper" element="q15:CommonDataError" />
+  </wsdl:message>
+  <wsdl:portType name="ITestService">
+    <wsdl:operation name="Ping">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITestService/Ping" message="tns:ITestService_Ping_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITestService/PingResponse" message="tns:ITestService_Ping_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SerializationTest">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITestService/SerializationTest" message="tns:ITestService_SerializationTest_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITestService/SerializationTestResponse" message="tns:ITestService_SerializationTest_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Echo">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITestService/Echo" message="tns:ITestService_Echo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITestService/EchoResponse" message="tns:ITestService_Echo_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://hpc.microsoft.com/session/AuthenticationFailure" name="AuthenticationFailureFault" message="tns:ITestService_Echo_AuthenticationFailureFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://hpc.microsoft.com/session/RetryOperationError" name="RetryOperationErrorFault" message="tns:ITestService_Echo_RetryOperationErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EchoException">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITestService/EchoException" message="tns:ITestService_EchoException_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITestService/EchoExceptionResponse" message="tns:ITestService_EchoException_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EchoFault">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITestService/EchoFault" message="tns:ITestService_EchoFault_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITestService/EchoFaultResponse" message="tns:ITestService_EchoFault_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ITestService/EchoFaultArgumentNullExceptionFault" name="ArgumentNullExceptionFault" message="tns:ITestService_EchoFault_ArgumentNullExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ITestService/EchoFaultExceptionFault" name="ExceptionFault" message="tns:ITestService_EchoFault_ExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ITestService/EchoFaultOutOfMemoryExceptionFault" name="OutOfMemoryExceptionFault" message="tns:ITestService_EchoFault_OutOfMemoryExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ITestService/EchoFaultDivideByZeroExceptionFault" name="DivideByZeroExceptionFault" message="tns:ITestService_EchoFault_DivideByZeroExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EchoFaultWithName">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITestService/EchoFaultWithName" message="tns:ITestService_EchoFaultWithName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITestService/EchoFaultWithNameResponse" message="tns:ITestService_EchoFaultWithName_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ITestService/EchoFaultWithNameOutOfMemoryExceptionFault" name="OutOfMemoryExceptionFault" message="tns:ITestService_EchoFaultWithName_OutOfMemoryExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ITestService/EchoFaultWithNameArgumentNullExceptionFault" name="ArgumentNullExceptionFault" message="tns:ITestService_EchoFaultWithName_ArgumentNullExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ITestService/EchoFaultWithNameDivideByZeroExceptionFault" name="DivideByZeroExceptionFault" message="tns:ITestService_EchoFaultWithName_DivideByZeroExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ITestService/EchoFaultWithNameExceptionFault" name="ExceptionFault" message="tns:ITestService_EchoFaultWithName_ExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EchoWithDelay">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITestService/EchoWithDelay" message="tns:ITestService_EchoWithDelay_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITestService/EchoWithDelayResponse" message="tns:ITestService_EchoWithDelay_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://hpc.microsoft.com/session/AuthenticationFailure" name="AuthenticationFailureFault" message="tns:ITestService_EchoWithDelay_AuthenticationFailureFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://hpc.microsoft.com/session/RetryOperationError" name="RetryOperationErrorFault" message="tns:ITestService_EchoWithDelay_RetryOperationErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EchoWithDelayOnSelectedNode">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITestService/EchoWithDelayOnSelectedNode" message="tns:ITestService_EchoWithDelayOnSelectedNode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITestService/EchoWithDelayOnSelectedNodeResponse" message="tns:ITestService_EchoWithDelayOnSelectedNode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EchoWithFail">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITestService/EchoWithFail" message="tns:ITestService_EchoWithFail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITestService/EchoWithFailResponse" message="tns:ITestService_EchoWithFail_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://hpc.microsoft.com/session/AuthenticationFailure" name="AuthenticationFailureFault" message="tns:ITestService_EchoWithFail_AuthenticationFailureFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://hpc.microsoft.com/session/RetryOperationError" name="RetryOperationErrorFault" message="tns:ITestService_EchoWithFail_RetryOperationErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EchoWithParam">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITestService/EchoWithParam" message="tns:ITestService_EchoWithParam_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITestService/EchoWithParamResponse" message="tns:ITestService_EchoWithParam_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EchoStruct">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITestService/EchoStruct" message="tns:ITestService_EchoStruct_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITestService/EchoStructResponse" message="tns:ITestService_EchoStruct_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EchoWithOnExit">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITestService/EchoWithOnExit" message="tns:ITestService_EchoWithOnExit_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITestService/EchoWithOnExitResponse" message="tns:ITestService_EchoWithOnExit_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EchoAppSettings">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITestService/EchoAppSettings" message="tns:ITestService_EchoAppSettings_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITestService/EchoAppSettingsResponse" message="tns:ITestService_EchoAppSettings_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EchoDouble">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITestService/EchoDouble" message="tns:ITestService_EchoDouble_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITestService/EchoDoubleResponse" message="tns:ITestService_EchoDouble_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EchoClass">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITestService/EchoClass" message="tns:ITestService_EchoClass_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITestService/EchoClassResponse" message="tns:ITestService_EchoClass_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EchoObject">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITestService/EchoObject" message="tns:ITestService_EchoObject_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITestService/EchoObjectResponse" message="tns:ITestService_EchoObject_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EchoObject2">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITestService/EchoObject2" message="tns:ITestService_EchoObject2_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITestService/EchoObject2Response" message="tns:ITestService_EchoObject2_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EchoObject3">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITestService/EchoObject3" message="tns:ITestService_EchoObject3_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITestService/EchoObject3Response" message="tns:ITestService_EchoObject3_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EchoObject4">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITestService/EchoObject4" message="tns:ITestService_EchoObject4_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITestService/EchoObject4Response" message="tns:ITestService_EchoObject4_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsumeCPU">
+      <wsdl:input wsaw:Action="ConsumeCPU" message="tns:ITestService_ConsumeCPU_InputMessage" />
+      <wsdl:output wsaw:Action="ConsumeCPUResponse" message="tns:ITestService_ConsumeCPU_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LastTime">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITestService/LastTime" message="tns:ITestService_LastTime_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITestService/LastTimeResponse" message="tns:ITestService_LastTime_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Kill">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITestService/Kill" message="tns:ITestService_Kill_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITestService/KillResponse" message="tns:ITestService_Kill_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Trace">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITestService/Trace" message="tns:ITestService_Trace_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITestService/TraceResponse" message="tns:ITestService_Trace_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GenerateLoad">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITestService/GenerateLoad" message="tns:ITestService_GenerateLoad_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITestService/GenerateLoadResponse" message="tns:ITestService_GenerateLoad_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GenerateLoadWithResponseData">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITestService/GenerateLoadWithResponseData" message="tns:ITestService_GenerateLoadWithResponseData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITestService/GenerateLoadWithResponseDataResponse" message="tns:ITestService_GenerateLoadWithResponseData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GenerateLoadWithInputFile">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITestService/GenerateLoadWithInputFile" message="tns:ITestService_GenerateLoadWithInputFile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITestService/GenerateLoadWithInputFileResponse" message="tns:ITestService_GenerateLoadWithInputFile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ServiceSideAsyncEcho">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITestService/ServiceSideAsyncEcho" message="tns:ITestService_ServiceSideAsyncEcho_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITestService/ServiceSideAsyncEchoResponse" message="tns:ITestService_ServiceSideAsyncEcho_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RunInprocSoaJob">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITestService/RunInprocSoaJob" message="tns:ITestService_RunInprocSoaJob_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITestService/RunInprocSoaJobResponse" message="tns:ITestService_RunInprocSoaJob_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCommonData">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITestService/GetCommonData" message="tns:ITestService_GetCommonData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITestService/GetCommonDataResponse" message="tns:ITestService_GetCommonData_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ITestService/GetCommonDataCommonDataErrorFault" name="CommonDataErrorFault" message="tns:ITestService_GetCommonData_CommonDataErrorFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DefaultBinding_ITestService" type="tns:ITestService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Ping">
+      <soap:operation soapAction="http://tempuri.org/ITestService/Ping" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SerializationTest">
+      <soap:operation soapAction="http://tempuri.org/ITestService/SerializationTest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Echo">
+      <soap:operation soapAction="http://tempuri.org/ITestService/Echo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AuthenticationFailureFault">
+        <soap:fault name="AuthenticationFailureFault" use="literal" />
+      </wsdl:fault>
+      <wsdl:fault name="RetryOperationErrorFault">
+        <soap:fault name="RetryOperationErrorFault" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="EchoException">
+      <soap:operation soapAction="http://tempuri.org/ITestService/EchoException" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EchoFault">
+      <soap:operation soapAction="http://tempuri.org/ITestService/EchoFault" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ArgumentNullExceptionFault">
+        <soap:fault name="ArgumentNullExceptionFault" use="literal" />
+      </wsdl:fault>
+      <wsdl:fault name="ExceptionFault">
+        <soap:fault name="ExceptionFault" use="literal" />
+      </wsdl:fault>
+      <wsdl:fault name="OutOfMemoryExceptionFault">
+        <soap:fault name="OutOfMemoryExceptionFault" use="literal" />
+      </wsdl:fault>
+      <wsdl:fault name="DivideByZeroExceptionFault">
+        <soap:fault name="DivideByZeroExceptionFault" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="EchoFaultWithName">
+      <soap:operation soapAction="http://tempuri.org/ITestService/EchoFaultWithName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="OutOfMemoryExceptionFault">
+        <soap:fault name="OutOfMemoryExceptionFault" use="literal" />
+      </wsdl:fault>
+      <wsdl:fault name="ArgumentNullExceptionFault">
+        <soap:fault name="ArgumentNullExceptionFault" use="literal" />
+      </wsdl:fault>
+      <wsdl:fault name="DivideByZeroExceptionFault">
+        <soap:fault name="DivideByZeroExceptionFault" use="literal" />
+      </wsdl:fault>
+      <wsdl:fault name="ExceptionFault">
+        <soap:fault name="ExceptionFault" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="EchoWithDelay">
+      <soap:operation soapAction="http://tempuri.org/ITestService/EchoWithDelay" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AuthenticationFailureFault">
+        <soap:fault name="AuthenticationFailureFault" use="literal" />
+      </wsdl:fault>
+      <wsdl:fault name="RetryOperationErrorFault">
+        <soap:fault name="RetryOperationErrorFault" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="EchoWithDelayOnSelectedNode">
+      <soap:operation soapAction="http://tempuri.org/ITestService/EchoWithDelayOnSelectedNode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EchoWithFail">
+      <soap:operation soapAction="http://tempuri.org/ITestService/EchoWithFail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AuthenticationFailureFault">
+        <soap:fault name="AuthenticationFailureFault" use="literal" />
+      </wsdl:fault>
+      <wsdl:fault name="RetryOperationErrorFault">
+        <soap:fault name="RetryOperationErrorFault" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="EchoWithParam">
+      <soap:operation soapAction="http://tempuri.org/ITestService/EchoWithParam" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EchoStruct">
+      <soap:operation soapAction="http://tempuri.org/ITestService/EchoStruct" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EchoWithOnExit">
+      <soap:operation soapAction="http://tempuri.org/ITestService/EchoWithOnExit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EchoAppSettings">
+      <soap:operation soapAction="http://tempuri.org/ITestService/EchoAppSettings" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EchoDouble">
+      <soap:operation soapAction="http://tempuri.org/ITestService/EchoDouble" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EchoClass">
+      <soap:operation soapAction="http://tempuri.org/ITestService/EchoClass" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EchoObject">
+      <soap:operation soapAction="http://tempuri.org/ITestService/EchoObject" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EchoObject2">
+      <soap:operation soapAction="http://tempuri.org/ITestService/EchoObject2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EchoObject3">
+      <soap:operation soapAction="http://tempuri.org/ITestService/EchoObject3" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EchoObject4">
+      <soap:operation soapAction="http://tempuri.org/ITestService/EchoObject4" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsumeCPU">
+      <soap:operation soapAction="ConsumeCPU" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LastTime">
+      <soap:operation soapAction="http://tempuri.org/ITestService/LastTime" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Kill">
+      <soap:operation soapAction="http://tempuri.org/ITestService/Kill" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Trace">
+      <soap:operation soapAction="http://tempuri.org/ITestService/Trace" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateLoad">
+      <soap:operation soapAction="http://tempuri.org/ITestService/GenerateLoad" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateLoadWithResponseData">
+      <soap:operation soapAction="http://tempuri.org/ITestService/GenerateLoadWithResponseData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateLoadWithInputFile">
+      <soap:operation soapAction="http://tempuri.org/ITestService/GenerateLoadWithInputFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ServiceSideAsyncEcho">
+      <soap:operation soapAction="http://tempuri.org/ITestService/ServiceSideAsyncEcho" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RunInprocSoaJob">
+      <soap:operation soapAction="http://tempuri.org/ITestService/RunInprocSoaJob" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCommonData">
+      <soap:operation soapAction="http://tempuri.org/ITestService/GetCommonData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CommonDataErrorFault">
+        <soap:fault name="CommonDataErrorFault" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AITestLibService">
+      <wsdl:port name="DefaultBinding_ITestService" binding="tns:DefaultBinding_ITestService">
+          <soap:address location="https://localhost/Broker" />
+      </wsdl:port>
+  </wsdl:service>
+
+</wsdl:definitions>

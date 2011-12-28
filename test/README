@@ -1,0 +1,84 @@
+Introduction
+============
+This readme.txt shows the steps to run HPC Java Session API test cases
+
+
+Prerequisites
+============
+1) JDK 1.6.0_23
+2) CXF 2.4.0
+3) JUNIT 4.8.1
+
+
+On Windows Server 2008 R2:
+============
+
+1. Download and compile the HPC Java Session API source code
+
+a) Download HPC Java Session API source code to %basedir%\src
+
+b) Build the HPC Java Session API source code by %basedir%\src\makejar.cmd, remember to set the correct environments for %JAVA_HOME% and %CXF_HOME% before running the script. If build succeeds, there will be Microsoft-HpcSession-3.0.jar and Microsoft-HpcServiceHost-3.0.jar generated.
+
+c) Copy the Microsoft-HpcService-3.0.jar and Microsoft-HpcServiceHost-3.0.jar to %CCP_HOME%\bin on all cluster nodes 
+
+2. Download and compile the HPC Java Session API test service and test cases
+
+a) Download HPC Java Session API test service and test cases to %basedir%\test
+
+b) Copy the Microsoft-HpcSession-3.0.jar to %basedir%\test
+
+c) Build the test service code by %basedir%\test\TestService\makejar.cmd. Modify the script for the correct %CXF_HOME% and %JAVA_HOME%. When succeeded, the JavaTestService.jar would be generated.
+
+d) Deploy the test service JavaTestService.jar and service configuation file JavaTestService.config to the HPC cluster by copying JavaTestService.jar and *.wsdl and *.xsd under %basedir%\test\TestService to C:\JavaTestService\ on all cluster nodes and copy JavaTestService.config to \\[HeadNode]\HpcServiceRegistration
+
+e) Build the test service client code by %basedir%\test\TestServiceClient\makejar.cmd. Modify the script for the correct %CXF_HOME% and %JAVA_HOME%. When succeeded, the JavaTestServiceClient.jar would be generated.
+
+f) Copy JavaTestServiceClient.jar, junit.jar and org.hamcrest.core_1.1.0.v20090501071000.jar to %basedir%\test\TestCase\ and run buildtests.cmd there to build the test cases. Please check the %JAVA_HOME% and %CXF_HOME% before running the script.
+
+
+3. Run the HPC Java Session API test cases
+
+a) Modify the %basedir%\test\TestCase\TestData.xml with the correct headnode name, username and password, and copy it to the %basedir%\test\TestCase\bin folder
+
+b) Under %basedir%\test\TestCase\ run the runtests_BVT.cmd to launch the BVT test
+
+c) To run the full pass, under %basedir%\SOAtest\test run runtests_Full.cmd
+
+
+On RHEL5.5:
+============
+
+1. Download and compile the HPC Java Session API source code
+
+a) Download HPC Java Session API source code to $basedir/src
+
+b) Build the HPC Java Session API source code by $basedir/src/makejar.sh, remember to export CXF_HOME and make sure $JAVA_HOME and $JAVA_BIN are set before run the script. If build succeeds, there will be Microsoft-HpcSession-3.0.jar and Microsoft-HpcServiceHost-3.0.jar generated.
+
+
+2. Download and compile the HPC Java Session API test cases
+
+a) Download HPC Java Session API test service and test cases to $basedir/test
+
+b) Copy the Microsoft-HpcSession-3.0.jar to $basedir/test
+
+c) Build the test service code by $basedir/SOAtest/testservice/makejar.sh. Modify the script for the correct CXF_HOME and Java paths. When succeeded, the JavaTestService.jar would be generated.
+
+d) Deploy the test service JavaTestService.jar and service configuation file JavaTestService.config to the HPC cluster by copying JavaTestService.jar and *.wsdl and *.xsd under $basedir/test/TestService to C:\JavaTestService\ on all cluster nodes and copy JavaTestService.config to \\[HeadNode]\HpcServiceRegistration
+
+e) Build the test service client code by $basedir/test/TestServiceClient/makejar.sh. Modify the script for the correct $CXF_HOME and $JAVA_HOME. When succeeded, the JavaTestServiceClient.jar would be generated.
+
+f) Copy JavaTestServiceClient.jar, junit.jar and org.hamcrest.core_1.1.0.v20090501071000.jar to $basedir/test/TestCase and run buildtests.sh to build the HPC Java Session API test cases. Remember to export $JAVA_HOME and $CXF_HOME before running the script.
+
+3. Run the HPC Java Session API test cases
+
+a) Modify the TestData.xml with the correct headnode name, username and password
+
+b) For CommonData test cases, the command data share folder should be mounted by
+   mount -t cifs -o username=[domain]/\[username],password='[password]' //[headnode]/runtime$ /mnt/winshare/
+
+c) Under $basedir/test/TestCase run runtests_BVT.sh to launch the BVT test
+
+d) To run the full pass, under $basedir/test/TestCase run runtests_Full.sh. 
+
+
+

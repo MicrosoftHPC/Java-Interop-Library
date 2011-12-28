@@ -21,6 +21,7 @@ import com.microsoft.schemas._2003._10.serialization.arrays.ArrayOfstring;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="BrokerEpr" type="{http://schemas.microsoft.com/2003/10/Serialization/Arrays}ArrayOfstring" minOccurs="0"/>
+ *         &lt;element name="BrokerUniqueId" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="ClientBrokerHeartbeatInterval" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="ClientBrokerHeartbeatRetryCount" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="ControllerEpr" type="{http://schemas.microsoft.com/2003/10/Serialization/Arrays}ArrayOfstring" minOccurs="0"/>
@@ -38,6 +39,7 @@ import com.microsoft.schemas._2003._10.serialization.arrays.ArrayOfstring;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "BrokerInitializationResult", namespace = "http://hpc.microsoft.com/BrokerLauncher", propOrder = {
     "brokerEpr",
+    "brokerUniqueId",
     "clientBrokerHeartbeatInterval",
     "clientBrokerHeartbeatRetryCount",
     "controllerEpr",
@@ -49,6 +51,8 @@ public class BrokerInitializationResult {
 
     @XmlElementRef(name = "BrokerEpr", namespace = "http://hpc.microsoft.com/BrokerLauncher", type = JAXBElement.class, required = false)
     protected JAXBElement<ArrayOfstring> brokerEpr;
+    @XmlElementRef(name = "BrokerUniqueId", namespace = "http://hpc.microsoft.com/BrokerLauncher", type = JAXBElement.class, required = false)
+    protected JAXBElement<String> brokerUniqueId;
     @XmlElement(name = "ClientBrokerHeartbeatInterval")
     protected Integer clientBrokerHeartbeatInterval;
     @XmlElement(name = "ClientBrokerHeartbeatRetryCount")
@@ -84,6 +88,30 @@ public class BrokerInitializationResult {
      */
     public void setBrokerEpr(JAXBElement<ArrayOfstring> value) {
         this.brokerEpr = ((JAXBElement<ArrayOfstring> ) value);
+    }
+
+    /**
+     * Gets the value of the brokerUniqueId property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     
+     */
+    public JAXBElement<String> getBrokerUniqueId() {
+        return brokerUniqueId;
+    }
+
+    /**
+     * Sets the value of the brokerUniqueId property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     
+     */
+    public void setBrokerUniqueId(JAXBElement<String> value) {
+        this.brokerUniqueId = ((JAXBElement<String> ) value);
     }
 
     /**

@@ -37,6 +37,8 @@ import org.datacontract.schemas._2004._07.system.Version;
  *         &lt;element name="ServerVersion" type="{http://schemas.datacontract.org/2004/07/System}Version" minOccurs="0"/>
  *         &lt;element name="ServiceOperationTimeout" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="ServiceVersion" type="{http://schemas.datacontract.org/2004/07/System}Version" minOccurs="0"/>
+ *         &lt;element name="SessionACL" type="{http://schemas.microsoft.com/2003/10/Serialization/Arrays}ArrayOfstring" minOccurs="0"/>
+ *         &lt;element name="SessionOwner" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="TransportScheme" type="{http://schemas.datacontract.org/2004/07/Microsoft.Hpc.Scheduler.Session}TransportScheme" minOccurs="0"/>
  *         &lt;element name="UseInprocessBroker" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
  *       &lt;/sequence>
@@ -62,6 +64,8 @@ import org.datacontract.schemas._2004._07.system.Version;
     "serverVersion",
     "serviceOperationTimeout",
     "serviceVersion",
+    "sessionACL",
+    "sessionOwner",
     "transportScheme",
     "useInprocessBroker"
 })
@@ -94,6 +98,10 @@ public class SessionInfo {
     protected Integer serviceOperationTimeout;
     @XmlElementRef(name = "ServiceVersion", namespace = "http://hpc.microsoft.com/SessionLauncher", type = JAXBElement.class, required = false)
     protected JAXBElement<Version> serviceVersion;
+    @XmlElementRef(name = "SessionACL", namespace = "http://hpc.microsoft.com/SessionLauncher", type = JAXBElement.class, required = false)
+    protected JAXBElement<ArrayOfstring> sessionACL;
+    @XmlElementRef(name = "SessionOwner", namespace = "http://hpc.microsoft.com/SessionLauncher", type = JAXBElement.class, required = false)
+    protected JAXBElement<String> sessionOwner;
     @XmlList
     @XmlElement(name = "TransportScheme")
     protected List<String> transportScheme;
@@ -415,6 +423,54 @@ public class SessionInfo {
      */
     public void setServiceVersion(JAXBElement<Version> value) {
         this.serviceVersion = ((JAXBElement<Version> ) value);
+    }
+
+    /**
+     * Gets the value of the sessionACL property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link ArrayOfstring }{@code >}
+     *     
+     */
+    public JAXBElement<ArrayOfstring> getSessionACL() {
+        return sessionACL;
+    }
+
+    /**
+     * Sets the value of the sessionACL property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link ArrayOfstring }{@code >}
+     *     
+     */
+    public void setSessionACL(JAXBElement<ArrayOfstring> value) {
+        this.sessionACL = ((JAXBElement<ArrayOfstring> ) value);
+    }
+
+    /**
+     * Gets the value of the sessionOwner property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     
+     */
+    public JAXBElement<String> getSessionOwner() {
+        return sessionOwner;
+    }
+
+    /**
+     * Sets the value of the sessionOwner property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     
+     */
+    public void setSessionOwner(JAXBElement<String> value) {
+        this.sessionOwner = ((JAXBElement<String> ) value);
     }
 
     /**

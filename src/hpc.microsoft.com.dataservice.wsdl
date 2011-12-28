@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:tns="http://hpc.microsoft.com/dataservice/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="http://hpc.microsoft.com/dataservice/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://hpc.microsoft.com/dataservice/Imports">
+      <xsd:import namespace="http://hpc.microsoft.com/dataservice/" schemaLocation="hpc.microsoft.com.dataservice.xsd" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" schemaLocation="schemas.microsoft.com.2003.10.Serialization.xsd"/>
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" schemaLocation="schemas.microsoft.com.2003.10.Serialization.Arrays.xsd"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IDataService_CreateDataClient_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateDataClient" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_CreateDataClient_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateDataClientResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_CreateDataClient_DataFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:DataFault" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_OpenDataClient_InputMessage">
+    <wsdl:part name="parameters" element="tns:OpenDataClient" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_OpenDataClient_OutputMessage">
+    <wsdl:part name="parameters" element="tns:OpenDataClientResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_OpenDataClient_DataFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:DataFault" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_DeleteDataClient_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteDataClient" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_DeleteDataClient_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteDataClientResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_DeleteDataClient_DataFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:DataFault" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_AssociateDataClientWithSession_InputMessage">
+    <wsdl:part name="parameters" element="tns:AssociateDataClientWithSession" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_AssociateDataClientWithSession_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AssociateDataClientWithSessionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_AssociateDataClientWithSession_DataFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:DataFault" />
+  </wsdl:message>
+  <wsdl:portType name="IDataService">
+    <wsdl:operation name="CreateDataClient">
+      <wsdl:input wsaw:Action="http://hpc.microsoft.com/dataservice/IDataService/CreateDataClient" message="tns:IDataService_CreateDataClient_InputMessage" />
+      <wsdl:output wsaw:Action="http://hpc.microsoft.com/dataservice/IDataService/CreateDataClientResponse" message="tns:IDataService_CreateDataClient_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://hpc.microsoft.com/dataservice/DataFault" name="DataFaultFault" message="tns:IDataService_CreateDataClient_DataFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OpenDataClient">
+      <wsdl:input wsaw:Action="http://hpc.microsoft.com/dataservice/IDataService/OpenDataClient" message="tns:IDataService_OpenDataClient_InputMessage" />
+      <wsdl:output wsaw:Action="http://hpc.microsoft.com/dataservice/IDataService/OpenDataClientResponse" message="tns:IDataService_OpenDataClient_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://hpc.microsoft.com/dataservice/DataFault" name="DataFaultFault" message="tns:IDataService_OpenDataClient_DataFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteDataClient">
+      <wsdl:input wsaw:Action="http://hpc.microsoft.com/dataservice/IDataService/DeleteDataClient" message="tns:IDataService_DeleteDataClient_InputMessage" />
+      <wsdl:output wsaw:Action="http://hpc.microsoft.com/dataservice/IDataService/DeleteDataClientResponse" message="tns:IDataService_DeleteDataClient_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://hpc.microsoft.com/dataservice/DataFault" name="DataFaultFault" message="tns:IDataService_DeleteDataClient_DataFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AssociateDataClientWithSession">
+      <wsdl:input wsaw:Action="http://hpc.microsoft.com/dataservice/IDataService/AssociateDataClientWithSession" message="tns:IDataService_AssociateDataClientWithSession_InputMessage" />
+      <wsdl:output wsaw:Action="http://hpc.microsoft.com/dataservice/IDataService/AssociateDataClientWithSessionResponse" message="tns:IDataService_AssociateDataClientWithSession_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://hpc.microsoft.com/dataservice/DataFault" name="DataFaultFault" message="tns:IDataService_AssociateDataClientWithSession_DataFaultFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DefaultBinding_IDataService" type="tns:IDataService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateDataClient">
+      <soap:operation soapAction="http://hpc.microsoft.com/dataservice/IDataService/CreateDataClient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DataFaultFault">
+        <soap:fault name="DataFaultFault" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="OpenDataClient">
+      <soap:operation soapAction="http://hpc.microsoft.com/dataservice/IDataService/OpenDataClient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DataFaultFault">
+        <soap:fault name="DataFaultFault" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteDataClient">
+      <soap:operation soapAction="http://hpc.microsoft.com/dataservice/IDataService/DeleteDataClient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DataFaultFault">
+        <soap:fault name="DataFaultFault" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="AssociateDataClientWithSession">
+      <soap:operation soapAction="http://hpc.microsoft.com/dataservice/IDataService/AssociateDataClientWithSession" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DataFaultFault">
+        <soap:fault name="DataFaultFault" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+</wsdl:definitions>

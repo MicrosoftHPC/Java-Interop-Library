@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://hpc.microsoft.com/brokercontroller/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" targetNamespace="http://hpc.microsoft.com/brokercontroller/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://hpc.microsoft.com/brokercontroller/Imports">
+      <xsd:import namespace="http://hpc.microsoft.com/brokercontroller/" schemaLocation="hpc.microsoft.com.brokercontroller.xsd" />
+      <xsd:import namespace="http://hpc.microsoft.com/session/" schemaLocation="hpc.microsoft.com.session.xsd" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import namespace="http://hpc.microsoft.com" schemaLocation="hpc.microsoft.com.xsd" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IBrokerController_Flush_InputMessage">
+    <wsdl:part name="parameters" element="tns:Flush" />
+  </wsdl:message>
+  <wsdl:message name="IBrokerController_Flush_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FlushResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBrokerController_Flush_SessionFaultFault_FaultMessage">
+    <wsdl:part name="detail" xmlns:q1="http://hpc.microsoft.com/session/" element="q1:SessionFault" />
+  </wsdl:message>
+  <wsdl:message name="IBrokerController_EndRequests_InputMessage">
+    <wsdl:part name="parameters" element="tns:EndRequests" />
+  </wsdl:message>
+  <wsdl:message name="IBrokerController_EndRequests_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EndRequestsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBrokerController_EndRequests_SessionFaultFault_FaultMessage">
+    <wsdl:part name="detail" xmlns:q2="http://hpc.microsoft.com/session/" element="q2:SessionFault" />
+  </wsdl:message>
+  <wsdl:message name="IBrokerController_Purge_InputMessage">
+    <wsdl:part name="parameters" element="tns:Purge" />
+  </wsdl:message>
+  <wsdl:message name="IBrokerController_Purge_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PurgeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBrokerController_Purge_SessionFaultFault_FaultMessage">
+    <wsdl:part name="detail" xmlns:q3="http://hpc.microsoft.com/session/" element="q3:SessionFault" />
+  </wsdl:message>
+  <wsdl:message name="IBrokerController_GetBrokerClientStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBrokerClientStatus" />
+  </wsdl:message>
+  <wsdl:message name="IBrokerController_GetBrokerClientStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBrokerClientStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBrokerController_GetBrokerClientStatus_SessionFaultFault_FaultMessage">
+    <wsdl:part name="detail" xmlns:q4="http://hpc.microsoft.com/session/" element="q4:SessionFault" />
+  </wsdl:message>
+  <wsdl:message name="IBrokerController_GetRequestsCount_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRequestsCount" />
+  </wsdl:message>
+  <wsdl:message name="IBrokerController_GetRequestsCount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRequestsCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBrokerController_GetRequestsCount_SessionFaultFault_FaultMessage">
+    <wsdl:part name="detail" xmlns:q5="http://hpc.microsoft.com/session/" element="q5:SessionFault" />
+  </wsdl:message>
+  <wsdl:message name="IBrokerController_PullResponses_InputMessage">
+    <wsdl:part name="parameters" element="tns:PullResponses" />
+  </wsdl:message>
+  <wsdl:message name="IBrokerController_PullResponses_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PullResponsesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBrokerController_PullResponses_SessionFaultFault_FaultMessage">
+    <wsdl:part name="detail" xmlns:q6="http://hpc.microsoft.com/session/" element="q6:SessionFault" />
+  </wsdl:message>
+  <wsdl:portType name="IBrokerController">
+    <wsdl:operation name="Flush">
+      <wsdl:input wsaw:Action="http://hpc.microsoft.com/brokercontroller/IBrokerController/Flush" message="tns:IBrokerController_Flush_InputMessage" />
+      <wsdl:output wsaw:Action="http://hpc.microsoft.com/brokercontroller/IBrokerController/FlushResponse" message="tns:IBrokerController_Flush_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://hpc.microsoft.com/session/SessionFault" name="SessionFaultFault" message="tns:IBrokerController_Flush_SessionFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EndRequests">
+      <wsdl:input wsaw:Action="http://hpc.microsoft.com/brokercontroller/IBrokerController/EndRequests" message="tns:IBrokerController_EndRequests_InputMessage" />
+      <wsdl:output wsaw:Action="http://hpc.microsoft.com/brokercontroller/IBrokerController/EndRequestsResponse" message="tns:IBrokerController_EndRequests_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://hpc.microsoft.com/session/SessionFault" name="SessionFaultFault" message="tns:IBrokerController_EndRequests_SessionFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Purge">
+      <wsdl:input wsaw:Action="http://hpc.microsoft.com/brokercontroller/IBrokerController/Purge" message="tns:IBrokerController_Purge_InputMessage" />
+      <wsdl:output wsaw:Action="http://hpc.microsoft.com/brokercontroller/IBrokerController/PurgeResponse" message="tns:IBrokerController_Purge_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://hpc.microsoft.com/session/SessionFault" name="SessionFaultFault" message="tns:IBrokerController_Purge_SessionFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBrokerClientStatus">
+      <wsdl:input wsaw:Action="http://hpc.microsoft.com/brokercontroller/IBrokerController/GetBrokerClientStatus" message="tns:IBrokerController_GetBrokerClientStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://hpc.microsoft.com/brokercontroller/IBrokerController/GetBrokerClientStatusResponse" message="tns:IBrokerController_GetBrokerClientStatus_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://hpc.microsoft.com/session/SessionFault" name="SessionFaultFault" message="tns:IBrokerController_GetBrokerClientStatus_SessionFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRequestsCount">
+      <wsdl:input wsaw:Action="http://hpc.microsoft.com/brokercontroller/IBrokerController/GetRequestsCount" message="tns:IBrokerController_GetRequestsCount_InputMessage" />
+      <wsdl:output wsaw:Action="http://hpc.microsoft.com/brokercontroller/IBrokerController/GetRequestsCountResponse" message="tns:IBrokerController_GetRequestsCount_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://hpc.microsoft.com/session/SessionFault" name="SessionFaultFault" message="tns:IBrokerController_GetRequestsCount_SessionFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PullResponses">
+      <wsdl:input wsaw:Action="http://hpc.microsoft.com/brokercontroller/IBrokerController/PullResponses" message="tns:IBrokerController_PullResponses_InputMessage" />
+      <wsdl:output wsaw:Action="http://hpc.microsoft.com/brokercontroller/IBrokerController/PullResponsesResponse" message="tns:IBrokerController_PullResponses_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://hpc.microsoft.com/session/SessionFault" name="SessionFaultFault" message="tns:IBrokerController_PullResponses_SessionFaultFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DefaultBinding_IBrokerController" type="tns:IBrokerController">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Flush">
+      <soap:operation soapAction="http://hpc.microsoft.com/brokercontroller/IBrokerController/Flush" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="SessionFaultFault">
+        <soap:fault name="SessionFaultFault" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="EndRequests">
+      <soap:operation soapAction="http://hpc.microsoft.com/brokercontroller/IBrokerController/EndRequests" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="SessionFaultFault">
+        <soap:fault name="SessionFaultFault" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Purge">
+      <soap:operation soapAction="http://hpc.microsoft.com/brokercontroller/IBrokerController/Purge" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="SessionFaultFault">
+        <soap:fault name="SessionFaultFault" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetBrokerClientStatus">
+      <soap:operation soapAction="http://hpc.microsoft.com/brokercontroller/IBrokerController/GetBrokerClientStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="SessionFaultFault">
+        <soap:fault name="SessionFaultFault" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetRequestsCount">
+      <soap:operation soapAction="http://hpc.microsoft.com/brokercontroller/IBrokerController/GetRequestsCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="SessionFaultFault">
+        <soap:fault name="SessionFaultFault" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PullResponses">
+      <soap:operation soapAction="http://hpc.microsoft.com/brokercontroller/IBrokerController/PullResponses" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="SessionFaultFault">
+        <soap:fault name="SessionFaultFault" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+</wsdl:definitions>

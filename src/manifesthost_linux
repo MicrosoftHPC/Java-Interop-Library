@@ -1,4 +1,4 @@
 Manifest-Version: 1.0
 Main-Class: com.microsoft.hpc.servicehost.Main
-Class-Path: Microsoft-HpcSession-3.0.jar $CXF_HOME/libcxf-manifest.jar
+Class-Path: Microsoft-HpcSession-3.0.jar $CXF_HOME/lib/cxf-manifest.jar
 

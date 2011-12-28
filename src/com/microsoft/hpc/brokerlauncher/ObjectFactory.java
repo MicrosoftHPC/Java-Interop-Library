@@ -31,6 +31,7 @@ public class ObjectFactory {
     private final static QName _AttachResponseAttachResult_QNAME = new QName("http://hpc.microsoft.com/brokerlauncher/", "AttachResult");
     private final static QName _BrokerInitializationResultBrokerEpr_QNAME = new QName("http://hpc.microsoft.com/BrokerLauncher", "BrokerEpr");
     private final static QName _BrokerInitializationResultControllerEpr_QNAME = new QName("http://hpc.microsoft.com/BrokerLauncher", "ControllerEpr");
+    private final static QName _BrokerInitializationResultBrokerUniqueId_QNAME = new QName("http://hpc.microsoft.com/BrokerLauncher", "BrokerUniqueId");
     private final static QName _BrokerInitializationResultResponseEpr_QNAME = new QName("http://hpc.microsoft.com/BrokerLauncher", "ResponseEpr");
     private final static QName _CreateDurableResponseCreateDurableResult_QNAME = new QName("http://hpc.microsoft.com/brokerlauncher/", "CreateDurableResult");
     private final static QName _GetActiveBrokerIdListResponseGetActiveBrokerIdListResult_QNAME = new QName("http://hpc.microsoft.com/brokerlauncher/", "GetActiveBrokerIdListResult");
@@ -192,6 +193,16 @@ public class ObjectFactory {
     public JAXBElement<ArrayOfstring> createBrokerInitializationResultResponseEpr(ArrayOfstring value) {
         return new JAXBElement<ArrayOfstring>(_BrokerInitializationResultResponseEpr_QNAME, ArrayOfstring.class, BrokerInitializationResult.class, value);
     }
+    
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://hpc.microsoft.com/BrokerLauncher", name = "BrokerUniqueId", scope = BrokerInitializationResult.class)
+    public JAXBElement<String> createBrokerInitializationResultBrokerUniqueId(String value) {
+        return new JAXBElement<String>(_BrokerInitializationResultBrokerUniqueId_QNAME, String.class, BrokerInitializationResult.class, value);
+    }
+
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link BrokerInitializationResult }{@code >}}

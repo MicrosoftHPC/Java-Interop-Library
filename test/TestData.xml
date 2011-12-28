@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Config>
+
+<Global>
+<Scheduler>shpc-0042</Scheduler>
+<UserName>fareast\wsdcta</UserName>
+<Password>Pa55word&amp;&amp;7</Password>
+<ServiceName>AITestServiceLib</ServiceName>
+<NbOfCalls>10</NbOfCalls>
+<NbOfSessions>3</NbOfSessions>
+<NbOfClients>2</NbOfClients>
+	<UserName2>fareast\wsdcta2</UserName2>
+	<Password2>Pa55word&amp;&amp;7</Password2>
+	<NbOfBatches>2</NbOfBatches></Global>
+
+<Group name="BVT">
+<NbOfCalls>12</NbOfCalls>
+<BVTName1>BVTValue1</BVTName1>
+</Group>
+
+
+<Group name="GenericService">
+<ServiceName>SoaGenericTestService</ServiceName>
+
+</Group>
+	<Group name="DurableSessionTest">
+		<ServiceName>aitestservicelib</ServiceName></Group>
+	<Group name="SessionBaseTest">
+		<ServiceName>aitestservicelib</ServiceName></Group>
+  <Group name="CommonDataTest">
+    <DefaultDataServer>\\shpc-0050\CommonData2</DefaultDataServer>
+    <DataSizeToCheck>1024,32768,1048576,4194304,16777216,67108864,104857600</DataSizeToCheck>
+    <PreConfiguredDataServer1>\\Mingqing-box\TestConfig-1</PreConfiguredDataServer1>
+  </Group>
+
+<Group name="SessionStartInfoTest">
+<ServiceName>Microsoft.Hpc.Excel.XllContainer64</ServiceName>
+</Group>
+
+<Group name="Stress">
+<MinCalls>10</MinCalls>
+<MaxCalls>50</MaxCalls>
+<MinClients>2</MinClients>
+<MaxClients>5</MaxClients>
+<MinBatches>2</MinBatches>
+<MaxBatches>5</MaxBatches>
+<MinDataKb>5</MinDataKb>
+<MaxDataKb>15</MaxDataKb>
+<MinTimeMs>5</MinTimeMs>
+<MaxTimeMs>15</MaxTimeMs>
+
+</Group>
+
+
+</Config>

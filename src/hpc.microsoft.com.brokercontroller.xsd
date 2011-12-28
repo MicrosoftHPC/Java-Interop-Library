@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://hpc.microsoft.com/brokercontroller/" elementFormDefault="qualified" targetNamespace="http://hpc.microsoft.com/brokercontroller/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://hpc.microsoft.com" schemaLocation="hpc.microsoft.com.xsd" />
+  <xs:element name="Flush">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="count" type="xs:int" />
+        <xs:element minOccurs="0" name="clientid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="timeoutThrottlingMs" type="xs:int" />
+        <xs:element minOccurs="0" name="timeoutFlushMs" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FlushResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EndRequests">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="count" type="xs:int" />
+        <xs:element minOccurs="0" name="clientid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="timeoutThrottlingMs" type="xs:int" />
+        <xs:element minOccurs="0" name="timeoutEOMMs" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EndRequestsResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Purge">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="clientid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PurgeResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBrokerClientStatus">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="clientId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBrokerClientStatusResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetBrokerClientStatusResult" xmlns:q1="http://hpc.microsoft.com" type="q1:BrokerClientStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRequestsCount">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="clientId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRequestsCountResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetRequestsCountResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PullResponses">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="action" type="xs:string" />
+        <xs:element minOccurs="1" maxOccurs="1" name="position" type="tns:GetResponsePosition" />
+        <xs:element minOccurs="1" maxOccurs="1" name="count" type="xs:int" />
+        <xs:element minOccurs="0" maxOccurs="1" name="clientId" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="GetResponsePosition">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Begin" />
+      <xs:enumeration value="Current" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="PullResponsesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="PullResponsesResult" type="tns:BrokerResponseMessages" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="BrokerResponseMessages">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="EOM" type="xs:boolean" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SOAPMessage">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:any />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

@@ -33,8 +33,10 @@ public class ObjectFactory {
     private final static QName _SessionInfoBrokerEpr_QNAME = new QName("http://hpc.microsoft.com/SessionLauncher", "BrokerEpr");
     private final static QName _SessionInfoServerVersion_QNAME = new QName("http://hpc.microsoft.com/SessionLauncher", "ServerVersion");
     private final static QName _SessionInfoBrokerLauncherEpr_QNAME = new QName("http://hpc.microsoft.com/SessionLauncher", "BrokerLauncherEpr");
+    private final static QName _SessionInfoSessionOwner_QNAME = new QName("http://hpc.microsoft.com/SessionLauncher", "SessionOwner");
     private final static QName _SessionInfoServiceVersion_QNAME = new QName("http://hpc.microsoft.com/SessionLauncher", "ServiceVersion");
     private final static QName _SessionInfoResponseEpr_QNAME = new QName("http://hpc.microsoft.com/SessionLauncher", "ResponseEpr");
+    private final static QName _SessionInfoSessionACL_QNAME = new QName("http://hpc.microsoft.com/SessionLauncher", "SessionACL");
     private final static QName _SessionInfoControllerEpr_QNAME = new QName("http://hpc.microsoft.com/SessionLauncher", "ControllerEpr");
     private final static QName _GetServiceVersionsServiceName_QNAME = new QName("http://hpc.microsoft.com/sessionlauncher/", "serviceName");
     private final static QName _AllocateDurableResponseAllocateDurableResult_QNAME = new QName("http://hpc.microsoft.com/sessionlauncher/", "AllocateDurableResult");
@@ -202,6 +204,16 @@ public class ObjectFactory {
     public JAXBElement<ArrayOfstring> createSessionInfoBrokerEpr(ArrayOfstring value) {
         return new JAXBElement<ArrayOfstring>(_SessionInfoBrokerEpr_QNAME, ArrayOfstring.class, SessionInfo.class, value);
     }
+    
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://hpc.microsoft.com/SessionLauncher", name = "SessionOwner", scope = SessionInfo.class)
+    public JAXBElement<String> createSessionInfoSessionOwner(String value) {
+        return new JAXBElement<String>(_SessionInfoSessionOwner_QNAME, String.class, SessionInfo.class, value);
+    }
+
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Version }{@code >}}
@@ -230,6 +242,15 @@ public class ObjectFactory {
         return new JAXBElement<Version>(_SessionInfoServiceVersion_QNAME, Version.class, SessionInfo.class, value);
     }
 
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfstring }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://hpc.microsoft.com/SessionLauncher", name = "SessionACL", scope = SessionInfo.class)
+    public JAXBElement<ArrayOfstring> createSessionInfoSessionACL(ArrayOfstring value) {
+        return new JAXBElement<ArrayOfstring>(_SessionInfoSessionACL_QNAME, ArrayOfstring.class, SessionInfo.class, value);
+    }
+    
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfstring }{@code >}}
      * 
