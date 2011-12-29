@@ -872,7 +872,7 @@ public class DataClientTest {
     }
 
     
-    @Test(timeout = 600000)
+    @Ignore
     // DataClient.Delete - Unauthorized delete
     public final void DataClient_API_Delete_3() throws IOException,
             DataException {

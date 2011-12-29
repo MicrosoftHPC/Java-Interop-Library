@@ -161,7 +161,6 @@ public class SessionStartInfoTest {
                 info.messagesThrottleStopThreshold(), 3000);
         logger.assertEqual("nodeGroupsStr", info.getNodeGroups(),
                 "ComputeNodes");
-        // logger.assertEqual("password", info.getPassword(), "Pa55word");
         logger.assertEqual("priority", info.getPriority(), 4); 
         logger.assertEqual("requestedNodesStr", info.getRequestedNodesStr(),
                 "");

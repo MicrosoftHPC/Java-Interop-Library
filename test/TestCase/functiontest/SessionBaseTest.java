@@ -150,10 +150,10 @@ public class SessionBaseTest {
         try {
             sb = DurableSession.createSession(info);
             logger.assertEqual("client version", sb.getClientVersion()
-                    .toString(), "3.2"); 
+                    .toString(), "3.3"); 
             /*            logger.assertEqual("server version", sb.getServerVersion()
                     .toString(), "3.2");
-*/           logger.assertTrue("server version",sb.getServerVersion().toString().startsWith("3.2"));
+*/           logger.assertTrue("server version",sb.getServerVersion().toString().startsWith("3"));
 
 
             sb.close();
@@ -168,11 +168,11 @@ public class SessionBaseTest {
         try {
             sb = Session.createSession(info);
             logger.assertEqual("client version", sb.getClientVersion()
-                    .toString(), "3.2");
+                    .toString(), "3.3");
             /*logger.assertEqual("server version", sb.getServerVersion()
                     .toString(), "3.2");
 */
-            logger.assertTrue("server version",sb.getServerVersion().toString().startsWith("3.2"));
+            logger.assertTrue("server version",sb.getServerVersion().toString().startsWith("3"));
 
             sb.close();
         } catch (SocketTimeoutException e) {
@@ -361,7 +361,7 @@ public class SessionBaseTest {
             logger.assertEqual("ccpechosvc version", SessionBase
                     .GetServiceVersions(config.Scheduler, config.ServiceName,
                             config.UserName, config.Password)[0].toString(),
-                    "3.2");
+                    "3.3");
         } catch (SessionException e) {
             logger.Error("Session exception");
             e.printStackTrace();

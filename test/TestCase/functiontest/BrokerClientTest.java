@@ -1970,7 +1970,7 @@ public class BrokerClientTest {
      * {@link com.microsoft.hpc.scheduler.session.BrokerClient#setResponseHandler(java.lang.Class, com.microsoft.hpc.scheduler.session.ResponseListener, int)}
      * .
      */
-    @Test
+    @Ignore
     public void testSetResponseHandlerClassOfTMessageResponseListenerOfTMessageInt() {
 
         // functional

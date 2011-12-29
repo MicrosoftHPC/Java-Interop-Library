@@ -16,12 +16,12 @@ import javax.xml.xpath.*;
  */
 public class Config {
 
-    public String UserName = "fareast\\wsdcta";
-    public String Password = "Pa55word##3";
-    public String UserName2 = "fareast\\wsdcta2";
-    public String Password2 = "Pa55word##3";
+    public String UserName = "username";
+    public String Password = "password";
+    public String UserName2 = "username2";
+    public String Password2 = "password2";
 
-    public String Scheduler = "wcs-1515118";
+    public String Scheduler = "headnode";
     public String ServiceName = "JavaTestService";
     public int NbOfCalls = 12;
     public int NbOfClients = 1;
