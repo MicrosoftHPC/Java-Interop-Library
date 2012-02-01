@@ -5,7 +5,7 @@
 <Scheduler>headnode</Scheduler>
 <UserName>username</UserName>
 <Password>password</Password>
-<ServiceName>JavaTestService</ServiceName>
+<ServiceName>AITestServiceLib</ServiceName>
 <NbOfCalls>10</NbOfCalls>
 <NbOfSessions>3</NbOfSessions>
 <NbOfClients>2</NbOfClients>
@@ -24,11 +24,23 @@
 
 </Group>
 	<Group name="DurableSessionTest">
-		<ServiceName>JavaTestService</ServiceName></Group>
+		<ServiceName>aitestservicelib</ServiceName></Group>
 	<Group name="SessionBaseTest">
-		<ServiceName>JavaTestService</ServiceName></Group>
+		<ServiceName>aitestservicelib</ServiceName></Group>
   <Group name="CommonDataTest">
-    <DefaultDataServer>\\shpc-0050\CommonData2</DefaultDataServer>
+    <DefaultDataServer>\\shpc-0042\runtime$</DefaultDataServer>
+    <DataSizeToCheck>1024,32768,1048576,4194304,16777216,67108864,104857600</DataSizeToCheck>
+    <PreConfiguredDataServer1>\\Mingqing-box\TestConfig-1</PreConfiguredDataServer1>
+  </Group>
+
+  <Group name="CommonDataTestInteractive">
+    <DefaultDataServer>\\shpc-0042\runtime$</DefaultDataServer>
+    <DataSizeToCheck>1024,32768,1048576,4194304,16777216,67108864,104857600</DataSizeToCheck>
+    <PreConfiguredDataServer1>\\Mingqing-box\TestConfig-1</PreConfiguredDataServer1>
+  </Group>
+
+  <Group name="CommonDataTestDurable">
+    <DefaultDataServer>\\shpc-0042\runtime$</DefaultDataServer>
     <DataSizeToCheck>1024,32768,1048576,4194304,16777216,67108864,104857600</DataSizeToCheck>
     <PreConfiguredDataServer1>\\Mingqing-box\TestConfig-1</PreConfiguredDataServer1>
   </Group>

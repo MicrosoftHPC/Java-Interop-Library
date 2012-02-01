@@ -56,7 +56,7 @@ public class SessionAttachInfoTest {
      */
     @Before
     public void setUp() throws Exception {
-        logger.Start("SessionAttachInfoTest");
+        
     }
 
     /**
@@ -64,7 +64,7 @@ public class SessionAttachInfoTest {
      */
     @After
     public void tearDown() throws Exception {
-        logger.End("SessionAttachInfoTest");
+        
     }
 
     /**
@@ -74,15 +74,17 @@ public class SessionAttachInfoTest {
      */
     @Test
     public final void testSessionAttachInfoStringInt() {
+    	logger.Start();
         SessionAttachInfo attachInfo = new SessionAttachInfo(config.Scheduler,
                 1, config.UserName, config.Password);
         try {
             logger.assertEqual("hn", attachInfo.getHeadnode(), config.Scheduler);
             logger.assertEqual("id", attachInfo.getId(), 1);
         } catch (Throwable e) {
-            logger.Error("Exception is thrown %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Exception is thrown ", e);
+            
         }
+        logger.End();
 
     }
 
@@ -93,6 +95,7 @@ public class SessionAttachInfoTest {
      */
     @Test
     public final void testSessionAttachInfoStringIntStringString() {
+    	logger.Start();
         int sessionId = dSession.getId();
         SessionAttachInfo attachInfo = new SessionAttachInfo(config.Scheduler,
                 sessionId, config.UserName, config.Password);
@@ -101,22 +104,22 @@ public class SessionAttachInfoTest {
             logger.assertEqual("hn", attachInfo.getHeadnode(), config.Scheduler);
             logger.assertEqual("id", attachInfo.getId(), sessionId);
         } catch (Throwable e) {
-            logger.Error("Exception is thrown %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Exception is thrown ", e);
+            
         }
 
         DurableSession dSession_attached = null;
         try {
             dSession_attached = DurableSession.attachSession(attachInfo);
         } catch (SessionException e1) {
-            logger.Error("SessionException when attaching a durable session");
-            e1.printStackTrace();
+            logger.Error("SessionException when attaching a durable session", e1);
+            
         } catch (SocketTimeoutException e1) {
-            logger.Error("Timeout when attaching a durable session");
-            e1.printStackTrace();
+            logger.Error("Timeout when attaching a durable session", e1);
+            
         } catch (Exception e1) {
-            logger.Error("Exception when attaching a durable session");
-            e1.printStackTrace();
+            logger.Error("Exception when attaching a durable session", e1);
+            
         }
 
         // boundary
@@ -126,10 +129,10 @@ public class SessionAttachInfoTest {
             logger.Error("EE is not thrown");
         } catch (IllegalArgumentException e1) {
             logger.Info("Invalid sessionAttachInfo when attaching a durable session");
-            e1.printStackTrace();
+            
         } catch (Exception e1) {
-            logger.Error("Invalid sessionAttachInfo when attaching a durable session");
-            e1.printStackTrace();
+            logger.Error("Invalid sessionAttachInfo when attaching a durable session", e1);
+            
         }
 
         attachInfo = new SessionAttachInfo(config.Scheduler, 0,
@@ -139,7 +142,7 @@ public class SessionAttachInfoTest {
             logger.Error("EE is not thrown");
         } catch (Exception e1) {
             logger.Info("Invalid sessionAttachInfo when attaching a durable session");
-            e1.printStackTrace();
+            
         }
 
         attachInfo = new SessionAttachInfo(config.Scheduler, -1, "", "");
@@ -148,7 +151,7 @@ public class SessionAttachInfoTest {
             logger.Error("EE is not thrown");
         } catch (Exception e1) {
             logger.Info("Invalid sessionAttachInfo when attaching a durable session");
-            e1.printStackTrace();
+            
         }
 
         attachInfo = new SessionAttachInfo(config.Scheduler, Integer.MAX_VALUE,
@@ -158,8 +161,10 @@ public class SessionAttachInfoTest {
             logger.Error("EE is not thrown");
         } catch (Exception e1) {
             logger.Info("Invalid sessionAttachInfo when attaching a durable session");
-            e1.printStackTrace();
+            
         }
+        
+        logger.End();
 
     }
 

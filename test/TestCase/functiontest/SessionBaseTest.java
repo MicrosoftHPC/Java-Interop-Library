@@ -53,7 +53,7 @@ public class SessionBaseTest {
      */
     @Before
     public void setUp() throws Exception {
-        logger.Start("SessionBaseTest");
+        
     }
 
     /**
@@ -61,7 +61,7 @@ public class SessionBaseTest {
      */
     @After
     public void tearDown() throws Exception {
-        logger.End("SessionBaseTest");
+        
     }
 
     /**
@@ -70,6 +70,7 @@ public class SessionBaseTest {
      */
     @Test
     public final void testGetId() {
+    	logger.Start();
         SessionStartInfo info = new SessionStartInfo(config.Scheduler,
                 config.ServiceName, config.UserName, config.Password);
         SessionBase sb = null;
@@ -78,11 +79,11 @@ public class SessionBaseTest {
             logger.Info("Session id %d", sb.getId());
             sb.close();
         } catch (SocketTimeoutException e) {
-            logger.Error("Timeout when creating a durable session");
-            e.printStackTrace();
+            logger.Error("Timeout when creating a durable session", e);
+            
         } catch (SessionException e) {
-            logger.Error("Session exception when creating a durable session");
-            e.printStackTrace();
+            logger.Error("Session exception when creating a durable session", e);
+            
         }
 
         try {
@@ -90,12 +91,14 @@ public class SessionBaseTest {
             logger.Info("Session id %d", sb.getId());
             sb.close();
         } catch (SocketTimeoutException e) {
-            logger.Error("Timeout when creating a durable session");
-            e.printStackTrace();
+            logger.Error("Timeout when creating a durable session", e);
+            
         } catch (SessionException e) {
-            logger.Error("Session exception when creating a durable session");
-            e.printStackTrace();
+            logger.Error("Session exception when creating a durable session", e);
+            
         }
+        
+        logger.End();
 
     }
 
@@ -106,6 +109,7 @@ public class SessionBaseTest {
      */
     @Test
     public final void testGetEndpointReference() {
+    	logger.Start();
         SessionStartInfo info = new SessionStartInfo(config.Scheduler,
                 config.ServiceName, config.UserName, config.Password);
         SessionBase sb = null;
@@ -114,11 +118,11 @@ public class SessionBaseTest {
             logger.Info("EPR is %s", sb.getEndpointReference());
             sb.close();
         } catch (SocketTimeoutException e) {
-            logger.Error("Timeout when creating a durable session");
-            e.printStackTrace();
+            logger.Error("Timeout when creating a durable session", e);
+            
         } catch (SessionException e) {
-            logger.Error("Session exception when creating a durable session");
-            e.printStackTrace();
+            logger.Error("Session exception when creating a durable session", e);
+            
         }
 
         try {
@@ -126,12 +130,13 @@ public class SessionBaseTest {
             logger.Info("EPR is %s", sb.getEndpointReference());
             sb.close();
         } catch (SocketTimeoutException e) {
-            logger.Error("Timeout when creating a durable session");
-            e.printStackTrace();
+            logger.Error("Timeout when creating a durable session", e);
+            
         } catch (SessionException e) {
-            logger.Error("Session exception when creating a durable session");
-            e.printStackTrace();
+            logger.Error("Session exception when creating a durable session", e);
+            
         }
+        logger.End();
 
     }
 
@@ -144,44 +149,47 @@ public class SessionBaseTest {
      */
     @Test
     public final void testGetClientVersion() {
+    	logger.Start();
         SessionStartInfo info = new SessionStartInfo(config.Scheduler,
                 config.ServiceName, config.UserName, config.Password);
         SessionBase sb = null;
         try {
             sb = DurableSession.createSession(info);
             logger.assertEqual("client version", sb.getClientVersion()
-                    .toString(), "3.3"); 
+                    .toString(), "4.0"); 
             /*            logger.assertEqual("server version", sb.getServerVersion()
                     .toString(), "3.2");
-*/           logger.assertTrue("server version",sb.getServerVersion().toString().startsWith("3"));
+*/           logger.assertTrue("server version",sb.getServerVersion().toString().startsWith("4"));
 
 
             sb.close();
         } catch (SocketTimeoutException e) {
-            logger.Error("Timeout when creating a durable session");
-            e.printStackTrace();
+            logger.Error("Timeout when creating a durable session", e);
+            
         } catch (SessionException e) {
-            logger.Error("Session exception when creating a durable session");
-            e.printStackTrace();
+            logger.Error("Session exception when creating a durable session", e);
+            
         }
 
         try {
             sb = Session.createSession(info);
             logger.assertEqual("client version", sb.getClientVersion()
-                    .toString(), "3.3");
+                    .toString(), "4.0");
             /*logger.assertEqual("server version", sb.getServerVersion()
                     .toString(), "3.2");
 */
-            logger.assertTrue("server version",sb.getServerVersion().toString().startsWith("3"));
+            logger.assertTrue("server version",sb.getServerVersion().toString().startsWith("4"));
 
             sb.close();
         } catch (SocketTimeoutException e) {
-            logger.Error("Timeout when creating a durable session");
-            e.printStackTrace();
+            logger.Error("Timeout when creating a durable session", e);
+            
         } catch (SessionException e) {
-            logger.Error("Session exception when creating a durable session");
-            e.printStackTrace();
+            logger.Error("Session exception when creating a durable session", e);
+            
         }
+        
+        logger.End();
 
     }
 
@@ -211,6 +219,7 @@ public class SessionBaseTest {
      */
     @Test
     public final void testCloseBoolean() {
+    	logger.Start();
         // functional
         SessionStartInfo info = new SessionStartInfo(config.Scheduler,
                 config.ServiceName, config.UserName, config.Password);
@@ -219,24 +228,24 @@ public class SessionBaseTest {
             session = DurableSession.createSession(info);
             session.close(true);
         } catch (SocketTimeoutException e) {
-            logger.Error("Timeout when creating a durable session");
-            e.printStackTrace();
+            logger.Error("Timeout when creating a durable session", e);
+            
         } catch (SessionException e) {
-            logger.Error("Session exception when creating a durable session");
-            e.printStackTrace();
+            logger.Error("Session exception when creating a durable session", e);
+            
         }
 
         try {
             session = Session.createSession(info);
             session.close(false);
         } catch (SocketTimeoutException e) {
-            logger.Error("Timeout when creating a durable session");
-            e.printStackTrace();
+            logger.Error("Timeout when creating a durable session", e);
+            
         } catch (SessionException e) {
-            logger.Error("Session exception when creating a durable session");
-            e.printStackTrace();
+            logger.Error("Session exception when creating a durable session", e);
+            
         }
-
+        logger.End();
     }
 
     /**
@@ -246,6 +255,7 @@ public class SessionBaseTest {
      */
     @Test
     public final void testCloseBooleanInt() {
+    	logger.Start();
         // functional
         SessionStartInfo info = new SessionStartInfo(config.Scheduler,
                 config.ServiceName, config.UserName, config.Password);
@@ -254,33 +264,33 @@ public class SessionBaseTest {
             session = DurableSession.createSession(info);
             session.close(true, 5000);
         } catch (SocketTimeoutException e) {
-            logger.Error("Timeout when creating a durable session");
-            e.printStackTrace();
+            logger.Error("Timeout when creating a durable session", e);
+            
         } catch (SessionException e) {
-            logger.Error("Session exception when creating a durable session");
-            e.printStackTrace();
+            logger.Error("Session exception when creating a durable session", e);
+            
         }
 
         try {
             session = Session.createSession(info);
             session.close(true, 5000);
         } catch (SocketTimeoutException e) {
-            logger.Error("Timeout when creating a durable session");
-            e.printStackTrace();
+            logger.Error("Timeout when creating a durable session", e);
+            
         } catch (SessionException e) {
-            logger.Error("Session exception when creating a durable session");
-            e.printStackTrace();
+            logger.Error("Session exception when creating a durable session", e);
+            
         }
 
         try {
             session = Session.createSession(info);
             session.close(true, 0);
         } catch (SocketTimeoutException e) {
-            logger.Error("Timeout when creating a durable session");
-            e.printStackTrace();
+            logger.Error("Timeout when creating a durable session", e);
+            
         } catch (SessionException e) {
-            logger.Error("Session exception when creating a durable session");
-            e.printStackTrace();
+            logger.Error("Session exception when creating a durable session", e);
+            
         }
 
         // boundary
@@ -288,25 +298,25 @@ public class SessionBaseTest {
         try {
             session = Session.createSession(info);
         } catch (SocketTimeoutException e) {
-            logger.Error("Timeout when creating a durable session");
-            e.printStackTrace();
+            logger.Error("Timeout when creating a durable session", e);
+            
         } catch (SessionException e) {
-            logger.Error("Session exception when creating a durable session");
-            e.printStackTrace();
+            logger.Error("Session exception when creating a durable session", e);
+            
         }
 
         try {
             session.close(false, -1000);
             logger.Error("EE is not thrown");
         } catch (SocketTimeoutException e) {
-            logger.Error("Timeout when creating a durable session");
-            e.printStackTrace();
+            logger.Error("Timeout when creating a durable session", e);
+            
         } catch (SessionException e) {
-            logger.Error("Session exception when creating a durable session");
-            e.printStackTrace();
+            logger.Error("Session exception when creating a durable session", e);
+            
         } catch (IllegalArgumentException e) {
-            logger.Info("IllegalArgumentException when creating a durable session");
-            e.printStackTrace();
+            logger.Info("IllegalArgumentException when creating a durable session", e);
+            
         }
 
         try {
@@ -314,39 +324,39 @@ public class SessionBaseTest {
             logger.Error("EE is not thrown 1");
         } catch (SocketTimeoutException e) {
             logger.Info("Timeout when creating a durable session");
-            e.printStackTrace();
+            
         } catch (SessionException e) {
-            logger.Error("Session exception when creating a durable session");
-            e.printStackTrace();
+            logger.Error("Session exception when creating a durable session", e);
+            
         } catch (IllegalArgumentException e) {
-            logger.Error("IllegalArgumentException when creating a durable session");
-            e.printStackTrace();
+            logger.Error("IllegalArgumentException when creating a durable session", e);
+            
         }
 
         try {
             session.close(false, Integer.MIN_VALUE);
             logger.Error("EE is not thrown");
         } catch (SocketTimeoutException e) {
-            logger.Error("Timeout when creating a durable session");
-            e.printStackTrace();
+            logger.Error("Timeout when creating a durable session", e);
+            
         } catch (SessionException e) {
-            logger.Error("Session exception when creating a durable session");
-            e.printStackTrace();
+            logger.Error("Session exception when creating a durable session", e);
+            
         } catch (IllegalArgumentException e) {
-            logger.Info("IllegalArgumentException when creating a durable session");
-            e.printStackTrace();
+            logger.Info("IllegalArgumentException when creating a durable session", e);
+            
         }
 
         try {
             session.close(true, Integer.MAX_VALUE);
         } catch (SocketTimeoutException e) {
-            logger.Error("Timeout when creating a durable session");
-            e.printStackTrace();
+            logger.Error("Timeout when creating a durable session", e);
+            
         } catch (SessionException e) {
-            logger.Error("IllegalArgumentException when creating a durable session");
-            e.printStackTrace();
+            logger.Error("IllegalArgumentException when creating a durable session", e);
+            
         }
-
+        logger.End();
     }
 
     /**
@@ -356,15 +366,16 @@ public class SessionBaseTest {
      */
     @Test
     public final void testGetServiceVersions() {
+    	logger.Start();
 
         try {
             logger.assertEqual("ccpechosvc version", SessionBase
                     .GetServiceVersions(config.Scheduler, config.ServiceName,
                             config.UserName, config.Password)[0].toString(),
-                    "3.3");
+                    "3.2");
         } catch (SessionException e) {
-            logger.Error("Session exception");
-            e.printStackTrace();
+            logger.Error("Session exception", e);
+            
         }
 
         // get other service name
@@ -380,8 +391,8 @@ public class SessionBaseTest {
                 }
 
             } catch (SessionException e) {
-                logger.Error("Session exception");
-                e.printStackTrace();
+                logger.Error("Session exception", e);
+                
             }
 
         }
@@ -395,10 +406,10 @@ public class SessionBaseTest {
             logger.Error("EE is not thrown");
         } catch (IllegalArgumentException e) {
             logger.Info("IllegalArgumentException is thrown");
-            e.printStackTrace();
+            
         } catch (SessionException e) {
-            logger.Error("UE is thrown");
-            e.printStackTrace();
+            logger.Error("UE is thrown", e);
+            
         }
 
         try {
@@ -407,10 +418,10 @@ public class SessionBaseTest {
             logger.Error("EE is not thrown");
         } catch (WebServiceException e) {
             logger.Info("SessionException is thrown");
-            e.printStackTrace();
+            
         } catch (SessionException e) {
-            logger.Error("SessionException is thrown");
-            e.printStackTrace();
+            logger.Error("SessionException is thrown", e);
+            
         }
 
         try {
@@ -419,10 +430,10 @@ public class SessionBaseTest {
             logger.Error("EE is not thrown");
         } catch (IllegalArgumentException e) {
             logger.Info("SessionException is thrown");
-            e.printStackTrace();
+            
         } catch (SessionException e) {
-            logger.Error("SessionException is thrown");
-            e.printStackTrace();
+            logger.Error("SessionException is thrown", e);
+            
         }
         
         try {
@@ -432,9 +443,9 @@ public class SessionBaseTest {
             // logger.Error("EE is not thrown"); 
         } catch (SessionException e) {
             logger.Info("SessionException is thrown");
-            e.printStackTrace();
+            
         }
-
+        logger.End();
     }
 
     /**
@@ -442,8 +453,9 @@ public class SessionBaseTest {
      */
     @Test
     public final void testNoServiceVersion() {
+    	logger.Start();
     	logger.assertEqual("noServiceVersion", SessionBase.NoServiceVersion, new Version(0,0));
-    	
+    	logger.End();
     }
     
     private static Config config;

@@ -85,7 +85,7 @@ public class SessionBase
     /**
      * the client version
      */
-    private static Version clientVersion = new Version(3, 3);
+    private static Version clientVersion = new Version(4, 0);
 
     /*
      * the Magic Infinite date

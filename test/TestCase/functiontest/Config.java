@@ -21,8 +21,8 @@ public class Config {
     public String UserName2 = "username2";
     public String Password2 = "password2";
 
-    public String Scheduler = "headnode";
-    public String ServiceName = "JavaTestService";
+    public String Scheduler = "wcs-1515118";
+    public String ServiceName = "AITestServiceLib";
     public int NbOfCalls = 12;
     public int NbOfClients = 1;
     public int NbOfBatches = 1;

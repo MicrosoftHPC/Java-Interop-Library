@@ -417,17 +417,27 @@ public class BVT {
         } catch (Throwable e) {
             logger.Error("Exception is thrown %s%n%s", e.toString(),
                     e.getStackTrace());
+        }        
+        // session dispose would call close(true) which would cause problem. BUG
+        if (session != null) {
+            try {
+                session.close(false);
+            } catch (Throwable e1) {
+                logger.Error(e1);
+            }
         }
+        
 
         SessionAttachInfo attInfo = new SessionAttachInfo(config.Scheduler,
                 sessionId, config.UserName, config.Password);
 
+        Session session2 = null;
         try {
-            session = Session.attachSession(attInfo);
+            session2 = Session.attachSession(attInfo);
             logger.Info("Session %d is attached.", sessionId);
 
             BrokerClient<AITestLibService> client = new BrokerClient<AITestLibService>(
-                    session, AITestLibService.class);
+                    session2, AITestLibService.class);
             logger.Info("Retrieving responses...");
 
             for (BrokerResponse<EchoResponse> response : client
@@ -455,9 +465,9 @@ public class BVT {
             logger.Error(e1);
         }
 
-        if (session != null) {
+        if (session2 != null) {
             try {
-                session.close();
+                session2.close();
             } catch (Throwable e1) {
                 logger.Error(e1);
             }
@@ -1130,10 +1140,10 @@ public class BVT {
                         client.endRequests();
                     } catch (SocketTimeoutException e) {
                         // TODO Auto-generated catch block
-                        e.printStackTrace();
+                        
                     } catch (SessionException e) {
                         // TODO Auto-generated catch block
-                        e.printStackTrace();
+                        
                     }
                 }
                 l.countDown();
@@ -1171,10 +1181,10 @@ public class BVT {
                         client.close();
                     } catch (SocketTimeoutException e) {
                         // TODO Auto-generated catch block
-                        e.printStackTrace();
+                        
                     } catch (SessionException e) {
                         // TODO Auto-generated catch block
-                        e.printStackTrace();
+                        
                     }
 
                 }
