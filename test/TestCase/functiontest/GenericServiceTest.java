@@ -117,8 +117,8 @@ public class GenericServiceTest {
 							response.getUserData(), reply);
 					
 				} catch (Throwable ex) {
-					logger.Error("Error in process request %s", ex.toString());
-					ex.printStackTrace();
+					logger.Error("Error in process request", ex);
+
 
 				}
 
@@ -127,15 +127,15 @@ public class GenericServiceTest {
 			client.close();
 			
 		} catch (Throwable e) {
-			logger.Error("Exception is thrown %s", e.toString());
-			e.printStackTrace();
+			logger.Error("Exception is thrown ", e);
+			
 		}
 		
 		try {
 			session.close();
 		} catch (Throwable e) {
-			logger.Error("Exception is thrown %s", e.toString());
-			e.printStackTrace();
+			logger.Error("Exception is thrown ", e);
+			
 		}
 		
 		logger.End("test_DurableGenericService");
@@ -194,12 +194,12 @@ public class GenericServiceTest {
 							response.getUserData(), reply);
 					
 				} catch (SOAPFaultException ee){
-					logger.Info("EE is thrown. %s", ee.toString());
-					ee.printStackTrace();
+					logger.Info("EE is thrown. ", ee);
+					
 				}
 				catch (Throwable ee) {
-					logger.Error("Error in process request %s", ee.toString());
-					ee.printStackTrace();
+					logger.Error("Error in process request ", ee);
+					
 
 				}
 
@@ -208,15 +208,15 @@ public class GenericServiceTest {
 			client.close();
 			
 		} catch (Throwable e) {
-			logger.Error("Exception is thrown %s", e.toString());
-			e.printStackTrace();
+			logger.Error("Exception is thrown ", e);
+			
 		}
 		
 		try {
 			session.close();
 		} catch (Throwable e) {
-			logger.Error("Exception is thrown %s", e.toString());
-			e.printStackTrace();
+			logger.Error("Exception is thrown ", e);
+			
 		}
 		
 		logger.End("test_DurableGenericService");

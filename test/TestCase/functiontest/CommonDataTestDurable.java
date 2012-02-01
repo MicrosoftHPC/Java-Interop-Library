@@ -47,8 +47,8 @@ public class CommonDataTestDurable {
      */
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
-        config = new Config("CommonDataTest");
-        logger = new Logger(true, true, "DataClientTest");
+        config = new Config("CommonDataTestDurable");
+        logger = new Logger(true, true, "CommonDataTestDurable");
         String[] tmp = config.getValue("DataSizeToCheck").split(",");
         dataSizeToCheck = new int[tmp.length];
         for (int i = 0; i < tmp.length; i++) {
@@ -69,7 +69,7 @@ public class CommonDataTestDurable {
      */
     @Before
     public void setUp() throws Exception {
-        logger.Start("CommonDataTest");
+        
     }
 
     /**
@@ -85,7 +85,7 @@ public class CommonDataTestDurable {
                 // ignore error
             }
         }
-        logger.End("CommonDataTest");
+        
     }
 
     @Test(timeout = 600000)
@@ -93,12 +93,14 @@ public class CommonDataTestDurable {
     public final void V3_DataClient_E2E_1() throws SocketTimeoutException,
             SessionException, DataException, DatatypeConfigurationException,
             InterruptedException {
+    	logger.Start();
         for (int dataSize : dataSizeToCheck) {
             logger.Info("Test common data size as %sB", dataSize);
             CommonDataHelper.SimpleSendGetCommonData(logger, dataSize, true);
             // Sleep some time for data cleanup before next session
             Thread.sleep(10 * 1000);
         }
+        logger.End();
     }
 
     @Test(timeout = 600000)
@@ -107,6 +109,7 @@ public class CommonDataTestDurable {
     public final void V3_DataClient_E2E_2() throws SocketTimeoutException,
             SessionException, DataException, DatatypeConfigurationException,
             InterruptedException {
+    	logger.Start();
         for (int dataSize : dataSizeToCheck) {
             logger.Info("Test common data size as %sB", dataSize);
             SessionStartInfo ssi = new SessionStartInfo(config.Scheduler,
@@ -130,6 +133,7 @@ public class CommonDataTestDurable {
             Thread.sleep(10 * 1000);
 
         }
+        logger.End();
     }
 
     @Test(timeout = 600000)
@@ -138,6 +142,7 @@ public class CommonDataTestDurable {
     public final void V3_DataClient_E2E_3() throws SocketTimeoutException,
             SessionException, DataException, DatatypeConfigurationException,
             InterruptedException {
+    	logger.Start();
         for (int dataSize : dataSizeToCheck) {
             logger.Info("Test common data size as %sB", dataSize);
             SessionStartInfo ssi = new SessionStartInfo(config.Scheduler,
@@ -159,6 +164,7 @@ public class CommonDataTestDurable {
             // Sleep some time for data cleanup before next session
             Thread.sleep(10 * 1000);
         }
+        logger.End();
     }
 
     @Test(timeout = 600000)
@@ -167,6 +173,7 @@ public class CommonDataTestDurable {
     public final void V3_DataClient_E2E_6() throws DataException,
             SocketTimeoutException, SessionException,
             DatatypeConfigurationException, InterruptedException {
+    	logger.Start();
         for (int dataSize : dataSizeToCheck) {
             logger.Info("Test common data size as %sB", dataSize);
             CommonDataBytes data = CommonDataHelper
@@ -200,6 +207,7 @@ public class CommonDataTestDurable {
             // Sleep some time for data cleanup before next session
             Thread.sleep(10 * 1000);
         }
+        logger.End();
     }
 
     @Test(timeout = 600000)
@@ -208,6 +216,7 @@ public class CommonDataTestDurable {
     public final void V3_DataClient_E2E_8() throws SocketTimeoutException,
             SessionException, DataException, DatatypeConfigurationException,
             InterruptedException {
+    	logger.Start();
         for (int dataSize : dataSizeToCheck) {
             logger.Info("Test common data size as %sB", dataSize);
             SessionStartInfo ssi = new SessionStartInfo(config.Scheduler,
@@ -218,6 +227,7 @@ public class CommonDataTestDurable {
             // Sleep some time for data cleanup before next session
             Thread.sleep(10 * 1000);
         }
+        logger.End();
     }
 
     @Test(timeout = 600000)
@@ -226,6 +236,7 @@ public class CommonDataTestDurable {
     public final void V3_DataClient_E2E_9() throws SocketTimeoutException,
             SessionException, DataException, DatatypeConfigurationException,
             InterruptedException {
+    	logger.Start();
         for (int dataSize : dataSizeToCheck) {
             logger.Info("Test common data size as %sB", dataSize);
             SessionStartInfo ssi = new SessionStartInfo(config.Scheduler,
@@ -236,6 +247,7 @@ public class CommonDataTestDurable {
             // Sleep some time for data cleanup before next session
             Thread.sleep(10 * 1000);
         }
+        logger.End();
     }
 
     @Test(timeout = 600000)
@@ -244,6 +256,7 @@ public class CommonDataTestDurable {
     public final void V3_DataClient_E2E_10() throws SocketTimeoutException,
             SessionException, DataException, DatatypeConfigurationException,
             InterruptedException {
+    	logger.Start();
         for (int dataSize : dataSizeToCheck) {
             logger.Info("Test common data size as %sB", dataSize);
             SessionStartInfo ssi = new SessionStartInfo(config.Scheduler,
@@ -255,6 +268,7 @@ public class CommonDataTestDurable {
             // Sleep some time for data cleanup before next session
             Thread.sleep(10 * 1000);
         }
+        logger.End();
     }
 
     @Test(timeout = 600000)
@@ -262,6 +276,7 @@ public class CommonDataTestDurable {
     public final void V3_DataClient_E2E_11() throws DataException,
             SocketTimeoutException, SessionException, InterruptedException,
             DatatypeConfigurationException {
+    	logger.Start();
         for (int dataSize : dataSizeToCheck) {
             logger.Info("Test common data size as %sB", dataSize);
             CommonDataBytes data = CommonDataHelper
@@ -287,6 +302,7 @@ public class CommonDataTestDurable {
             // Sleep some time for data cleanup before next session
             Thread.sleep(10 * 1000);
         }
+        logger.End();
     }
 
     private static Config config;

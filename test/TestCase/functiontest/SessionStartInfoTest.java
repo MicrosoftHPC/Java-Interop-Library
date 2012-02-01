@@ -55,7 +55,7 @@ public class SessionStartInfoTest {
      */
     @Before
     public void setUp() throws Exception {
-        logger.Start("SessionStartInfoTest");
+        
     }
 
     /**
@@ -63,7 +63,7 @@ public class SessionStartInfoTest {
      */
     @After
     public void tearDown() throws Exception {
-        logger.End("SessionStartInfoTest");
+        
     }
 
     /**
@@ -73,6 +73,7 @@ public class SessionStartInfoTest {
      */
     @Test
     public final void testSessionStartInfoStringStringStringString() {
+    	logger.Start();
         SessionStartInfo info = new SessionStartInfo(config.Scheduler,
                 config.ServiceName, config.UserName, config.Password);
         logger.assertEqual("allocationGrowLoadRatioThreshold",
@@ -161,6 +162,7 @@ public class SessionStartInfoTest {
                 info.messagesThrottleStopThreshold(), 3000);
         logger.assertEqual("nodeGroupsStr", info.getNodeGroups(),
                 "ComputeNodes");
+        // logger.assertEqual("password", info.getPassword(), "Pa55word");
         logger.assertEqual("priority", info.getPriority(), 4); 
         logger.assertEqual("requestedNodesStr", info.getRequestedNodesStr(),
                 "");
@@ -192,22 +194,22 @@ public class SessionStartInfoTest {
         try {
             session = Session.createSession(info);
         } catch (SocketTimeoutException e) {
-            logger.Error("Timeout when creating a  session");
-            e.printStackTrace();
+            logger.Error("Timeout when creating a  session", e);
+            
         } catch (SessionException e) {
-            logger.Error("Session exception when creating a  session");
-            e.printStackTrace();
+            logger.Error("Session exception when creating a  session", e);
+            
         }
         //should check the session created.
         if (session !=null) {
         	try {
         		session.close();
         	 } catch (SocketTimeoutException e) {
-                 logger.Error("Timeout when creating a  session");
-                 e.printStackTrace();
+                 logger.Error("Timeout when creating a  session", e);
+                 
         	} catch (SessionException e) {
-                logger.Error("Session exception when creating a  session");
-                e.printStackTrace();
+                logger.Error("Session exception when creating a  session", e);
+                
             }
         }
         
@@ -218,11 +220,11 @@ public class SessionStartInfoTest {
         try {
             session = Session.createSession(info);
         } catch (SocketTimeoutException e) {
-            logger.Error("Timeout when creating a  session");
-            e.printStackTrace();
+            logger.Error("Timeout when creating a  session", e);
+            
         } catch (SessionException e) {
             logger.Info("Session exception when creating a  session");
-            e.printStackTrace();
+            
         }
         
         
@@ -232,12 +234,13 @@ public class SessionStartInfoTest {
         try {
             session = Session.createSession(info);
         } catch (SocketTimeoutException e) {
-            logger.Error("Timeout when creating a  session");
-            e.printStackTrace();
+            logger.Error("Timeout when creating a  session", e);
+            
         } catch (SessionException e) {
             logger.Info("Session exception when creating a  session");
-            e.printStackTrace();
+            
         }
+        logger.End();
 
     }
 
@@ -248,6 +251,7 @@ public class SessionStartInfoTest {
      */
     @Test
     public final void testSessionStartInfoStringStringStringString_1() {
+    	logger.Start();
         SessionStartInfo info = null;
         Session session = null;
 
@@ -258,13 +262,13 @@ public class SessionStartInfoTest {
         try {
             session = Session.createSession(info);
         } catch (SocketTimeoutException e) {
-            logger.Error("Timeout when creating a  session");
-            e.printStackTrace();
+            logger.Error("Timeout when creating a  session", e);
+            
         } catch (SessionException e) {
             logger.Info("Session exception when creating a  session");
-            e.printStackTrace();
+            
         }
-
+        logger.End();
     }
 
     
@@ -275,6 +279,7 @@ public class SessionStartInfoTest {
      */
     @Test
     public final void testSessionStartInfoStringStringStringString_2() {
+    	logger.Start();
         SessionStartInfo info = null;
         Session session = null;
 
@@ -285,13 +290,13 @@ public class SessionStartInfoTest {
         try {
             session = Session.createSession(info);
         } catch (SocketTimeoutException e) {
-            logger.Error("Timeout when creating a  session");
-            e.printStackTrace();
+            logger.Error("Timeout when creating a  session", e);
+            
         } catch (SessionException e) {
             logger.Info("Session exception when creating a  session");
-            e.printStackTrace();
+            
         }
-
+        logger.End();
     }
 
     /**
@@ -301,6 +306,7 @@ public class SessionStartInfoTest {
      */
     @Test
     public final void testSessionStartInfoStringString() {
+    	logger.Start();
         // TODO
         HpcJava.setUsername(config.UserName);
         HpcJava.setPassword(config.Password);
@@ -315,22 +321,22 @@ public class SessionStartInfoTest {
         try {
             session = Session.createSession(info);
         } catch (SocketTimeoutException e) {
-            logger.Error("Timeout when creating a  session");
-            e.printStackTrace();
+            logger.Error("Timeout when creating a  session", e);
+            
         } catch (SessionException e) {
-            logger.Error("Session exception when creating a  session");
-            e.printStackTrace();
+            logger.Error("Session exception when creating a  session", e);
+            
         } 
 
         if (session != null) {
             try {
                 session.close();
             } catch (Throwable e) {
-                logger.Error("Exception is thrown %s", e.toString());
-                e.printStackTrace();
+                logger.Error("Exception is thrown ", e);
+                
             }
         }
-
+        logger.End();
     }
 
     /**
@@ -340,6 +346,7 @@ public class SessionStartInfoTest {
      */
     @Test
     public final void testSessionStartInfoStringStringVersion() {
+    	logger.Start();
         Version v = new Version(2, 0);
         SessionStartInfo info = new SessionStartInfo(config.Scheduler,
                 config.ServiceName, v, config.UserName, config.Password);
@@ -355,21 +362,22 @@ public class SessionStartInfoTest {
         try {
             session = Session.createSession(info);
         } catch (SocketTimeoutException e) {
-            logger.Error("Timeout when creating a  session");
-            e.printStackTrace();
+            logger.Error("Timeout when creating a  session", e);
+            
         } catch (SessionException e) {
-            logger.Error("Session exception when creating a  session");
-            e.printStackTrace();
+            logger.Error("Session exception when creating a  session", e);
+            
         }
 
         if (session != null) {
             try {
                 session.close();
             } catch (Throwable e) {
-                logger.Error("Exception is thrown %s", e.toString());
-                e.printStackTrace();
+                logger.Error("Exception is thrown ", e);
+                
             }
         }
+        logger.End();
     }
 
     
@@ -382,13 +390,14 @@ public class SessionStartInfoTest {
      */
     @Test
     public final void testSessionStartInfoStringStringVersionStringString() {
+    	logger.Start();
     	String serviceName = config.getValue("ServiceName");
         Version[] vs = null;
 		try {
 			vs = SessionBase.GetServiceVersions(config.Scheduler, serviceName, config.UserName, config.Password);
 		} catch (SessionException e1) {
-			logger.Error("Exception when getting service version");
-			e1.printStackTrace();
+			logger.Error("Exception when getting service version", e1);
+			
 		}
         for (Version v : vs) {
         	logger.Info(v);
@@ -402,21 +411,22 @@ public class SessionStartInfoTest {
             session = Session.createSession(info);
             logger.Info("Session %d is created.",session.getId());
         } catch (SocketTimeoutException e) {
-            logger.Error("Timeout when creating a  session");
-            e.printStackTrace();
+            logger.Error("Timeout when creating a  session", e);
+            
         } catch (SessionException e) {
-            logger.Error("Session exception when creating a  session");
-            e.printStackTrace();
+            logger.Error("Session exception when creating a  session", e);
+            
         }
 
         if (session != null) {
             try {
                 session.close();
             } catch (Throwable e) {
-                logger.Error("Exception is thrown %s", e.toString());
-                e.printStackTrace();
+                logger.Error("Exception is thrown ", e);
+                
             }
         }
+        logger.End();
     }
 
     
@@ -426,12 +436,13 @@ public class SessionStartInfoTest {
      */
     @Test
     public final void testSessionStartInfoStringStringVersionStringString_noVersion() {
+    	logger.Start();
     	Version[] vs = null;
 		try {
 			vs = SessionBase.GetServiceVersions(config.Scheduler, config.ServiceName, config.UserName, config.Password);
 		} catch (SessionException e1) {
-			logger.Error("Exception when getting service version");
-			e1.printStackTrace();
+			logger.Error("Exception when getting service version", e1);
+			
 		}
         for (Version v : vs) {
         	logger.Info(v);
@@ -444,21 +455,22 @@ public class SessionStartInfoTest {
             session = Session.createSession(info);
             logger.Info("Session %d is created.",session.getId());
         } catch (SocketTimeoutException e) {
-            logger.Error("Timeout when creating a  session");
-            e.printStackTrace();
+            logger.Error("Timeout when creating a  session", e);
+            
         } catch (SessionException e) {
-            logger.Error("Session exception when creating a  session");
-            e.printStackTrace();
+            logger.Error("Session exception when creating a  session", e);
+            
         }
 
         if (session != null) {
             try {
                 session.close();
             } catch (Throwable e) {
-                logger.Error("Exception is thrown %s", e.toString());
-                e.printStackTrace();
+                logger.Error("Exception is thrown ", e);
+                
             }
         }
+        logger.End();
     }
 
     
@@ -468,6 +480,7 @@ public class SessionStartInfoTest {
      */
     @Test
     public final void testSessionStartInfoStringStringVersionStringString_Er() {
+    	logger.Start();
     	String serviceName = config.getValue("ServiceName");
         SessionStartInfo info = new SessionStartInfo(config.Scheduler,
                 serviceName, new Version(-1,0), config.UserName, config.Password);
@@ -477,21 +490,22 @@ public class SessionStartInfoTest {
             session = Session.createSession(info);
             logger.Info("Session %d is created.",session.getId());
         } catch (SocketTimeoutException e) {
-            logger.Error("Timeout when creating a  session");
-            e.printStackTrace();
+            logger.Error("Timeout when creating a  session", e);
+            
         } catch (SessionException e) {
             logger.Info("Session exception when creating a  session");
-            e.printStackTrace();
+            
         }
 
         if (session != null) {
             try {
                 session.close();
             } catch (Throwable e) {
-                logger.Error("Exception is thrown %s", e.toString());
-                e.printStackTrace();
+                logger.Error("Exception is thrown ", e);
+                
             }
         }
+        logger.End();
     }
 
     

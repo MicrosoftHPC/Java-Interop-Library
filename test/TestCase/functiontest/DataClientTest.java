@@ -47,7 +47,7 @@ public class DataClientTest {
      */
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
-        config = new Config("CommonDataTest");
+        config = new Config("DataClientTest");
         logger = new Logger(true, true, "DataClientTest");
 
     }
@@ -65,7 +65,7 @@ public class DataClientTest {
      */
     @Before
     public void setUp() throws Exception {
-        logger.Start("DataClientTest");
+        
     }
 
     /**
@@ -82,12 +82,13 @@ public class DataClientTest {
             }
         }
         DataClientHelper.CreatedDataClients.clear();
-        logger.End("DataClientTest");
+        
     }
 
     @Test(timeout = 600000)
     // headnode=NULL
     public final void DataClient_API_Create_1() throws DataException {
+    	logger.Start();
         try {
             DataClient dataClient = DataClient.create(
                     CommonDataHelper.defaultDataClientId, null,
@@ -97,12 +98,15 @@ public class DataClientTest {
             logger.Info("NullPointerException got as expected: %s", e
                     .getMessage());
         }
+        
+        logger.End();
 
     }
 
     @Test(timeout = 600000)
     // headnode=string.Empty
     public final void DataClient_API_Create_2() throws DataException {
+    	logger.Start();
         try {
             DataClient dataClient = DataClient.create(
                     CommonDataHelper.defaultDataClientId, "", config.UserName,
@@ -112,12 +116,14 @@ public class DataClientTest {
             logger.Info("IllegalArgumentException got as expected: %s", e
                     .getMessage());
         }
+        logger.End();
 
     }
 
     @Test(timeout = 600000)
     // headnode is not existed
     public final void DataClient_API_Create_3() throws DataException {
+    	logger.Start();
         try {
             DataClient dataClient = DataClient.create(
                     CommonDataHelper.defaultDataClientId, "NotExistHeadNode",
@@ -127,6 +133,7 @@ public class DataClientTest {
             logger.Info("WebException when headnode not exist: %s", e
                     .getMessage());
         }
+        logger.End();
     }
 
     // @Test
@@ -157,6 +164,7 @@ public class DataClientTest {
     @Test(timeout = 600000)
     // dataClientId=NULL
     public final void DataClient_API_Create_5() throws DataException {
+    	logger.Start();
         try {
             DataClient dataClient = DataClientHelper.Create(null);
             logger.Error("No error got which is not expected");
@@ -164,11 +172,13 @@ public class DataClientTest {
             logger.Info("NullPointerException got as expected: %s", e
                     .getMessage());
         }
+        logger.End();
     }
 
     @Test(timeout = 600000)
     // dataClientId=string.Empty
     public final void DataClient_API_Create_6() throws DataException {
+    	logger.Start();
         try {
             DataClient dataClient = DataClientHelper.Create("");
             logger.Error("No error got which is not expected");
@@ -176,11 +186,13 @@ public class DataClientTest {
             logger.Info("IllegalArgumentException got as expected: %s", e
                     .getMessage());
         }
+        logger.End();
     }
 
     @Test(timeout = 600000)
     // valid dataClientId",
     public final void DataClient_API_Create_7() {
+    	logger.Start();
         for (String dataClientId : CommonDataHelper.validDataClientId) {
             logger.Info("Try to use DataClientId %s", dataClientId);
             try {
@@ -195,13 +207,15 @@ public class DataClientTest {
                 logger.Error("Unexpected exception: %s", e.getMessage());
             }
         }
+        logger.End();
     }
 
     @Test(timeout = 600000)
     // DataClient.Create - invalid dataClientId
     public final void DataClient_API_Create_8() {
+    	logger.Start();
         for (String dataClientId : CommonDataHelper.invalidDataClientId) {
-            try {
+        	try {
                 logger.Info("Try to use DataClientId %s", dataClientId);
                 DataClient dataClient = DataClientHelper.Create(dataClientId);
                 logger.Error("No error got which is not expected");
@@ -212,11 +226,13 @@ public class DataClientTest {
                 logger.Error("Unexpected exception: %s", e.getMessage());
             }
         }
+        logger.End();
     }
 
     @Test(timeout = 600000)
     // DataClient.Create - username=NULL
     public final void DataClient_API_Create_9() throws DataException {
+    	logger.Start();
         try {
             DataClient dataClient = DataClient.create(
                     CommonDataHelper.defaultDataClientId, config.Scheduler,
@@ -226,11 +242,13 @@ public class DataClientTest {
             logger.Info("NullPointerException got as expected: %s", e
                     .getMessage());
         }
+        logger.End();
     }
 
     @Test(timeout = 600000)
     // DataClient.Create - username is empty
     public final void DataClient_API_Create_10() throws DataException {
+    	logger.Start();
         try {
             DataClient dataClient = DataClient.create(
                     CommonDataHelper.defaultDataClientId, config.Scheduler, "",
@@ -240,11 +258,13 @@ public class DataClientTest {
             logger.Info("IllegalArgumentException got as expected: %s", e
                     .getMessage());
         }
+        logger.End();
     }
 
     @Test(timeout = 600000)
     // DataClient.Create - password=NULL
     public final void DataClient_API_Create_11() throws DataException {
+    	logger.Start();
         try {
             DataClient dataClient = DataClient.create(
                     CommonDataHelper.defaultDataClientId, config.Scheduler,
@@ -254,11 +274,13 @@ public class DataClientTest {
             logger.Info("NullPointerException got as expected: %s", e
                     .getMessage());
         }
+        logger.End();
     }
 
     @Test(timeout = 600000)
     // DataClient.Create - password is empty
     public final void DataClient_API_Create_12() throws DataException {
+    	logger.Start();
         try {
             DataClient dataClient = DataClient.create(
                     CommonDataHelper.defaultDataClientId, config.Scheduler,
@@ -269,11 +291,13 @@ public class DataClientTest {
                     "javax.xml.ws.soap.SOAPFaultException got as expected: %s",
                     e.toString());
         }
+        logger.End();
     }
 
     @Test(timeout = 600000)
     // DataClient.Create - create two DataClient with the same name
     public final void DataClient_API_Create_13() throws DataException {
+    	logger.Start();
         DataClient dataClient = DataClientHelper.Create();
         try {
             DataClient dataClient2 = DataClientHelper.Create();
@@ -288,11 +312,13 @@ public class DataClientTest {
                     .getMessage());
         }
         DataClientHelper.Delete();
+        logger.End();
     }
 
     @Test(timeout = 600000)
     // DataClient.WriteRawBytesAll - object is NULL
     public final void DataClient_API_WriteRaw_1() throws DataException {
+    	logger.Start();
         DataClient dataClient = DataClientHelper.Create();
         try {
             dataClient.writeRawBytesAll(null);
@@ -302,11 +328,13 @@ public class DataClientTest {
                     .getMessage());
         }
         DataClientHelper.Delete();
+        logger.End();
     }
 
     @Test(timeout = 600000)
     // DataClient.WriteRawBytesAll - call WriteAll twice
     public final void DataClient_API_WriteRaw_2() throws DataException {
+    	logger.Start();
         DataClient dataClient = DataClientHelper.Create();
 
         CommonDataBytes data = CommonDataHelper
@@ -325,6 +353,7 @@ public class DataClientTest {
                     .getMessage());
         }
         DataClientHelper.Delete();
+        logger.End();
     }
 
     
@@ -333,6 +362,7 @@ public class DataClientTest {
     // if bind with different session Id
     public final void DataClient_API_WriteRaw_6() throws IllegalStateException,
             DataException {
+    	logger.Start();
         CommonDataBytes data = CommonDataHelper
                 .GenerateCommonDataBytes(CommonDataHelper.defaultSize);
         DataClient dataClient = DataClientHelper.Create(
@@ -353,11 +383,13 @@ public class DataClientTest {
 
         }
         DataClientHelper.Delete();
+        logger.End();
     }
 
     @Test(timeout = 600000)
     // DataClient.ReadRawBytesAll - Read before write
     public final void DataClient_API_ReadRaw_1() throws DataException {
+    	logger.Start();
         DataClient dataClient = DataClientHelper.Create();
         try {
             byte[] rtn = dataClient.readRawBytesAll();
@@ -370,12 +402,14 @@ public class DataClientTest {
                                     .getCode());
         }
         DataClientHelper.Delete();
+        logger.End();
     }
 
     @Test(timeout = 600000)
     // DataClient.ReadRawBytesAll - Multiple read
     public final void DataClient_API_ReadRaw_2() throws IllegalStateException,
             DataException {
+    	logger.Start();
         DataClient dataClient = DataClientHelper.Create();
         CommonDataBytes data = CommonDataHelper
                 .GenerateCommonDataBytes(CommonDataHelper.defaultSize);
@@ -386,11 +420,13 @@ public class DataClientTest {
                     .ValidateCommonDataBytes(rtn, data.md5Hash));
         }
         DataClientHelper.Delete();
+        logger.End();
     }
 
     @Test(timeout = 600000)
     // DataClient.ReadRawBytesAll - Read after deleted
     public final void DataClient_API_ReadRaw_4() throws DataException {
+    	logger.Start();
         DataClient dataClient = DataClientHelper.Create();
         CommonDataBytes data = CommonDataHelper
                 .GenerateCommonDataBytes(CommonDataHelper.defaultSize);
@@ -407,7 +443,7 @@ public class DataClientTest {
                             .getCode());
 
         }
-
+        logger.End();
     }
 
     
@@ -415,6 +451,7 @@ public class DataClientTest {
     @Test(timeout = 600000)
     // DataClient.ReadRawBytesAll - Read after deleted
     public final void DataClient_API_ReadRaw_6() throws DataException {
+    	logger.Start();
         DataClient dataClient = DataClientHelper.Create();
         DataClient dataClient2 = DataClientHelper.Open();
         CommonDataBytes data = CommonDataHelper
@@ -433,7 +470,7 @@ public class DataClientTest {
                     e.getErrorCode() == DataErrorCode.DataClientDeleted
                             .getCode());
         }
-
+        logger.End();
     }
 
     @Test(timeout = 600000)
@@ -441,6 +478,7 @@ public class DataClientTest {
     // serializable
     public final void DataClient_API_ReadRaw_7() throws IOException,
             DataException, ClassNotFoundException {
+    	logger.Start();
         String object = "test";
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         ObjectOutputStream out = new ObjectOutputStream(bos);
@@ -458,11 +496,13 @@ public class DataClientTest {
         logger.assertTrue("Common data is corrupted.", rtn.equals("test"));
 
         DataClientHelper.Delete();
+        logger.End();
     }
 
     @Test(timeout = 600000)
     // DataClient.WriteRawBytesAll - Could not write empty byte
     public void DataClient_API_WriteRaw_8() throws DataException {
+    	logger.Start();
         byte[] data = new byte[0];
         try {
             DataClient dataClient = DataClientHelper.Create();
@@ -473,11 +513,13 @@ public class DataClientTest {
                     .getMessage());
         }
         DataClientHelper.Delete();
+        logger.End();
     }
 
     @Test(timeout = 600000)
     // DataClient.WriteRawBytesAll - Could not write empty byte
     public void DataClient_API_WriteRaw_9() throws DataException {
+    	logger.Start();
         byte[] data = new byte[0];
         try {
             DataClient dataClient = DataClientHelper.Create();
@@ -488,11 +530,13 @@ public class DataClientTest {
                     .getMessage());
         }
         DataClientHelper.Delete();
+        logger.End();
     }
 
     @Test(timeout = 600000)
     // DataClient.WriteRawBytesAll - Unauthorized write
     public void DataClient_API_WriteRaw_10() throws DataException {
+    	logger.Start();
         byte[] data = new byte[] { 0 };
         try {
             DataClient dataClient = DataClient.create(
@@ -508,11 +552,13 @@ public class DataClientTest {
         }
         DataClient.delete(CommonDataHelper.defaultDataClientId,
                 config.Scheduler, config.UserName2, config.Password2);
+        logger.End();
     }
 
     @Test(timeout = 600000)
     // DataClient.Open - headnode=NULL
     public final void DataClient_API_Open_1() throws DataException {
+    	logger.Start();
         DataClient dataClient = DataClientHelper.Create();
 
         try {
@@ -526,11 +572,13 @@ public class DataClientTest {
         }
 
         DataClientHelper.Delete();
+        logger.End();
     }
 
     @Test(timeout = 600000)
     // DataClient.Open - headnode=string.Empty
     public final void DataClient_API_Open_2() throws DataException {
+    	logger.Start();
         DataClient dataClient = DataClientHelper.Create();
         try {
             DataClient dataClient2 = DataClient.open(
@@ -545,11 +593,13 @@ public class DataClientTest {
         }
 
         DataClientHelper.Delete();
+        logger.End();
     }
 
     @Test(timeout = 600000)
     // DataClient.Open - headnode is not existed
     public final void DataClient_API_Open_3() throws DataException {
+    	logger.Start();
         DataClient dataClient = DataClientHelper.Create();
         try {
             DataClient dataClient2 = DataClient.open(
@@ -562,6 +612,7 @@ public class DataClientTest {
         }
 
         DataClientHelper.Delete();
+        logger.End();
     }
 
     // to do
@@ -597,6 +648,7 @@ public class DataClientTest {
     @Test(timeout = 600000)
     // DataClient.Open - dataClientId=NULL
     public final void DataClient_API_Open_5() throws DataException {
+    	logger.Start();
         DataClient dataClient = DataClientHelper.Create();
         try {
             DataClient dataClient2 = DataClient.open(null, config.Scheduler,
@@ -607,11 +659,13 @@ public class DataClientTest {
                     .getMessage());
         }
         DataClientHelper.Delete();
+        logger.End();
     }
 
     @Test(timeout = 600000)
     // DataClient.Open - dataClientId=string.Empty
     public final void DataClient_API_Open_6() throws DataException {
+    	logger.Start();
         DataClient dataClient = DataClientHelper.Create();
         try {
             DataClient dataClient2 = DataClient.open("", config.Scheduler,
@@ -623,11 +677,13 @@ public class DataClientTest {
         }
 
         DataClientHelper.Delete();
+        logger.End();
     }
 
     @Test(timeout = 600000)
     // DataClient.Open - valid dataClientId
     public final void DataClient_API_Open_7() throws DataException {
+    	logger.Start();
         for (String dataClientId : CommonDataHelper.validDataClientId) {
             DataClient dataClient = DataClientHelper.Create(dataClientId);
             dataClient.writeRawBytesAll(CommonDataHelper.simpleCommonData);
@@ -642,6 +698,7 @@ public class DataClientTest {
             }
         }
         DataClientHelper.Delete();
+        logger.End();
 
     }
 
@@ -649,6 +706,7 @@ public class DataClientTest {
     // DataClient.Open - invalid dataClientId
     public void DataClient_API_Open_8() {
 
+    	logger.Start();
         for (String dataClientId : CommonDataHelper.invalidDataClientId) {
             try {
                 logger.Info("Try to use DataClientId %s", dataClientId);
@@ -661,11 +719,13 @@ public class DataClientTest {
                 logger.Error("Unexpected exception: %s", e.getMessage());
             }
         }
+        logger.End();
     }
 
     @Test(timeout = 600000)
     // DataClient.Open - Open dataClient which does not exist
     public final void DataClient_API_Open_9() throws DataException {
+    	logger.Start();
         DataClient dataClient = DataClientHelper.Create();
         try {
             DataClient dataClient2 = DataClientHelper.Open("test");
@@ -683,11 +743,13 @@ public class DataClientTest {
         }
 
         DataClientHelper.Delete();
+        logger.End();
     }
 
     @Test(timeout = 600000)
     // DataClient.Open - multiple Open and Read
     public final void DataClient_API_Open_10() throws DataException {
+    	logger.Start();
         DataClient dataClient = DataClientHelper.Create();
         DataClient[] dataClients = new DataClient[10];
         dataClient.writeRawBytesAll(CommonDataHelper.simpleCommonData);
@@ -699,11 +761,13 @@ public class DataClientTest {
         }
 
         DataClientHelper.Delete();
+        logger.End();
     }
 
     @Test(timeout = 600000)
     // DataClient.Open - Open dataClient which has been closed
     public final void DataClient_API_Open_11() throws DataException {
+    	logger.Start();
         DataClient dataClient = DataClientHelper.Create();
         DataClientHelper.Delete();
         try {
@@ -721,11 +785,13 @@ public class DataClientTest {
                             "DataException when open dataClient which does not exist: %s",
                             e.getMessage());
         }
+        logger.End();
     }
 
     @Test(timeout = 600000)
     // DataClient.Open - Opened dataClient is read only
     public final void DataClient_API_Open_12() throws DataException {
+    	logger.Start();
         DataClient dataClient = DataClientHelper.Create();
         DataClient dataClient2 = DataClientHelper.Open();
         try {
@@ -741,11 +807,13 @@ public class DataClientTest {
                     e.getMessage());
         }
         DataClientHelper.Delete();
+        logger.End();
     }
 
     @Test(timeout = 600000)
     // CCP_SOADATASERVER - Invalid data server path - data server unreachable
     public final void DataClient_SOADataServer_1() throws IOException {
+    	logger.Start();
         if (System.getProperty("os.name").toLowerCase().indexOf("win") == -1)
             return;
         String dataServer = "\\\\NotReachableHN\\DataServer";
@@ -768,11 +836,13 @@ public class DataClientTest {
             logger.Error("Unexpected exception: %s", e.getMessage());
         }
         CommonDataHelper.SetDataServer(backup);
+        logger.End();
     }
 
     @Test(timeout = 600000)
     // CCP_SOADATASERVER - Invalid data server path - data server is empty
     public final void DataClient_SOADataServer_2() throws IOException {
+    	logger.Start();
         if (System.getProperty("os.name").toLowerCase().indexOf("win") == -1)
             return;
         String dataServer = "";
@@ -795,11 +865,13 @@ public class DataClientTest {
             logger.Error("Unexpected exception: %s", e.getMessage());
         }
         CommonDataHelper.SetDataServer(backup);
+        logger.End();
     }
 
     @Test(timeout = 600000)
     // CCP_SOADATASERVER - Invalid data server path - multiple data server path
     public final void DataClient_SOADataServer_3() throws IOException {
+    	logger.Start();
         if (System.getProperty("os.name").toLowerCase().indexOf("win") == -1)
             return;
         String backup = CommonDataHelper.GetDataServer();
@@ -819,11 +891,13 @@ public class DataClientTest {
             logger.Error("Unexpected exception: %s", e.getMessage());
         }
         CommonDataHelper.SetDataServer(backup);
+        logger.End();
     }
 
     @Test(timeout = 600000)
     // CCP_SOADATASERVER - Invalid data server path
     public void DataClient_SOADataServer_4() throws IOException {
+    	logger.Start();
         if (System.getProperty("os.name").toLowerCase().indexOf("win") == -1)
             return;
         String dataServer = "!(&*#*#&*#&)#(";
@@ -844,11 +918,13 @@ public class DataClientTest {
             logger.Error("Unexpected exception: %s", e.getMessage());
         }
         CommonDataHelper.SetDataServer(backup);
+        logger.End();
     }
 
     @Test(timeout = 600000)
     // CCP_SOADATASERVER - Invalid data server path - local path
     public final void DataClient_SOADataServer_5() throws IOException {
+    	logger.Start();
         if (System.getProperty("os.name").toLowerCase().indexOf("win") == -1)
             return;
         String dataServer = "c:\\data";
@@ -869,13 +945,15 @@ public class DataClientTest {
             logger.Error("Unexpected exception: %s", e.getMessage());
         }
         CommonDataHelper.SetDataServer(backup);
+        logger.End();
     }
 
     
-    @Ignore
+    @Test(timeout = 600000)
     // DataClient.Delete - Unauthorized delete
     public final void DataClient_API_Delete_3() throws IOException,
             DataException {
+    	logger.Start();
         try {
             CommonDataBytes data = CommonDataHelper
                     .GenerateCommonDataBytes(CommonDataHelper.defaultSize);
@@ -886,12 +964,14 @@ public class DataClientTest {
         } catch (Exception e) {
             logger.Error("Unexpected exception: %s", e.getMessage());
         }
+        logger.End();
     }
 
     @Test(timeout = 600000)
     // DataClient.Delete - Authorized delete
     public final void DataClient_API_Delete_4() throws IOException,
             DataException {
+    	logger.Start();
         try {
             CommonDataBytes data = CommonDataHelper
                     .GenerateCommonDataBytes(CommonDataHelper.defaultSize);
@@ -905,10 +985,11 @@ public class DataClientTest {
         } catch (Exception e) {
             logger.Error("Unexpected exception: %s", e.getMessage());
         }
+        logger.End();
     }
 
     public int DataClient_API_Delete_2_Helper() throws DataException {
-        int rtn = -1;
+    	int rtn = -1;
 
         try {
             DataClient.delete(CommonDataHelper.defaultDataClientId,
@@ -923,11 +1004,13 @@ public class DataClientTest {
         }
         DataClientHelper.Delete();
         return rtn;
+      
     }
 
     @Test(timeout = 600000)
     // DataClient.WriteRawBytesAll in compress
     public final void DataClient_API_WriteCompress_1() throws DataException {
+    	logger.Start();
         // use good compressible data per bug 12911
         byte[] commonData = new byte[CommonDataHelper.defaultSize];
         for (int i = 0; i < commonData.length; i++)
@@ -946,12 +1029,14 @@ public class DataClientTest {
                 fileSize < (long) CommonDataHelper.defaultSize);
         CommonDataHelper.ValidateCommonDataBytes(rtn, md5Hash);
         DataClientHelper.Delete();
+        logger.End();
 
     }
 
     @Test(timeout = 600000)
     // DataClient.WriteRawBytesAll not in compress
     public final void DataClient_API_WriteCompress_2() throws DataException {
+    	logger.Start();
         DataClient dataClient = DataClientHelper.Create();
         CommonDataBytes commonData = CommonDataHelper
                 .GenerateCommonDataBytes(CommonDataHelper.defaultSize);
@@ -965,11 +1050,13 @@ public class DataClientTest {
                 fileSize >= (long) CommonDataHelper.defaultSize);
         CommonDataHelper.ValidateCommonDataBytes(rtn, commonData.md5Hash);
         DataClientHelper.Delete();
+        logger.End();
     }
 
     @Test(timeout = 600000)
     // DataClient.WriteRawBytesAll not in compress (by default)",
     public final void DataClient_API_WriteCompress_3() throws DataException {
+    	logger.Start();
         DataClient dataClient = DataClientHelper.Create();
         CommonDataBytes commonData = CommonDataHelper
                 .GenerateCommonDataBytes(CommonDataHelper.defaultSize);
@@ -983,21 +1070,25 @@ public class DataClientTest {
                 fileSize >= (long) CommonDataHelper.defaultSize);
         CommonDataHelper.ValidateCommonDataBytes(rtn, commonData.md5Hash);
         DataClientHelper.Delete();
+        logger.End();
     }
 
     @Test(timeout = 600000)
     // DataClient.GetFilePath - no data written
     public final void DataClient_API_FilePath_1() throws DataException {
+    	logger.Start();
         DataClient dataClient = DataClientHelper.Create();
         String filePath = dataClient.getStorePath();
         logger.Info("The data file path is %s", filePath);
 
         DataClientHelper.Delete();
+        logger.End();
     }
 
     @Test(timeout = 600000)
     // DataClient.GetFilePath - data deleted
     public final void DataClient_API_FilePath_2() throws DataException {
+    	logger.Start();
         DataClient dataClient = DataClientHelper.Create();
         CommonDataBytes data = CommonDataHelper
                 .GenerateCommonDataBytes(CommonDataHelper.defaultSize);
@@ -1006,12 +1097,14 @@ public class DataClientTest {
         logger
                 .Info("Still should be able to get common data file path after the data is deleted");
         String filePath = dataClient.getStorePath();
+        logger.End();
     }
 
     @Test(timeout = 600000)
     // DataClient.GetFilePath - data could be read by simple file solution
     public final void DataClient_API_FilePath_3() throws IOException,
             DataException, ClassNotFoundException {
+    	logger.Start();
         String object = "test";
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         ObjectOutputStream out = new ObjectOutputStream(bos);
@@ -1052,11 +1145,13 @@ public class DataClientTest {
         logger.assertTrue("Common data is corrupted.", rtn.equals("test"));
 
         DataClientHelper.Delete();
+        logger.End();
     }
 
     @Test(timeout = 600000)
     // DataSecurity - Unauthorized read (by default)
     public final void DataClient_API_DataSecurity_2() throws DataException {
+    	logger.Start();
         byte[] data = new byte[] { 0 };
         DataClient dataClient = DataClient.create(
                 CommonDataHelper.defaultDataClientId, config.Scheduler,
@@ -1071,6 +1166,7 @@ public class DataClientTest {
         }
         DataClient.delete(CommonDataHelper.defaultDataClientId,
                 config.Scheduler, config.UserName2, config.Password2);
+        logger.End();
 
     }
 
@@ -1079,17 +1175,20 @@ public class DataClientTest {
     public final void DataClient_API_DataSecurity_4() throws DataException,
             SocketTimeoutException, SessionException,
             DatatypeConfigurationException {
+    	logger.Start();
         SessionStartInfo ssi = new SessionStartInfo(config.Scheduler,
                 config.ServiceName, config.UserName, config.Password);
         ssi.setRunAsUsername(config.UserName2);
         ssi.setRunAsPassword(config.Password2);
         CommonDataHelper.SimpleSendGetCommonData(logger, ssi, 10, false);
+        logger.End();
     }
 
     @Test(timeout = 600000)
     // Concurrency write
     public final void DataClient_Concurrency_1() throws InterruptedException,
             BrokenBarrierException, DataException {
+    	logger.Start();
         final int total = 100;
         final CyclicBarrier evt = new CyclicBarrier(total + 1);
         final AtomicInteger success = new AtomicInteger(0);
@@ -1145,14 +1244,17 @@ public class DataClientTest {
                                         "Unexpected success time: %s when total %s try to create/write with the same dataClientId.",
                                         success, total), success.get() == 1);
         DataClientHelper.Delete();
+        logger.End();
     }
 
     @Test(timeout = 600000)
     // Concurrency read and close
     public final void DataClient_Concurrency_2() throws InterruptedException,
             BrokenBarrierException {
+    	logger.Start();
         DataClient_Concurrency_2_Helper(CommonDataHelper.defaultDataClientId,
                 false, 100);
+        logger.End();
     }
 
     class DataClient_Concurrency_3_Helper_Class {
@@ -1190,6 +1292,7 @@ public class DataClientTest {
     // Concurrency create, write, read and close
     public final void DataClient_Concurrency_3() throws InterruptedException,
             BrokenBarrierException {
+    	logger.Start();
         int totalDataClient = 10;
         final CyclicBarrier evt = new CyclicBarrier(totalDataClient + 1);
         int totalDataClientFinished = 0;
@@ -1199,6 +1302,7 @@ public class DataClientTest {
             worker.QueueWorkerItem();
         }
         evt.await();
+        logger.End();
     }
 
     class DataClient_Concurrency_2_Helper_Class {

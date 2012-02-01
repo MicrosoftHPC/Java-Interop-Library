@@ -31,6 +31,12 @@ public class Logger {
 
         }
     }
+    
+    public void Start()   {
+    	String message = Thread.currentThread().getStackTrace()[2].getMethodName();
+    	Start(message);
+    }
+    
 
     public void Start(String message) {
         String time = "[" + df.format(new Date()) + "]";
@@ -82,6 +88,40 @@ public class Logger {
         if (toFile)
             outPrint.println(message);
     }
+    
+    public void Info(String message, Throwable e){
+    	String time = "[" + df.format(new Date()) + "]";
+        message = "[Info]" + time+ message ;
+        if (toScreen)
+        {
+        	out.print(message);
+        	e.printStackTrace(out);
+        }
+        if (toFile)
+        {
+        	outPrint.print(message);
+        	e.printStackTrace(outPrint);
+        }
+        
+    }
+    
+    public void Info(Throwable e){
+    	String time = "[" + df.format(new Date()) + "]";
+        String message = "[Error]" + time ;
+        if (toScreen)
+        {
+        	out.print(message);
+        	e.printStackTrace(out);
+        }
+        if (toFile)
+        {
+        	outPrint.print(message);
+        	e.printStackTrace(outPrint);
+        }
+        // fail the test case if Error happened
+        // fail(message);
+        errCount++;
+    }
 
     public void Error(String message) {
         String time = "[" + df.format(new Date()) + "]";
@@ -103,6 +143,24 @@ public class Logger {
             out.println(message);
         if (toFile)
             outPrint.println(message);
+        // fail the test case if Error happened
+        // fail(message);
+        errCount++;
+    }
+    
+    public void Error(String message, Throwable e){
+    	String time = "[" + df.format(new Date()) + "]";
+        message = "[Error]" + time+ message ;
+        if (toScreen)
+        {
+        	out.print(message);
+        	e.printStackTrace(out);
+        }
+        if (toFile)
+        {
+        	outPrint.print(message);
+        	e.printStackTrace(outPrint);
+        }
         // fail the test case if Error happened
         // fail(message);
         errCount++;
@@ -142,6 +200,11 @@ public class Logger {
             out.println(message);
         if (toFile)
             outPrint.println(message);
+    }
+    
+    public void End() {
+    	String message = Thread.currentThread().getStackTrace()[2].getMethodName();
+    	End(message);
     }
 
     public void End(String message) {
