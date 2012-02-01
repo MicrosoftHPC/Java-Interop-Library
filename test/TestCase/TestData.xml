@@ -2,15 +2,15 @@
 <Config>
 
 <Global>
-<Scheduler>shpc-0042</Scheduler>
-<UserName>fareast\wsdcta</UserName>
-<Password>Pa55word&amp;&amp;7</Password>
+<Scheduler>headnode</Scheduler>
+<UserName>username</UserName>
+<Password>password</Password>
 <ServiceName>AITestServiceLib</ServiceName>
 <NbOfCalls>10</NbOfCalls>
 <NbOfSessions>3</NbOfSessions>
 <NbOfClients>2</NbOfClients>
-	<UserName2>fareast\wsdcta2</UserName2>
-	<Password2>Pa55word&amp;&amp;7</Password2>
+	<UserName2>username2</UserName2>
+	<Password2>password2</Password2>
 	<NbOfBatches>2</NbOfBatches></Global>
 
 <Group name="BVT">

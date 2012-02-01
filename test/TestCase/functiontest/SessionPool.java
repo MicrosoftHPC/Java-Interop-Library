@@ -118,7 +118,7 @@ public class SessionPool {
                     logger.assertTrue("check response",
                             reply.getRefID() == refId);
                 } catch (Throwable ex) {
-                    logger.Error("Error in process request %s", ex.toString());
+                    logger.Error("Error in process request", ex);
 
                 }
 
@@ -127,15 +127,15 @@ public class SessionPool {
             client.close(true);
 
         } catch (Throwable e) {
-            logger.Error("Exception is thrown %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Exception is thrown ", e);
+            
         }
 
         try {
             session.close(false);
         } catch (Throwable e) {
-            logger.Error("Exception is thrown %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Exception is thrown ", e);
+            
         }
 
         logger.End("test_SessionPool_DurableEcho");
@@ -179,8 +179,7 @@ public class SessionPool {
             client.endRequests();
             client.close();
         } catch (Throwable e) {
-            logger.Error("Exception is thrown %s%n%s", e.toString(),
-                    e.getStackTrace());
+            logger.Error("Exception is thrown ", e);
         }
 
         SessionAttachInfo attInfo = new SessionAttachInfo(config.Scheduler,
@@ -204,7 +203,7 @@ public class SessionPool {
                     logger.assertTrue("check response",
                             reply.getRefID() == refId);
                 } catch (Throwable ex) {
-                    logger.Error("Error in process request %s", ex.toString());
+                    logger.Error("Error in process request", ex);
 
                 }
 
@@ -213,16 +212,16 @@ public class SessionPool {
             client.close(true);
 
         } catch (Throwable e1) {
-            logger.Error("Exception is thrown %s", e1.toString());
-            e1.printStackTrace();
+            logger.Error("Exception is thrown ", e1);
+            
         }
 
         if (session != null) {
             try {
                 session.close(false); //needed to keep the session in the pool
             } catch (Throwable e1) {
-                logger.Error("Exception is thrown %s", e1.toString());
-                e1.printStackTrace();
+                logger.Error("Exception is thrown ", e1);
+                
             }
         }
 
@@ -268,8 +267,7 @@ public class SessionPool {
             client.endRequests();
             client.close();
         } catch (Throwable e) {
-            logger.Error("Exception is thrown %s%n%s", e.toString(),
-                    e.getStackTrace());
+            logger.Error("Exception is thrown ", e);
         }
 
         SessionAttachInfo attInfo = new SessionAttachInfo(config.Scheduler,
@@ -295,7 +293,7 @@ public class SessionPool {
                     logger.assertTrue("check response",
                             reply.getRefID() == refId);
                 } catch (Throwable ex) {
-                    logger.Error("Error in process request %s", ex.toString());
+                    logger.Error("Error in process request", ex);
 
                 }
 
@@ -304,16 +302,16 @@ public class SessionPool {
             client.close(true);
 
         } catch (Throwable e1) {
-            logger.Error("Exception is thrown %s", e1.toString());
-            e1.printStackTrace();
+            logger.Error("Exception is thrown ", e1);
+            
         }
 
         if (session != null) {
             try {
                 session.close(false); //needed to keep the session in the pool
             } catch (Throwable e1) {
-                logger.Error("Exception is thrown %s", e1.toString());
-                e1.printStackTrace();
+                logger.Error("Exception is thrown ", e1);
+                
             }
         }
 
@@ -373,8 +371,7 @@ public class SessionPool {
                                 .compareTo(requests[k].getRefID()) == 0);
 
                     } catch (Throwable ex) {
-                        logger.Error("Error in process request %s",
-                                ex.toString());
+                        logger.Error("Error in process request ", ex);
 
                     }
 
@@ -384,15 +381,15 @@ public class SessionPool {
             }
 
         } catch (Throwable e) {
-            logger.Error("Exception is thrown %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Exception is thrown ", e);
+            
         }
 
         try {
             session.close(false);
         } catch (Throwable e) {
-            logger.Error("Exception is thrown %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Exception is thrown ", e);
+            
         }
 
         logger.End("test_SessionPool_InteractiveMultipleBatches");
@@ -455,11 +452,11 @@ public class SessionPool {
                         try {
                             client.sendRequest(request, i);
                         } catch (SessionException e) {
-                            logger.Error("SessionException: %s", e.toString());
-                            e.printStackTrace();
+                            logger.Error("SessionException: ", e);
+                            
                         } catch (SocketTimeoutException e) {
-                            logger.Error("SessionException: %s", e.toString());
-                            e.printStackTrace();
+                            logger.Error("SessionException: ", e);
+                            
                         }
                     }
                     logger.Info("Client %s calling endRequests()...", m + "_"
@@ -468,10 +465,10 @@ public class SessionPool {
                         client.endRequests();
                     } catch (SocketTimeoutException e) {
                         // TODO Auto-generated catch block
-                        e.printStackTrace();
+                        
                     } catch (SessionException e) {
                         // TODO Auto-generated catch block
-                        e.printStackTrace();
+                        
                     }
                 }
                 l.countDown();
@@ -494,15 +491,14 @@ public class SessionPool {
                                         reply.getRefID() == m * k);
 
                             } catch (Throwable ex) {
-                                logger.Error("Error in process request %s",
-                                        ex.toString());
+                                logger.Error("Error in process request ", ex);
 
                             }
 
                         }
                     } catch (SessionException e) {
-                        logger.Error("SessionException: %s", e.toString());
-                        e.printStackTrace();
+                        logger.Error("SessionException: ", e);
+                        
                     }
                     logger.Info("Done retrieving %d responses",
                             config.NbOfCalls);
@@ -510,10 +506,10 @@ public class SessionPool {
                         client.close(true);
                     } catch (SocketTimeoutException e) {
                         // TODO Auto-generated catch block
-                        e.printStackTrace();
+                        
                     } catch (SessionException e) {
                         // TODO Auto-generated catch block
-                        e.printStackTrace();
+                        
                     }
 
                 }
@@ -572,15 +568,15 @@ public class SessionPool {
             L2.await(10, TimeUnit.MINUTES);
 
         } catch (Throwable e) {
-            logger.Error("Exception is thrown %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Exception is thrown ", e);
+            
         }
 
         try {
             session.close(false);
         } catch (Throwable e) {
-            logger.Error("Exception is thrown %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Exception is thrown ", e);
+            
         }
 
         logger.End("test_SessionPool_InteractiveConcurrentMultipleBatches");
