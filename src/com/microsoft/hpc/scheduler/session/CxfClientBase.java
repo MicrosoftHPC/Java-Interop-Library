@@ -68,6 +68,7 @@ package com.microsoft.hpc.scheduler.session;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.prefs.*;
 
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
@@ -93,7 +94,6 @@ import org.apache.ws.security.handler.WSHandlerConstants;
  */
 class CxfClientBase implements CallbackHandler
 {
-
     // the service proxy object
     Object serviceObj;
 
@@ -105,7 +105,7 @@ class CxfClientBase implements CallbackHandler
 
     // the client object
     org.apache.cxf.endpoint.Client client;
-
+    
     /**
      * Setup the common security settings for Http/https call to SOA services
      * 
@@ -124,7 +124,9 @@ class CxfClientBase implements CallbackHandler
             addWSSHeaders(cxfEndpoint);
 
             // skip SSL setup
-            trustAll((HTTPConduit) client.getConduit());
+            Preferences prefs = Preferences.userNodeForPackage(getClass());
+            if (!prefs.getBoolean("RequireSSLValidation", false))
+                trustAll((HTTPConduit) client.getConduit());
         }
 
         // debug purpose
