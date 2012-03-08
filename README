@@ -53,6 +53,28 @@ How to setup the system
 		- installcert.ps1 install
 		- select the new certificate just created above. It's the one named 
 		  "CN=<nodename>". Normally it should be the last one.
+
+
+	On java client (Linux) machine, set up SSL trust between Java client and Headnode/BrokerNode.
+            
+         - Create the environment variable JAVA_HOME and set it to the Java installation path. Compile the GetCert.java under ~/tools/
+
+                    - "$JAVA_HOME/bin/javac" GetCert.java
+
+         a) Create head node and broker node certificates.
+            - "$JAVA_HOME/bin/java" GetCert <HeadNode>
+            - The above should create a file called "cacerts_new"
+            - If broker node is a different node, call "$JAVA_HOME/bin/java" GetCert <BrokerNode>
+            - The above should update the file "cacerts_new" with the certificate for broker node
+            - copy ecacerts to overwrite $JAVA_HOME/jre/lib/security/cacerts (NOTE: You need administrate privilege on Vista/7)
+
+	Please note the above step on linux client is only required when the preference file ~/.java/.userPrefs/com/microsoft/hpc/scheduler/session/prefs.xml exists and contains the following entry:
+	<map MAP_XML_VERSION="1.0">
+	  <entry key="RequireSSLValidation" value="true"/>
+	</map>
+
+	If the preference file does not exist or the value is "false" for the key "RequireSSLValidation", the certificates are not required.
+
 	
 How to use
 ==========

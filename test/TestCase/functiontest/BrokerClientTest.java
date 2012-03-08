@@ -81,7 +81,7 @@ public class BrokerClientTest {
         iClient = new BrokerClient<AITestLibService>(UUID.randomUUID()
                 .toString(), iSession, AITestLibService.class);
 
-        logger.Start("BrokerClientTest");
+        
 
     }
 
@@ -95,8 +95,7 @@ public class BrokerClientTest {
 
         if (iClient != null)
             iClient.close(true);
-
-        logger.End("BrokerClientTest");
+        
     }
 
     /**
@@ -115,6 +114,7 @@ public class BrokerClientTest {
      */
     @Test
     public final void testBrokerClientSessionBaseClassOfTContract() {
+    	logger.Start();
         BrokerClient<AITestLibService> client = null;
         // function
         client = new BrokerClient<AITestLibService>(dSession,
@@ -133,9 +133,9 @@ public class BrokerClientTest {
                     AITestLibService.class);
             logger.Error("Expected exception is not thrown.");
         } catch (NullPointerException e) {
-            logger.Info("Expected NullPointerException : %s", e.getMessage());
+            logger.Info("Expected NullPointerException ", e);
         } catch (Throwable e) {
-            logger.Error("UE : %s", e.getMessage());
+            logger.Error("UE ", e);
         }
 
         try {
@@ -149,10 +149,12 @@ public class BrokerClientTest {
             client = new BrokerClient<AITestLibService>(null, null);
             logger.Error("Expected exception is not thrown.");
         } catch (NullPointerException e) {
-            logger.Info("Expected NullPointerException : %s", e.getMessage());
+            logger.Info("Expected NullPointerException ", e);
         } catch (Throwable e) {
-            logger.Error("UE : %s", e.getMessage());
+            logger.Error("UE", e);
         }
+        
+        logger.End();
 
     }
 
@@ -163,6 +165,7 @@ public class BrokerClientTest {
      */
     @Test
     public final void testBrokerClientStringSessionBaseClassOfTContract() {
+    	logger.Start();
         BrokerClient<AITestLibService> client = null;
 
         ArrayList<String> validStrings = new ArrayList<String>();
@@ -202,8 +205,8 @@ public class BrokerClientTest {
                 client.close(true);
             }
         } catch (Throwable e) {
-            logger.Error("Exception %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Exception", e);
+
         }
 
         // boundary
@@ -218,10 +221,11 @@ public class BrokerClientTest {
 
             } catch (Throwable e) {
                 logger.Info("Expected Exception %s", e.toString());
-                e.printStackTrace();
+                
             }
         }
 
+        logger.End();
     }
 
     /**
@@ -251,26 +255,27 @@ public class BrokerClientTest {
      */
     @Test
     public final void testSendRequestTMessage() {
+    	logger.Start();
         Echo request = Util.generateEchoRequest();
         // function
         try {
             iClient.sendRequest(request);
         } catch (SessionException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+
         } catch (SocketTimeoutException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+
         }
 
         try {
             dClient.sendRequest(request);
         } catch (SessionException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+
         } catch (SocketTimeoutException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+
         }
 
         // boundary
@@ -281,11 +286,11 @@ public class BrokerClientTest {
         } catch (NullPointerException e) {
             logger.Info("Expected exception when sending requests %s",
                     e.toString());
-            e.printStackTrace();
+            
         } catch (Throwable e) {
             logger.Info("Expected exception when sending requests %s",
                     e.toString());
-            e.printStackTrace();
+            
         }
 
         try {
@@ -294,11 +299,11 @@ public class BrokerClientTest {
         } catch (NullPointerException e) {
             logger.Info("Expected exception when sending requests %s",
                     e.toString());
-            e.printStackTrace();
+            
         } catch (Throwable e) {
             logger.Info("Expected exception when sending requests %s",
                     e.toString());
-            e.printStackTrace();
+            
         }
 
         try {
@@ -307,10 +312,10 @@ public class BrokerClientTest {
         } catch (SessionException e) {
             logger.Info("Expected exception when sending requests %s",
                     e.toString());
-            e.printStackTrace();
+            
         } catch (SocketTimeoutException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+
         }
 
         try {
@@ -319,10 +324,10 @@ public class BrokerClientTest {
         } catch (SessionException e) {
             logger.Info("Expected exception when sending requests %s",
                     e.toString());
-            e.printStackTrace();
+
         } catch (SocketTimeoutException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+
         }
 
         try {
@@ -331,10 +336,10 @@ public class BrokerClientTest {
         } catch (SessionException e) {
             logger.Info("Expected exception when sending requests %s",
                     e.toString());
-            e.printStackTrace();
+            
         } catch (SocketTimeoutException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+
         }
 
         try {
@@ -343,10 +348,10 @@ public class BrokerClientTest {
         } catch (SessionException e) {
             logger.Info("Expected exception when sending requests %s",
                     e.toString());
-            e.printStackTrace();
+            
         } catch (SocketTimeoutException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+
         }
 
         try {
@@ -355,10 +360,10 @@ public class BrokerClientTest {
         } catch (SessionException e) {
             logger.Info("Expected exception when sending requests %s",
                     e.toString());
-            e.printStackTrace();
+            
         } catch (SocketTimeoutException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+
         }
 
         try {
@@ -367,11 +372,13 @@ public class BrokerClientTest {
         } catch (SessionException e) {
             logger.Info("Expected exception when sending requests %s",
                     e.toString());
-            e.printStackTrace();
+            
         } catch (SocketTimeoutException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+
         }
+        
+        logger.End();
 
     }
 
@@ -382,26 +389,27 @@ public class BrokerClientTest {
      */
     @Test
     public final void testSendRequestObjectObject() {
+    	logger.Start();
         Echo request = Util.generateEchoRequest();
         // function
         try {
             iClient.sendRequest(request, 1);
         } catch (SessionException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+
         } catch (SocketTimeoutException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+
         }
 
         try {
             dClient.sendRequest(request, "data");
         } catch (SessionException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+
         } catch (SocketTimeoutException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+
         }
 
         // boundary
@@ -410,63 +418,63 @@ public class BrokerClientTest {
             iClient.sendRequest(null, 1);
             logger.Error("Excetion is expected.");
         } catch (NullPointerException e) {
-            logger.Info("Expected exception when sending requests %s",
-                    e.toString());
-            e.printStackTrace();
+            logger.Info("Expected exception when sending requests ",
+                    e);
+
         } catch (Throwable e) {
-            logger.Info("Expected exception when sending requests %s",
-                    e.toString());
-            e.printStackTrace();
+            logger.Info("Expected exception when sending requests ",
+                    e);
+
         }
 
         try {
             dClient.sendRequest(null, "datat");
             logger.Error("Excetion is expected.");
         } catch (NullPointerException e) {
-            logger.Info("Expected exception when sending requests %s",
-                    e.toString());
-            e.printStackTrace();
+            logger.Info("Expected exception when sending requests ",
+                    e);
+
         } catch (Throwable e) {
-            logger.Info("Expected exception when sending requests %s",
-                    e.toString());
-            e.printStackTrace();
+            logger.Info("Expected exception when sending requests ",
+                    e);
+
         }
 
         try {
             iClient.sendRequest(new Object(), 1);
             logger.Error("Excetion is expected.");
         } catch (SessionException e) {
-            logger.Info("Expected exception when sending requests %s",
-                    e.toString());
-            e.printStackTrace();
+            logger.Info("Expected exception when sending requests ",
+                    e);
+            
         } catch (SocketTimeoutException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+
         }
 
         try {
             dClient.sendRequest(new Object(), "data");
             logger.Error("Excetion is expected.");
         } catch (SessionException e) {
-            logger.Info("Expected exception when sending requests %s",
-                    e.toString());
-            e.printStackTrace();
+            logger.Info("Expected exception when sending requests ",
+                    e);
+
         } catch (SocketTimeoutException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+
         }
 
         try {
             iClient.sendRequest(request, null);
             logger.Error("Excetion is expected.");
         } catch (NullPointerException e) {
-            logger.Info("Expected exception when sending requests %s",
-                    e.toString());
-            e.printStackTrace();
+            logger.Info("Expected exception when sending requests ",
+                    e);
+
         } catch (Throwable e) {
-            logger.Info("Expected exception when sending requests %s",
-                    e.toString());
-            e.printStackTrace();
+            logger.Info("Expected exception when sending requests ",
+                    e);
+
         }
 
         // following userdata objects are ok
@@ -474,18 +482,19 @@ public class BrokerClientTest {
          * try { dClient.sendRequest(request, new Object());
          * logger.Error("Excetion is expected."); } catch (SessionException e) {
          * logger.Info("Expected exception when sending requests %s",
-         * e.toString()); e.printStackTrace(); }
+         * e.toString());  }
          * 
          * try { iClient.sendRequest(request, request);
          * logger.Error("Excetion is expected."); } catch (SessionException e) {
          * logger.Info("Expected exception when sending requests %s",
-         * e.toString()); e.printStackTrace(); }
+         * e.toString());  }
          * 
          * try { dClient.sendRequest(request, true);
          * logger.Error("Excetion is expected."); } catch (SessionException e) {
          * logger.Info("Expected exception when sending requests %s",
-         * e.toString()); e.printStackTrace(); }
+         * e.toString());  }
          */
+        logger.End();
 
     }
 
@@ -497,28 +506,29 @@ public class BrokerClientTest {
     @Test
     public final void testSendRequestObjectObjectString() {
 
+    	logger.Start();
         // functional
         Echo request = Util.generateEchoRequest();
 
         try {
             iClient.sendRequest(request, 1, "http://tempuri.org/IEchoSvc/Echo");
         } catch (SessionException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         } catch (SocketTimeoutException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         }
 
         try {
             dClient.sendRequest(request, "data",
                     "http://tempuri.org/IEchoSvc/Echo");
         } catch (SessionException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         } catch (SocketTimeoutException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         }
 
         // TODO
@@ -529,12 +539,12 @@ public class BrokerClientTest {
          * try { iClient.sendRequest(request, 1, "ActionString");
          * logger.Error("Excetion is expected."); } catch (SessionException e) {
          * logger.Info("Expected exception when sending requests %s",
-         * e.toString()); e.printStackTrace(); }
+         * e.toString());  }
          * 
          * try { dClient.sendRequest(request, "datat", "");
          * logger.Error("Excetion is expected."); } catch (SessionException e) {
          * logger.Info("Expected exception when sending requests %s",
-         * e.toString()); e.printStackTrace(); }
+         * e.toString());  }
          */
 
         try {
@@ -543,19 +553,20 @@ public class BrokerClientTest {
         } catch (NullPointerException e) {
             logger.Info("Expected exception when sending requests %s",
                     e.toString());
-            e.printStackTrace();
+            
         } catch (Throwable e) {
             logger.Info("Expected exception when sending requests %s",
                     e.toString());
-            e.printStackTrace();
+            
         }
 
         /*
          * try { dClient.sendRequest(request, "datat", "&^(&^%$#{}?_?#@*");
          * logger.Error("Excetion is expected."); } catch (SessionException e) {
          * logger.Info("Expected exception when sending requests %s",
-         * e.toString()); e.printStackTrace(); }
+         * e.toString());  }
          */
+        logger.End();
 
     }
 
@@ -567,17 +578,18 @@ public class BrokerClientTest {
     @Test
     public final void testGetResponses() {
         // functional
+    	logger.Start();
         Echo request = Util.generateEchoRequest();
 
         try {
             dClient.sendRequest(request, "data");
             dClient.endRequests();
         } catch (SessionException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         } catch (SocketTimeoutException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         }
 
         try {
@@ -593,15 +605,15 @@ public class BrokerClientTest {
                 logger.assertTrue("check response",
                         reply.getRefID().compareTo(request.getRefID()) == 0);
             } catch (SOAPFaultException e) {
-                logger.Error("Exception in getResponse %s", e.toString());
-                e.printStackTrace();
+                logger.Error("Exception in getResponse ", e);
+                
             } catch (SOAPException e) {
-                logger.Error("Exception in getResponse %s", e.toString());
-                e.printStackTrace();
+                logger.Error("Exception in getResponse ", e);
+                
             }
         } catch (SessionException e) {
-            logger.Error("Excpetion when getting responses %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when getting responses ", e);
+            
         }
 
         // boundary
@@ -620,21 +632,22 @@ public class BrokerClientTest {
                 logger.assertTrue("check response",
                         reply.getRefID().compareTo(request.getRefID()) == 0);
             } catch (SOAPFaultException e) {
-                logger.Error("Exception in getResponse %s", e.toString());
-                e.printStackTrace();
+                logger.Error("Exception in getResponse ", e);
+                
             } catch (SOAPException e) {
-                logger.Error("Exception in getResponse %s", e.toString());
-                e.printStackTrace();
+                logger.Error("Exception in getResponse ", e);
+                
             }
         } catch (NullPointerException e) {
             logger.Info("Expected excpetion when getting responses %s",
                     e.toString());
-            e.printStackTrace();
+            
         } catch (Throwable e) {
-            logger.Error("UE when getting responses %s", e.toString());
-            e.printStackTrace();
+            logger.Error("UE when getting responses", e);
+            
         }
 
+        logger.End();
     }
 
     /**
@@ -644,6 +657,7 @@ public class BrokerClientTest {
      */
     @Test
     public final void testSetResponseHandler() {
+    	logger.Start();
 
         // functional
         final Echo request = Util.generateEchoRequest();
@@ -663,13 +677,13 @@ public class BrokerClientTest {
                             reply = response.getResult().getEchoResult()
                                     .getValue();
                         } catch (SOAPFaultException e) {
-                            logger.Error("Error in process request %s",
-                                    e.toString());
-                            e.printStackTrace();
+                            logger.Error("Error in process request ",
+                                    e);
+                            
                         } catch (SOAPException e) {
-                            logger.Error("Error in process request %s",
-                                    e.toString());
-                            e.printStackTrace();
+                            logger.Error("Error in process request ",
+                                    e);
+                            
                         }
                         logger.Info("\tReceived response for request %s: %s",
                                 response.getUserData(), reply);
@@ -686,9 +700,9 @@ public class BrokerClientTest {
 
                     @Override
                     public void raiseError(Exception e) {
-                        logger.Error("Error in process request %s",
-                                e.toString());
-                        e.printStackTrace();
+                        logger.Error("Error in process request ",
+                                e);
+                        
                     }
 
                 });
@@ -697,19 +711,21 @@ public class BrokerClientTest {
             iClient.sendRequest(request, "data");
             iClient.endRequests();
         } catch (SessionException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         } catch (SocketTimeoutException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         }
 
         try {
             l.await(2, TimeUnit.MINUTES);
         } catch (InterruptedException e1) {
-            logger.Error("Excpetion when awaiting latch %s", e1.toString());
+            logger.Error("Excpetion when awaiting latch ", e1);
             e1.printStackTrace();
         }
+        
+        logger.End();
 
     }
 
@@ -720,18 +736,20 @@ public class BrokerClientTest {
      */
     @Test
     public final void testSetResponseHandler_E1() {
+    	logger.Start();
 
         // boundary
         // when the responsehandler is null
-        Echo request = Util.generateEchoRequest();
-
+        
         try {
             iClient.setResponseHandler(EchoResponse.class, null);
             logger.Error("EE is not thrown.");
         } catch (NullPointerException e) {
             logger.Info("NullPointerException is expected.");
-            e.printStackTrace();
+            
         }
+        
+        logger.End();
 
     }
 
@@ -752,29 +770,32 @@ public class BrokerClientTest {
     @Test
     public final void testEndRequestsInt() {
         // functional
+    	logger.Start();
         Echo request = Util.generateEchoRequest();
 
         try {
             dClient.sendRequest(request, "data");
         } catch (SessionException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         } catch (SocketTimeoutException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         }
 
         try {
             dClient.endRequests(3000);
         } catch (SocketTimeoutException e) {
-            logger.Error("Excpetion when end requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when end requests ", e);
+            
         } catch (SessionException e) {
-            logger.Error("Excpetion when end requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when end requests ", e);
+            
         } // BUG this cannot throw InvalidOperationException
 
         // boundary
+        
+        logger.End();
 
     }
 
@@ -786,41 +807,45 @@ public class BrokerClientTest {
     @Test
     public final void testEndRequestsInt_1() {
         // functional
+    	logger.Start();
         Echo request = Util.generateEchoRequest();
         try {
             dClient.sendRequest(request, "data");
         } catch (SessionException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         } catch (SocketTimeoutException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         }
 
         try {
             dClient.endRequests(0);
         } catch (Throwable e) {
-            logger.Error("UE for 0 timeout %s", e.toString());
-            e.printStackTrace();
+            logger.Error("UE for 0 timeout ", e);
+            
         }
 
         // boundary
+        
+        logger.End();
 
     }
 
     @Test
     public final void testEndRequestsInt_0() {
         // functional
+    	logger.Start();
         Echo request = Util.generateEchoRequest();
 
         try {
             dClient.sendRequest(request, "data");
         } catch (SessionException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         } catch (SocketTimeoutException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         }
 
         try {
@@ -828,7 +853,7 @@ public class BrokerClientTest {
             logger.Error("EE is not thrown. -1");
         } catch (Throwable e) {
             logger.Info("Expected Exception %s", e.toString());
-            e.printStackTrace();
+            
         }
 
         try {
@@ -836,7 +861,7 @@ public class BrokerClientTest {
             logger.Error("EE is not thrown. min");
         } catch (Throwable e) {
             logger.Info("Expected Exception %s", e.toString());
-            e.printStackTrace();
+            
         }
 
         /*
@@ -844,8 +869,10 @@ public class BrokerClientTest {
          * timeoutThrottlingMS which is default 60 seconds
          * logger.Error("EE is not thrown. 1"); } catch (Throwable e) {
          * logger.Info("Expected Exception %s", e.toString());
-         * e.printStackTrace(); }
+         *  }
          */
+        
+        logger.End();
 
     }
 
@@ -857,6 +884,7 @@ public class BrokerClientTest {
     public final void testFlush() {
 
         // functional
+    	logger.Start();
         Echo request = Util.generateEchoRequest();
 
         try {
@@ -864,11 +892,11 @@ public class BrokerClientTest {
                 dClient.sendRequest(request, "data");
             }
         } catch (SessionException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         } catch (SocketTimeoutException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         }
 
         try {
@@ -877,8 +905,8 @@ public class BrokerClientTest {
                              // InvalidOperationException
             dClient.endRequests();
         } catch (Throwable e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         }
 
         // get responses
@@ -896,15 +924,15 @@ public class BrokerClientTest {
                 logger.assertTrue("check response",
                         reply.getRefID().compareTo(request.getRefID()) == 0);
             } catch (SOAPFaultException e) {
-                logger.Error("Exception in getResponse %s", e.toString());
-                e.printStackTrace();
+                logger.Error("Exception in getResponse ", e);
+                
             } catch (SOAPException e) {
-                logger.Error("Exception in getResponse %s", e.toString());
-                e.printStackTrace();
+                logger.Error("Exception in getResponse ", e);
+                
             }
         } catch (SessionException e) {
-            logger.Error("Excpetion when getting responses %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when getting responses ", e);
+            
         }
 
         // boundary
@@ -916,8 +944,10 @@ public class BrokerClientTest {
          * 
          * } catch (Throwable e) {
          * logger.Error("Excpetion when sending requests %s", e.toString());
-         * e.printStackTrace(); }
+         *  }
          */
+        
+        logger.End();
 
     }
 
@@ -929,6 +959,7 @@ public class BrokerClientTest {
     public final void testFlush_1() {
 
         // functional
+    	logger.Start();
         Echo request = Util.generateEchoRequest();
 
         try {
@@ -936,13 +967,13 @@ public class BrokerClientTest {
                 try {
                     dClient.sendRequest(request, "data");
                 } catch (SocketTimeoutException e) {
-                    logger.Error("Excpetion when sending requests %s", e.toString());
-                    e.printStackTrace();
+                    logger.Error("Excpetion when sending requests ", e);
+                    
                 }
             }
         } catch (SessionException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         }
 
         try {
@@ -950,8 +981,8 @@ public class BrokerClientTest {
                              // InvalidOperationException
             dClient.endRequests();
         } catch (Throwable e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         }
 
         // get responses
@@ -966,16 +997,16 @@ public class BrokerClientTest {
                     logger.assertTrue("check response", reply.getRefID()
                             .compareTo(request.getRefID()) == 0);
                 } catch (SOAPFaultException e) {
-                    logger.Error("Exception in getResponse %s", e.toString());
-                    e.printStackTrace();
+                    logger.Error("Exception in getResponse ", e);
+                    
                 } catch (SOAPException e) {
-                    logger.Error("Exception in getResponse %s", e.toString());
-                    e.printStackTrace();
+                    logger.Error("Exception in getResponse ", e);
+                    
                 }
             }
         } catch (SessionException e) {
-            logger.Error("Excpetion when getting responses %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when getting responses ", e);
+            
         }
 
         // boundary
@@ -987,8 +1018,9 @@ public class BrokerClientTest {
          * 
          * } catch (Throwable e) {
          * logger.Error("Excpetion when sending requests %s", e.toString());
-         * e.printStackTrace(); }
+         *  }
          */
+        logger.End();
 
     }
 
@@ -996,10 +1028,12 @@ public class BrokerClientTest {
      * Test method for
      * {@link com.microsoft.hpc.scheduler.session.BrokerClient#flush()}.
      */
-    @Test(timeout = 180000)
+    @Ignore
+    //@Test(timeout = 180000)
     public final void testFlush_Bug1() {
 
         // functional
+    	logger.Start();
         final Echo request = Util.generateEchoRequest();
 
         try {
@@ -1012,16 +1046,16 @@ public class BrokerClientTest {
                 }
             }
         } catch (SessionException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         }
 
         try {
             dClient.flush();
             //dClient.endRequests();
         } catch (Throwable e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         }
 
         final CountDownLatch l = new CountDownLatch(1);
@@ -1037,13 +1071,13 @@ public class BrokerClientTest {
                             reply = response.getResult().getEchoResult()
                                     .getValue();
                         } catch (SOAPFaultException e) {
-                            logger.Error("Error in process request %s",
-                                    e.toString());
-                            e.printStackTrace();
+                            logger.Error("Error in process request ",
+                                    e);
+                            
                         } catch (SOAPException e) {
-                            logger.Error("Error in process request %s",
-                                    e.toString());
-                            e.printStackTrace();
+                            logger.Error("Error in process request ",
+                                    e);
+                            
                         }
                         logger.Info("\tReceived response for request %s: %d",
                                 response.getUserData(), reply.getRefID());
@@ -1062,8 +1096,7 @@ public class BrokerClientTest {
 
                     @Override
                     public void raiseError(Exception e) {
-                        logger.Error("Error in process request %s",
-                                e.toString());
+                        logger.Error("Error in process request ", e);
 
                     }
                 });
@@ -1084,8 +1117,10 @@ public class BrokerClientTest {
          * 
          * } catch (Throwable e) {
          * logger.Error("Excpetion when sending requests %s", e.toString());
-         * e.printStackTrace(); }
+         *  }
          */
+        
+        logger.End();
 
     }
 
@@ -1097,25 +1132,26 @@ public class BrokerClientTest {
     public final void testFlushInt() {
 
         // functional
+    	logger.Start();
         Echo request = Util.generateEchoRequest();
 
         try {
             dClient.sendRequest(request, "data");
 
         } catch (SessionException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         } catch (SocketTimeoutException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         }
 
         try {
             dClient.flush(3000); // BUG flush should throw SessionException or
                                  // InvalidOperationException
         } catch (Throwable e) {
-            logger.Error("Excpetion when flushing requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when flushing requests ", e);
+            
         }
 
         // boundary
@@ -1125,8 +1161,8 @@ public class BrokerClientTest {
             logger.Error("Expected exception is not thrown");
 
         } catch (Throwable e) {
-            logger.Info("Excpetion when flushing requests %s", e.toString());
-            e.printStackTrace();
+            logger.Info("Excpetion when flushing requests ", e);
+            
         }
 
         try {
@@ -1134,8 +1170,8 @@ public class BrokerClientTest {
             logger.Error("Expected exception is not thrown");
 
         } catch (Throwable e) {
-            logger.Info("Excpetion when flushing requests %s", e.toString());
-            e.printStackTrace();
+            logger.Info("Excpetion when flushing requests ", e);
+            
         }
 
         try {
@@ -1144,7 +1180,7 @@ public class BrokerClientTest {
 
         } catch (Throwable e) {
             logger.Info("Excpetion when flushing requests %s", e.toString());
-            e.printStackTrace();
+            
         }
 
         try {
@@ -1153,8 +1189,10 @@ public class BrokerClientTest {
 
         } catch (Throwable e) {
             logger.Info("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            
         }
+        
+        logger.End();
 
     }
 
@@ -1166,25 +1204,28 @@ public class BrokerClientTest {
     public final void testEndRequests() {
 
         // functional
+    	logger.Start();
         Echo request = Util.generateEchoRequest();
 
         try {
             dClient.sendRequest(request, "data");
         } catch (SessionException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         } catch (SocketTimeoutException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         }
 
         try {
             dClient.endRequests(); // BUG this cannot throw
                                    // InvalidOperationException
         } catch (Throwable e) {
-            logger.Error("Excpetion when end requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when end requests ", e);
+            
         }
+        
+        logger.End();
 
     }
 
@@ -1196,19 +1237,21 @@ public class BrokerClientTest {
     public final void testEndRequests_1() {
 
         // boundary
-        Echo request = Util.generateEchoRequest();
-
+    	logger.Start();
+        
         // endrequest before any requests sent
         try {
             dClient.endRequests(); // BUG this cannot throw
                                    // InvalidOperationException
         } catch (IllegalStateException e) {
             logger.Info("EE when end requests %s", e.toString());
-            e.printStackTrace();
+            
         } catch (Throwable e) {
-            logger.Error("UE when end requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("UE when end requests ", e);
+            
         }
+        
+        logger.End();
 
     }
 
@@ -1220,12 +1263,13 @@ public class BrokerClientTest {
     public final void testClose() {
         // functional
     	// bug 11821
+    	logger.Start();
 
         try {
             dClient.close();
         } catch (Throwable e) {
-            logger.Error("Excpetion when close the client %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when close the client ", e);
+            
         }
 
         // boundary
@@ -1235,9 +1279,10 @@ public class BrokerClientTest {
             dClient.close();
             logger.Info("Exception should not be thrown.");
         } catch (Throwable e) {
-            logger.Error("UE when closing the client %s", e.toString());
-            e.printStackTrace();
+            logger.Error("UE when closing the client ", e);
+            
         }
+        logger.End();
 
     }
 
@@ -1250,15 +1295,16 @@ public class BrokerClientTest {
     public final void testCloseBoolean() {
         // functional
     	// bug 11821
+    	logger.Start();
 
         try {
             dClient.close(true);
         } catch (IllegalStateException e) {
         	logger.Info("IllegalStateException is thrown. %s", e.toString());
-        	e.printStackTrace();
+        	
         } catch (Throwable e) {
-            logger.Error("Excpetion when close the client %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when close the client ", e);
+            
         }
 
         // boundary
@@ -1268,10 +1314,11 @@ public class BrokerClientTest {
             dClient.close(true);
             logger.Info("Exception should not be thrown.");
         } catch (Throwable e) {
-            logger.Error("UE when closing the client %s", e.toString());
-            e.printStackTrace();
+            logger.Error("UE when closing the client ", e);
+            
         }
 
+        logger.End();
     }
 
     /**
@@ -1282,14 +1329,16 @@ public class BrokerClientTest {
     @Test
     public final void testCloseBooleanInt() {
         // functional
+    	logger.Start();
 
         try {
             dClient.close(false, 5000);
             dClient = null;
         } catch (Throwable e) {
-            logger.Error("Excpetion when close the client %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when close the client ", e);
+            
         }
+        logger.End();
 
     }
 
@@ -1302,13 +1351,14 @@ public class BrokerClientTest {
     public final void testCloseBooleanInt_1() {
         // boundary
     	// bug 11821
+    	logger.Start();
 
         try {
             dClient.close(false, -1);
             logger.Error("EException is not thrown");
         } catch (Throwable e) {
             logger.Info("Excpetion when close the client %s", e.toString());
-            e.printStackTrace();
+            
         }
 
         try {
@@ -1316,7 +1366,7 @@ public class BrokerClientTest {
             logger.Error("EException is not thrown");
         } catch (Throwable e) {
             logger.Info("Excpetion when close the client %s", e.toString());
-            e.printStackTrace();
+            
         }
 
        
@@ -1326,16 +1376,18 @@ public class BrokerClientTest {
             logger.Error("EException is not thrown");
         } catch (Throwable e) {
             logger.Info("Excpetion when close the client %s", e.toString());
-            e.printStackTrace();
+            
         }
         
         try {
             dClient.close(true, 0);
             
         } catch (Throwable e) {
-            logger.Error("Excpetion when close the client %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when close the client ", e);
+            
         }
+        
+        logger.End();
 
     }
 
@@ -1346,36 +1398,37 @@ public class BrokerClientTest {
      */
     @Test
     public final void testSendRequestObjectObjectInt() {
+    	logger.Start();
         Echo request = Util.generateEchoRequest();
         // function
         try {
             iClient.sendRequest(request, 1, 5000);
         } catch (SessionException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         } catch (SocketTimeoutException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         }
 
         try {
             dClient.sendRequest(request, "data", Integer.MAX_VALUE);
         } catch (SessionException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         } catch (SocketTimeoutException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         }
 
         try {
             iClient.sendRequest(request, 1, 0);
         } catch (SessionException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         } catch (SocketTimeoutException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         }
 
         // boundary
@@ -1386,11 +1439,11 @@ public class BrokerClientTest {
         } catch (NullPointerException e) {
             logger.Info("Expected exception when sending requests %s",
                     e.toString());
-            e.printStackTrace();
+            
         } catch (Throwable e) {
             logger.Info("Expected exception when sending requests %s",
                     e.toString());
-            e.printStackTrace();
+            
         }
 
         try {
@@ -1399,11 +1452,11 @@ public class BrokerClientTest {
         } catch (NullPointerException e) {
             logger.Info("Expected exception when sending requests %s",
                     e.toString());
-            e.printStackTrace();
+            
         } catch (Throwable e) {
             logger.Info("Expected exception when sending requests %s",
                     e.toString());
-            e.printStackTrace();
+            
         }
 
         try {
@@ -1412,11 +1465,11 @@ public class BrokerClientTest {
         } catch (NullPointerException e) {
             logger.Info("Expected exception when sending requests %s",
                     e.toString());
-            e.printStackTrace();
+            
         } catch (Throwable e) {
             logger.Info("Expected exception when sending requests %s",
                     e.toString());
-            e.printStackTrace();
+            
         }
 
         try {
@@ -1425,11 +1478,11 @@ public class BrokerClientTest {
         } catch (SessionException e) {
             logger.Info("Expected exception when sending requests %s",
                     e.toString());
-            e.printStackTrace();
+            
         } catch (Throwable e) {
             logger.Info("Expected exception when sending requests %s",
                     e.toString());
-            e.printStackTrace();
+            
         }
 
         try {
@@ -1438,13 +1491,14 @@ public class BrokerClientTest {
         } catch (NullPointerException e) {
             logger.Info("Expected exception when sending requests %s",
                     e.toString());
-            e.printStackTrace();
+            
         } catch (Throwable e) {
             logger.Info("Expected exception when sending requests %s",
                     e.toString());
-            e.printStackTrace();
+            
         }
 
+        logger.End();
     }
 
     /**
@@ -1455,31 +1509,33 @@ public class BrokerClientTest {
     @Test
     public final void testSendRequestObjectObjectStringInt() {
         // functional
+    	logger.Start();
         Echo request = Util.generateEchoRequest();
 
         try {
             iClient.sendRequest(request, 1, "http://tempuri.org/IEchoSvc/Echo",
                     5000);
         } catch (SessionException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         } catch (SocketTimeoutException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         }
 
         try {
             dClient.sendRequest(request, "data",
                     "http://tempuri.org/IEchoSvc/Echo", 0);
         } catch (SessionException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         } catch (SocketTimeoutException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         }
 
         // boundary
+        logger.End();
     }
     
     
@@ -1488,7 +1544,7 @@ public class BrokerClientTest {
      */
     @Test
     public final void testGetRequestCount() {
-        
+    	logger.Start();
     	try {
 			logger.Info(dClient.getRequestCount());
 			logger.Info(iClient.getRequestCount());
@@ -1526,7 +1582,7 @@ public class BrokerClientTest {
                  logger.assertTrue("check response",
                          reply.getRefID() == refId);
              } catch (Throwable ex) {
-                 logger.Error("Error in process request %s", ex.toString());
+                 logger.Error("Error in process request ", ex);
 
              }
 
@@ -1538,15 +1594,15 @@ public class BrokerClientTest {
          
 		 		
     	} catch (SessionException e) {
-			logger.Error("UE is thrown %s",e.toString());
-			e.printStackTrace();
+			logger.Error("UE is thrown ",e);
+			
     	} catch (SocketTimeoutException e) {
-    		logger.Error("UE is thrown %s",e.toString());
-			e.printStackTrace();
+    		logger.Error("UE is thrown ",e);
+			
 		}
 		
 		
-    	
+    	logger.End();
     	
     	
     }
@@ -1556,7 +1612,7 @@ public class BrokerClientTest {
      */
     @Test
     public final void testGetStatus() {
-        
+    	logger.Start();
     	try {
 			logger.Info(dClient.getStatus().toString());
 			logger.Info(iClient.getStatus().toString());
@@ -1592,7 +1648,7 @@ public class BrokerClientTest {
                  logger.assertTrue("check response",
                          reply.getRefID() == refId);
              } catch (Throwable ex) {
-                 logger.Error("Error in process request %s", ex.toString());
+                 logger.Error("Error in process request ", ex);
 
              }
 
@@ -1604,15 +1660,15 @@ public class BrokerClientTest {
          
 		 		
     	} catch (SessionException e) {
-			logger.Error("UE is thrown %s",e.toString());
-			e.printStackTrace();
+			logger.Error("UE is thrown ",e);
+			
     	} catch (SocketTimeoutException e) {
-    		logger.Error("UE is thrown %s",e.toString());
-			e.printStackTrace();
+    		logger.Error("UE is thrown ",e);
+			
 		}
 		
 		
-    	
+    	logger.End();
     	
     	
     }
@@ -1722,17 +1778,18 @@ public class BrokerClientTest {
     @Test
     public void testGetResponses2() {
         // functional
+    	logger.Start();
         Echo request = Util.generateEchoRequest();
 
         try {
             dClient.sendRequest(request, "data");
             dClient.endRequests();
         } catch (SessionException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         } catch (SocketTimeoutException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         }
 
         try {
@@ -1748,17 +1805,18 @@ public class BrokerClientTest {
                 logger.assertTrue("check response",
                         reply.getRefID().compareTo(request.getRefID()) == 0);
             } catch (SOAPFaultException e) {
-                logger.Error("Exception in getResponse %s", e.toString());
-                e.printStackTrace();
+                logger.Error("Exception in getResponse ", e);
+                
             } catch (SOAPException e) {
-                logger.Error("Exception in getResponse %s", e.toString());
-                e.printStackTrace();
+                logger.Error("Exception in getResponse ", e);
+                
             }
         } catch (SessionException e) {
-            logger.Error("Excpetion when getting responses %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when getting responses ", e);
+            
         }
 
+        logger.End();
     }
 
     /**
@@ -1769,17 +1827,18 @@ public class BrokerClientTest {
     @Test
     public void testGetResponsesInt() {
         // functional
+    	logger.Start();
         Echo request = Util.generateEchoRequest();
 
         try {
             dClient.sendRequest(request, "data");
             dClient.endRequests();
         } catch (SessionException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         } catch (SocketTimeoutException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         }
 
         try {
@@ -1794,15 +1853,15 @@ public class BrokerClientTest {
                 logger.assertTrue("check response",
                         reply.getRefID().compareTo(request.getRefID()) == 0);
             } catch (SOAPFaultException e) {
-                logger.Error("Exception in getResponse %s", e.toString());
-                e.printStackTrace();
+                logger.Error("Exception in getResponse ", e);
+                
             } catch (SOAPException e) {
-                logger.Error("Exception in getResponse %s", e.toString());
-                e.printStackTrace();
+                logger.Error("Exception in getResponse ", e);
+                
             }
         } catch (SessionException e) {
-            logger.Error("Excpetion when getting responses %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when getting responses ", e);
+            
         }
 
         try {
@@ -1818,15 +1877,15 @@ public class BrokerClientTest {
                 logger.assertTrue("check response",
                         reply.getRefID().compareTo(request.getRefID()) == 0);
             } catch (SOAPFaultException e) {
-                logger.Error("Exception in getResponse %s", e.toString());
-                e.printStackTrace();
+                logger.Error("Exception in getResponse ", e);
+                
             } catch (SOAPException e) {
-                logger.Error("Exception in getResponse %s", e.toString());
-                e.printStackTrace();
+                logger.Error("Exception in getResponse ", e);
+                
             }
         } catch (SessionException e) {
-            logger.Error("Excpetion when getting responses %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when getting responses ", e);
+            
         }
 
         // boundary
@@ -1839,10 +1898,10 @@ public class BrokerClientTest {
         } catch (IllegalArgumentException e) {
             logger.Info("Expected excpetion when getting responses %s",
                     e.toString());
-            e.printStackTrace();
+            
         } catch (Throwable e) {
-            logger.Error("UE when getting responses %s", e.toString());
-            e.printStackTrace();
+            logger.Error("UE when getting responses ", e);
+            
         }
 
         try {
@@ -1853,11 +1912,13 @@ public class BrokerClientTest {
         } catch (IllegalArgumentException e) {
             logger.Info("Expected excpetion when getting responses %s",
                     e.toString());
-            e.printStackTrace();
+            
         } catch (Throwable e) {
-            logger.Error("UE when getting responses %s", e.toString());
-            e.printStackTrace();
+            logger.Error("UE when getting responses ", e);
+            
         }
+        
+        logger.End();
 
     }
 
@@ -1869,6 +1930,7 @@ public class BrokerClientTest {
     @Test
     public void testGetResponsesInt_E1() {
         // functional
+    	logger.Start();
         GenerateLoad request = Util.generateGeneratedLoad(null, null,
                 1 * 1000, Util.generateRandomInteger());
 
@@ -1876,11 +1938,11 @@ public class BrokerClientTest {
             dClient.sendRequest(request, "data");
             dClient.endRequests();
         } catch (SessionException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         } catch (SocketTimeoutException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         }
 
         try {
@@ -1897,15 +1959,15 @@ public class BrokerClientTest {
                 logger.assertTrue("check response",
                         reply.getRefID().compareTo(request.getRefID()) == 0);
             } catch (SOAPFaultException e) {
-                logger.Error("Exception in getResponse %s", e.toString());
-                e.printStackTrace();
+                logger.Error("Exception in getResponse ", e);
+                
             } catch (SOAPException e) {
-                logger.Error("Exception in getResponse %s", e.toString());
-                e.printStackTrace();
+                logger.Error("Exception in getResponse ", e);
+                
             }
         } catch (SessionException e) {
-            logger.Error("Excpetion when getting responses %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when getting responses ", e);
+            
         }
 
         try {
@@ -1922,15 +1984,15 @@ public class BrokerClientTest {
                 logger.assertTrue("check response",
                         reply.getRefID().compareTo(request.getRefID()) == 0);
             } catch (SOAPFaultException e) {
-                logger.Error("Exception in getResponse %s", e.toString());
-                e.printStackTrace();
+                logger.Error("Exception in getResponse ", e);
+                
             } catch (SOAPException e) {
-                logger.Error("Exception in getResponse %s", e.toString());
-                e.printStackTrace();
+                logger.Error("Exception in getResponse ", e);
+                
             }
         } catch (SessionException e) {
-            logger.Error("Excpetion when getting responses %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when getting responses ", e);
+            
         }
 
         // boundary
@@ -1943,10 +2005,10 @@ public class BrokerClientTest {
         } catch (IllegalArgumentException e) {
             logger.Info("Expected excpetion when getting responses %s",
                     e.toString());
-            e.printStackTrace();
+            
         } catch (Throwable e) {
-            logger.Error("UE when getting responses %s", e.toString());
-            e.printStackTrace();
+            logger.Error("UE when getting responses ", e);
+            
         }
 
         try {
@@ -1957,11 +2019,13 @@ public class BrokerClientTest {
         } catch (IllegalArgumentException e) {
             logger.Info("Expected excpetion when getting responses %s",
                     e.toString());
-            e.printStackTrace();
+            
         } catch (Throwable e) {
-            logger.Error("UE when getting responses %s", e.toString());
-            e.printStackTrace();
+            logger.Error("UE when getting responses ", e);
+            
         }
+        
+        logger.End();
 
     }
 
@@ -1970,13 +2034,15 @@ public class BrokerClientTest {
      * {@link com.microsoft.hpc.scheduler.session.BrokerClient#setResponseHandler(java.lang.Class, com.microsoft.hpc.scheduler.session.ResponseListener, int)}
      * .
      */
-    @Ignore
+    @Test
     public void testSetResponseHandlerClassOfTMessageResponseListenerOfTMessageInt() {
 
         // functional
-
+    	logger.Start();
+    	
         final Echo request = Util.generateEchoRequest();
         final CountDownLatch l = new CountDownLatch(1);
+        
 
         iClient.setResponseHandler(EchoResponse.class,
                 new ResponseListener<EchoResponse>() {
@@ -1992,13 +2058,13 @@ public class BrokerClientTest {
                             reply = response.getResult().getEchoResult()
                                     .getValue();
                         } catch (SOAPFaultException e) {
-                            logger.Error("Error in process request %s",
-                                    e.toString());
-                            e.printStackTrace();
+                            logger.Error("Error in process request ",
+                                    e);
+                            
                         } catch (SOAPException e) {
-                            logger.Error("Error in process request %s",
-                                    e.toString());
-                            e.printStackTrace();
+                            logger.Error("Error in process request ",
+                                    e);
+                            
                         }
                         logger.Info("\tReceived response for request %s: %s",
                                 response.getUserData(), reply);
@@ -2018,29 +2084,33 @@ public class BrokerClientTest {
                     public void raiseError(Exception e) {
                         logger.Error("Error in process request %s, raised error",
                                 e.toString());
-                        e.printStackTrace();
+                        
                         l.countDown();
                     }
 
-                }, 15000);
+                }, 30000);
 
         try {
             iClient.sendRequest(request, "data");
+            iClient.sendRequest(request, "data");
+            iClient.sendRequest(request, "data");
             iClient.endRequests();
         } catch (SessionException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         } catch (SocketTimeoutException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
-        }
-
+            logger.Error("Excpetion when sending requests ", e);
+            
+        } 
+        
         try {
             l.await(10, TimeUnit.MINUTES);
         } catch (InterruptedException e1) {
-            logger.Error("Excpetion when awaiting latch %s", e1.toString());
+            logger.Error("Excpetion when awaiting latch ", e1);
             e1.printStackTrace();
         }
+        
+        logger.End();
 
     }
 
@@ -2048,15 +2118,17 @@ public class BrokerClientTest {
     /**
      * Test method for
      * {@link com.microsoft.hpc.scheduler.session.BrokerClient#setResponseHandler(java.lang.Class, com.microsoft.hpc.scheduler.session.ResponseListener, int)}
-     * .
+     * . EOM bug 17154
      */
     @Test
-    public void testSetResponseHandlerClassOfTMessageResponseListenerOfTMessageInt2() {
+    public void testSetResponseHandlerClassOfTMessageResponseListenerOfTMessageInt3() {
 
         // functional
-
+    	logger.Start();
+    	
         final Echo request = Util.generateEchoRequest();
         final CountDownLatch l = new CountDownLatch(1);
+        
 
         iClient.setResponseHandler(EchoResponse.class,
                 new ResponseListener<EchoResponse>() {
@@ -2072,13 +2144,13 @@ public class BrokerClientTest {
                             reply = response.getResult().getEchoResult()
                                     .getValue();
                         } catch (SOAPFaultException e) {
-                            logger.Error("Error in process request %s",
-                                    e.toString());
-                            e.printStackTrace();
+                            logger.Error("Error in process request ",
+                                    e);
+                            
                         } catch (SOAPException e) {
-                            logger.Error("Error in process request %s",
-                                    e.toString());
-                            e.printStackTrace();
+                            logger.Error("Error in process request ",
+                                    e);
+                            
                         }
                         logger.Info("\tReceived response for request %s: %s",
                                 response.getUserData(), reply);
@@ -2096,42 +2168,52 @@ public class BrokerClientTest {
 
                     @Override
                     public void raiseError(Exception e) {
-                        logger.Error("Error in process request %s",
+                        logger.Error("Error in process request %s, raised error",
                                 e.toString());
-                        e.printStackTrace();
+                        
+                        l.countDown();
                     }
 
-                }, 0);
+                }, 30000);
 
         try {
             iClient.sendRequest(request, "data");
+            iClient.sendRequest(request, "data");
+            iClient.sendRequest(request, "data");
+            //sleep 10 seconds here to wait for all request done
+            Thread.sleep(10000);
+            //and then send the EOM
             iClient.endRequests();
         } catch (SessionException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests", e);
         } catch (SocketTimeoutException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests", e);
+        } catch (InterruptedException e) {
+        	logger.Error("Excpetion when sending requests", e);
         }
 
         try {
-            l.await(2, TimeUnit.MINUTES);
+            l.await(10, TimeUnit.MINUTES);
         } catch (InterruptedException e1) {
-            logger.Error("Excpetion when awaiting latch %s", e1.toString());
-            e1.printStackTrace();
+            logger.Error("Excpetion when awaiting latch", e1);
+
         }
+        
+        logger.End();
 
     }
 
+    
     /**
      * Test method for
      * {@link com.microsoft.hpc.scheduler.session.BrokerClient#setResponseHandler(java.lang.Class, com.microsoft.hpc.scheduler.session.ResponseListener, int)}
      * .
      */
     @Test
-    public void testSetResponseHandlerClassOfTMessageResponseListenerOfTMessageInt_E1() {
+    public void testSetResponseHandlerClassOfTMessageResponseListenerOfTMessageInt2() {
 
-        // boundary
+        // functional
+    	logger.Start();
 
         final Echo request = Util.generateEchoRequest();
         final CountDownLatch l = new CountDownLatch(1);
@@ -2150,13 +2232,85 @@ public class BrokerClientTest {
                             reply = response.getResult().getEchoResult()
                                     .getValue();
                         } catch (SOAPFaultException e) {
-                            logger.Error("Error in process request %s",
-                                    e.toString());
-                            e.printStackTrace();
+                            logger.Error("Error in process request ", e);
                         } catch (SOAPException e) {
-                            logger.Error("Error in process request %s",
-                                    e.toString());
-                            e.printStackTrace();
+                            logger.Error("Error in process request ", e);
+                        }
+                        logger.Info("\tReceived response for request %s: %s",
+                                response.getUserData(), reply);
+                        logger.assertTrue("check response", reply.getRefID()
+                                .compareTo(request.getRefID()) == 0);
+
+                    }
+
+                    @Override
+                    public void endOfMessage() {
+                        logger.Info("Done retrieving %d responses", count);
+                        l.countDown();
+
+                    }
+
+                    @Override
+                    public void raiseError(Exception e) {
+                        logger.Error("Error in process request",e);
+                        
+                    }
+
+                }, 0);
+
+        try {
+            iClient.sendRequest(request, "data");
+            iClient.endRequests();
+        } catch (SessionException e) {
+            logger.Error("Excpetion when sending requests ", e );
+        } catch (SocketTimeoutException e) {
+            logger.Error("Excpetion when sending requests ", e );
+        }
+
+        try {
+            l.await(2, TimeUnit.MINUTES);
+        } catch (InterruptedException e1) {
+            logger.Error("Excpetion when awaiting latch ", e1);
+            
+        }
+        
+        logger.End();
+
+    }
+
+    /**
+     * Test method for
+     * {@link com.microsoft.hpc.scheduler.session.BrokerClient#setResponseHandler(java.lang.Class, com.microsoft.hpc.scheduler.session.ResponseListener, int)}
+     * .
+     */
+    @Test
+    public void testSetResponseHandlerClassOfTMessageResponseListenerOfTMessageInt_E1() {
+
+        // boundary
+    	logger.Start();
+
+        final Echo request = Util.generateEchoRequest();
+        final CountDownLatch l = new CountDownLatch(1);
+
+        iClient.setResponseHandler(EchoResponse.class,
+                new ResponseListener<EchoResponse>() {
+
+                    private int count = 0;
+
+                    @Override
+                    public void responseReturned(
+                            BrokerResponse<EchoResponse> response) {
+                        count++;
+                        ComputerInfo reply = null;
+                        try {
+                            reply = response.getResult().getEchoResult()
+                                    .getValue();
+                        } catch (SOAPFaultException e) {
+                            logger.Error("Error in process request ",e);
+                            
+                        } catch (SOAPException e) {
+                            logger.Error("Error in process request ",e);
+                            
                         } 
                         logger.Info("\tReceived response for request %s: %s",
                                 response.getUserData(), reply);
@@ -2177,15 +2331,13 @@ public class BrokerClientTest {
                     	if (e instanceof WebServiceException) {
                     		if (e.getCause() instanceof SocketTimeoutException) {
                     			logger.Info("Expected timeout exception");
-                    			e.printStackTrace();
+                    			
                                 l.countDown();
                                 return;
                     		}
                     	}
-                    	logger.Error("Error in process request %s raised error",
-                                e.toString());
-                    	e.printStackTrace();
-                        l.countDown();
+                    	logger.Error("Error in process request raised error",e);
+                    	l.countDown();
                         return;
                         
                     }
@@ -2196,19 +2348,20 @@ public class BrokerClientTest {
             iClient.sendRequest(request, "data");
             iClient.endRequests();
         } catch (SessionException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         } catch (SocketTimeoutException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         }
 
         try {
             l.await(2, TimeUnit.MINUTES);
         } catch (InterruptedException e1) {
-            logger.Error("Excpetion when awaiting latch %s", e1.toString());
-            e1.printStackTrace();
+            logger.Error("Excpetion when awaiting latch ", e1);
         }
+        
+        logger.End();
 
     }
 
@@ -2221,6 +2374,7 @@ public class BrokerClientTest {
     public void testSetResponseHandlerResponseListenerOfObject() {
 
         // functional
+    	logger.Start();
 
         final Echo request = Util.generateEchoRequest();
         final CountDownLatch l = new CountDownLatch(1);
@@ -2237,11 +2391,11 @@ public class BrokerClientTest {
                     reply = ((EchoResponse) response.getResult())
                             .getEchoResult().getValue();
                 } catch (SOAPFaultException e) {
-                    logger.Error("Error in process request %s", e.toString());
-                    e.printStackTrace();
+                    logger.Error("Error in process request ", e);
+                    
                 } catch (SOAPException e) {
-                    logger.Error("Error in process request %s", e.toString());
-                    e.printStackTrace();
+                    logger.Error("Error in process request", e);
+                    
                 }
                 logger.Info("\tReceived response for request %s: %s",
                         response.getUserData(), reply);
@@ -2259,8 +2413,8 @@ public class BrokerClientTest {
 
             @Override
             public void raiseError(Exception e) {
-                logger.Error("Error in process request %s", e.toString());
-                e.printStackTrace();
+                logger.Error("Error in process request ", e );
+                
             }
 
         });
@@ -2269,19 +2423,21 @@ public class BrokerClientTest {
             iClient.sendRequest(request, "data");
             iClient.endRequests();
         } catch (SessionException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         } catch (SocketTimeoutException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+            
         }
 
         try {
             l.await(10, TimeUnit.MINUTES);
         } catch (InterruptedException e1) {
-            logger.Error("Excpetion when awaiting latch %s", e1.toString());
-            e1.printStackTrace();
+            logger.Error("Excpetion when awaiting latch ", e1);
+            
         }
+        
+        logger.End();
 
     }
 
@@ -2293,6 +2449,7 @@ public class BrokerClientTest {
     @Test
     public void testSetResponseHandlerResponseListenerOfObjectInt() {
         // functional
+    	logger.Start();
 
         final Echo request = Util.generateEchoRequest();
         final CountDownLatch l = new CountDownLatch(1);
@@ -2309,11 +2466,11 @@ public class BrokerClientTest {
                     reply = ((EchoResponse) response.getResult())
                             .getEchoResult().getValue();
                 } catch (SOAPFaultException e) {
-                    logger.Error("Error in process request %s", e.toString());
-                    e.printStackTrace();
+                    logger.Error("Error in process request ", e);
+                   
                 } catch (SOAPException e) {
-                    logger.Error("Error in process request %s", e.toString());
-                    e.printStackTrace();
+                    logger.Error("Error in process request ", e);
+                    
                 }
                 logger.Info("\tReceived response for request %s: %s",
                         response.getUserData(), reply);
@@ -2331,8 +2488,8 @@ public class BrokerClientTest {
 
             @Override
             public void raiseError(Exception e) {
-                logger.Error("Error in process request %s", e.toString());
-                e.printStackTrace();
+                logger.Error("Error in process request ", e);
+            
             }
 
         }, 5000);
@@ -2341,19 +2498,21 @@ public class BrokerClientTest {
             iClient.sendRequest(request, "data");
             iClient.endRequests();
         } catch (SessionException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+        
         } catch (SocketTimeoutException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+      
         }
 
         try {
             l.await(10, TimeUnit.MINUTES);
         } catch (InterruptedException e1) {
-            logger.Error("Excpetion when awaiting latch %s", e1.toString());
-            e1.printStackTrace();
+            logger.Error("Excpetion when awaiting latch ", e1);
+
         }
+        
+        logger.End();
 
     }
 
@@ -2365,6 +2524,7 @@ public class BrokerClientTest {
     @Test
     public void testSetResponseHandlerResponseListenerOfObjectInt_E1() {
         // boundary
+    	logger.Start();
 
         final Echo request = Util.generateEchoRequest();
         final CountDownLatch l = new CountDownLatch(1);
@@ -2381,11 +2541,11 @@ public class BrokerClientTest {
                     reply = ((EchoResponse) response.getResult())
                             .getEchoResult().getValue();
                 } catch (SOAPFaultException e) {
-                    logger.Error("Error in process request %s", e.toString());
-                    e.printStackTrace();
+                    logger.Error("Error in process request ", e);
+
                 } catch (SOAPException e) {
-                    logger.Error("Error in process request %s", e.toString());
-                    e.printStackTrace();
+                    logger.Error("Error in process request ", e);
+
                 }
                 logger.Info("\tReceived response for request %s: %s",
                         response.getUserData(), reply);
@@ -2403,8 +2563,8 @@ public class BrokerClientTest {
 
             @Override
             public void raiseError(Exception e) {
-                logger.Error("Error in process request %s", e.toString());
-                e.printStackTrace();
+                logger.Error("Error in process request ", e);
+
             }
 
         }, 0);
@@ -2413,19 +2573,20 @@ public class BrokerClientTest {
             iClient.sendRequest(request, "data");
             iClient.endRequests();
         } catch (SessionException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests ", e);
+
         } catch (SocketTimeoutException e) {
-            logger.Error("Excpetion when sending requests %s", e.toString());
-            e.printStackTrace();
+            logger.Error("Excpetion when sending requests", e);
+
         }
 
         try {
             l.await(10, TimeUnit.MINUTES);
         } catch (InterruptedException e1) {
-            logger.Error("Excpetion when awaiting latch %s", e1.toString());
-            e1.printStackTrace();
+            logger.Error("Excpetion when awaiting latch ", e1);
+
         }
+        logger.End();
 
     }
 

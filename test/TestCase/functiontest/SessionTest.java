@@ -31,8 +31,8 @@ public class SessionTest {
      */
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
-        config = new Config("DurableSessionTest");
-        logger = new Logger(true, true, "DurableSessionTest");
+        config = new Config("SessionTest");
+        logger = new Logger(true, true, "SessionTest");
 
         SessionStartInfo info = new SessionStartInfo(config.Scheduler,
                 config.ServiceName, config.UserName, config.Password);
@@ -57,7 +57,7 @@ public class SessionTest {
      */
     @Before
     public void setUp() throws Exception {
-        logger.Start("SessionTest");
+        
     }
 
     /**
@@ -65,7 +65,7 @@ public class SessionTest {
      */
     @After
     public void tearDown() throws Exception {
-        logger.End("SessionTest");
+        
     }
 
     /**
@@ -83,9 +83,11 @@ public class SessionTest {
      */
     @Test
     public final void testGetAutoCloseJob() {
+    	logger.Start();
         logger.Info(iSession.getAutoCloseJob().toString()); // BUG what's this
                                                             // for?
 
+        logger.End();
     }
 
     
@@ -106,7 +108,9 @@ public class SessionTest {
      */
     @Test
     public final void testHttpEndpointReference() {
+    	logger.Start();
         logger.Info(iSession.httpEndpointReference());
+        logger.End();
     }
 
     /**
@@ -116,6 +120,7 @@ public class SessionTest {
      */
     @Test
     public final void testCreateSessionSessionStartInfo() {
+    	logger.Start();
         // functional
         SessionStartInfo info = new SessionStartInfo(config.Scheduler,
                 config.ServiceName, config.UserName, config.Password);
@@ -123,21 +128,21 @@ public class SessionTest {
         try {
             session = Session.createSession(info);
         } catch (SocketTimeoutException e) {
-            logger.Error("Timeout when creating a durable session");
-            e.printStackTrace();
+            logger.Error("Timeout when creating a durable session", e);
+            
         } catch (SessionException e) {
-            logger.Error("Session exception when creating a durable session");
-            e.printStackTrace();
+            logger.Error("Session exception when creating a durable session", e);
+            
         }
 
         try {
             session.close();
         } catch (SessionException e) {
-            logger.Error("Session exception when creating a durable session");
-            e.printStackTrace();
+            logger.Error("Session exception when creating a durable session", e);
+            
         } catch (SocketTimeoutException e) {
-            logger.Error("Timeout when creating a durable session");
-            e.printStackTrace();
+            logger.Error("Timeout when creating a durable session", e);
+            
         }
 
         // boundary
@@ -146,7 +151,7 @@ public class SessionTest {
             logger.Error("EException is not thrown.");
         } catch (Throwable e) {
             logger.Info("Timeout when creating a durable session");
-            e.printStackTrace();
+            
         }
 
         SessionStartInfo info2 = new SessionStartInfo("abc",
@@ -159,12 +164,12 @@ public class SessionTest {
             logger.Error("EException is not thrown.");
         } catch (Throwable e) {
             logger.Info("Timeout when creating a durable session");
-            e.printStackTrace();
+            
         }
 
         // more boundary test case for invalid startInfo would be included in
         // SessionStartInfo test
-
+        logger.End();
     }
 
     /**
@@ -174,7 +179,8 @@ public class SessionTest {
      */
     @Test
     public final void testCreateSessionSessionStartInfoTimeout() {
-
+    	logger.Start();
+    	logger.End();
         // BUG why need Timeout here.
 
     }
@@ -186,6 +192,7 @@ public class SessionTest {
      */
     @Test
     public final void testCreateSessionSessionStartInfoInt() {
+    	logger.Start();
         // functional
         SessionStartInfo info = new SessionStartInfo(config.Scheduler,
                 config.ServiceName, config.UserName, config.Password);
@@ -193,43 +200,43 @@ public class SessionTest {
         try {
             session = Session.createSession(info, 5000);
         } catch (SocketTimeoutException e) {
-            logger.Error("Timeout when creating a  session");
-            e.printStackTrace();
+            logger.Error("Timeout when creating a  session", e);
+            
         } catch (SessionException e) {
-            logger.Error("Session exception when creating a   session");
-            e.printStackTrace();
+            logger.Error("Session exception when creating a   session", e);
+            
         }
 
         try {
             session.close();
         } catch (SessionException e) {
             logger.Error("SessionException when closing a durable session");
-            e.printStackTrace();
+            
         } catch (SocketTimeoutException e) {
-            logger.Error("Timeout when closing a durable session");
-            e.printStackTrace();
+            logger.Error("Timeout when closing a durable session", e);
+            
         }
 
         try {
             session = Session.createSession(info, Integer.MAX_VALUE);
             session.close();
         } catch (SocketTimeoutException e) {
-            logger.Error("Timeout when creating a  session");
-            e.printStackTrace();
+            logger.Error("Timeout when creating a  session", e);
+            
         } catch (SessionException e) {
-            logger.Error("Session exception when creating a   session");
-            e.printStackTrace();
+            logger.Error("Session exception when creating a   session", e);
+            
         }
 
         try {
             session = Session.createSession(info, 0);
             session.close();
         } catch (SocketTimeoutException e) {
-            logger.Error("Timeout when creating a  session");
-            e.printStackTrace();
+            logger.Error("Timeout when creating a  session", e);
+            
         } catch (SessionException e) {
-            logger.Error("Session exception when creating a   session");
-            e.printStackTrace();
+            logger.Error("Session exception when creating a   session", e);
+            
         }
 
         // boundary
@@ -239,13 +246,13 @@ public class SessionTest {
             logger.Error("EException is not thrown.");
         } catch (IllegalArgumentException e) {
             logger.Info("IllegalArgumentException when creating a  session");
-            e.printStackTrace();
+            
         } catch (SocketTimeoutException e) {
-            logger.Error("Timeout when creating a  session");
-            e.printStackTrace();
+            logger.Error("Timeout when creating a  session", e);
+            
         } catch (SessionException e) {
-            logger.Error("Session exception when creating a   session");
-            e.printStackTrace();
+            logger.Error("Session exception when creating a   session", e);
+            
         }
 
         try {
@@ -253,10 +260,10 @@ public class SessionTest {
             logger.Error("EException is not thrown.");
         } catch (SocketTimeoutException e) {
             logger.Info("Timeout when creating a  session");
-            e.printStackTrace();
+            
         } catch (SessionException e) {
-            logger.Error("Session exception when creating a   session");
-            e.printStackTrace();
+            logger.Error("Session exception when creating a   session", e);
+            
         }
 
         try {
@@ -264,15 +271,15 @@ public class SessionTest {
             logger.Error("EException is not thrown.");
         } catch (IllegalArgumentException e) {
             logger.Info("IllegalArgumentException when creating a  session");
-            e.printStackTrace();
+            
         } catch (SocketTimeoutException e) {
-            logger.Error("Timeout when creating a  session");
-            e.printStackTrace();
+            logger.Error("Timeout when creating a  session", e);
+            
         } catch (SessionException e) {
-            logger.Error("Session exception when creating a   session");
-            e.printStackTrace();
+            logger.Error("Session exception when creating a   session", e);
+            
         }
-
+        logger.End();
     }
 
     /**
@@ -282,6 +289,7 @@ public class SessionTest {
      */
     @Test
     public final void testAttachSessionSessionAttachInfo() {
+    	logger.Start();
         // functional
         SessionStartInfo info = new SessionStartInfo(config.Scheduler,
                 config.ServiceName, config.UserName, config.Password);
@@ -289,11 +297,11 @@ public class SessionTest {
         try {
             session = Session.createSession(info);
         } catch (SocketTimeoutException e) {
-            logger.Error("Timeout when creating a  session");
-            e.printStackTrace();
+            logger.Error("Timeout when creating a  session", e);
+            
         } catch (SessionException e) {
-            logger.Error("Session exception when creating a  session");
-            e.printStackTrace();
+            logger.Error("Session exception when creating a  session", e);
+            
         }
 
         if (session == null) {
@@ -308,21 +316,21 @@ public class SessionTest {
         try {
             session_attached = Session.attachSession(attachInfo);
         } catch (SessionException e1) {
-            logger.Error("Timeout when attaching a  session");
-            e1.printStackTrace();
+            logger.Error("Timeout when attaching a  session", e1);
+            
         } catch (SocketTimeoutException e1) {
-            logger.Error("Timeout when attaching a  session");
-            e1.printStackTrace();
+            logger.Error("Timeout when attaching a  session", e1);
+            
         }
 
         try {
             session_attached.close();
         } catch (SessionException e) {
-            logger.Error("Timeout when closing a  session");
-            e.printStackTrace();
+            logger.Error("Timeout when closing a  session", e);
+            
         } catch (SocketTimeoutException e) {
-            logger.Error("Timeout when closing a  session");
-            e.printStackTrace();
+            logger.Error("Timeout when closing a  session", e);
+            
         }
 
         // boundary
@@ -330,11 +338,11 @@ public class SessionTest {
         try {
             session = Session.createSession(info);
         } catch (SocketTimeoutException e) {
-            logger.Error("Timeout when creating a  session");
-            e.printStackTrace();
+            logger.Error("Timeout when creating a  session", e);
+            
         } catch (SessionException e) {
-            logger.Error("Session exception when creating a  session");
-            e.printStackTrace();
+            logger.Error("Session exception when creating a  session", e);
+            
         }
 
         if (session == null) {
@@ -346,25 +354,27 @@ public class SessionTest {
             session_attached = Session.attachSession(null);
             logger.Error("EE is not thrown.");
         } catch (NullPointerException e1) {
-            logger.Info("Timeout when attaching a durable session");
-            e1.printStackTrace();
+            logger.Info("Timeout when attaching a durable session", e1);
+            
         } catch (SessionException e1) {
-            logger.Error("Timeout when attaching a durable session");
-            e1.printStackTrace();
+            logger.Error("Timeout when attaching a durable session", e1);
+            
         } catch (SocketTimeoutException e1) {
-            logger.Error("Timeout when attaching a durable session");
-            e1.printStackTrace();
+            logger.Error("Timeout when attaching a durable session", e1);
+            
         }
 
         try {
             session.close();
         } catch (SessionException e) {
-            logger.Error("Timeout when closing a durable session");
-            e.printStackTrace();
+            logger.Error("Timeout when closing a durable session", e);
+            
         } catch (SocketTimeoutException e) {
-            logger.Error("Timeout when closing a durable session");
-            e.printStackTrace();
+            logger.Error("Timeout when closing a durable session", e);
+            
         }
+        
+        logger.End();
     }
 
     /**
@@ -374,6 +384,7 @@ public class SessionTest {
      */
     @Test
     public final void testAttachSessionSessionAttachInfoInt() {
+    	logger.Start();
         // functional
         SessionStartInfo info = new SessionStartInfo(config.Scheduler,
                 config.ServiceName, config.UserName, config.Password);
@@ -381,11 +392,11 @@ public class SessionTest {
         try {
             session = Session.createSession(info);
         } catch (SocketTimeoutException e) {
-            logger.Error("Timeout when creating a durable session");
-            e.printStackTrace();
+            logger.Error("Timeout when creating a durable session", e);
+            
         } catch (SessionException e) {
-            logger.Error("Session exception when creating a durable session");
-            e.printStackTrace();
+            logger.Error("Session exception when creating a durable session", e);
+            
         }
 
         if (session == null) {
@@ -400,31 +411,31 @@ public class SessionTest {
         try {
             session_attached = Session.attachSession(attachInfo, 5000);
         } catch (SessionException e1) {
-            logger.Error("Timeout when attaching a durable session");
-            e1.printStackTrace();
+            logger.Error("Timeout when attaching a durable session", e1);
+            
         } catch (SocketTimeoutException e1) {
-            logger.Error("Timeout when attaching a durable session");
-            e1.printStackTrace();
+            logger.Error("Timeout when attaching a durable session", e1);
+            
         }
 
         try {
             session_attached = Session.attachSession(attachInfo, 0);
         } catch (SessionException e1) {
-            logger.Error("Timeout when attaching a durable session");
-            e1.printStackTrace();
+            logger.Error("Timeout when attaching a durable session", e1);
+            
         } catch (SocketTimeoutException e1) {
-            logger.Error("Timeout when attaching a durable session");
-            e1.printStackTrace();
+            logger.Error("Timeout when attaching a durable session", e1);
+            
         }
 
         try {
             session_attached.close();
         } catch (SessionException e) {
-            logger.Error("Timeout when closing a durable session");
-            e.printStackTrace();
+            logger.Error("Timeout when closing a durable session", e);
+            
         } catch (SocketTimeoutException e) {
-            logger.Error("Timeout when closing a durable session");
-            e.printStackTrace();
+            logger.Error("Timeout when closing a durable session", e);
+            
         }
 
         // boundary
@@ -432,11 +443,11 @@ public class SessionTest {
         try {
             session = Session.createSession(info);
         } catch (SocketTimeoutException e) {
-            logger.Error("Timeout when creating a durable session");
-            e.printStackTrace();
+            logger.Error("Timeout when creating a durable session", e);
+            
         } catch (SessionException e) {
-            logger.Error("Session exception when creating a durable session");
-            e.printStackTrace();
+            logger.Error("Session exception when creating a durable session", e);
+            
         }
 
         if (session == null) {
@@ -448,22 +459,22 @@ public class SessionTest {
             session_attached = Session.attachSession(attachInfo, -1);
             logger.Error("EE is not thrown.");
         } catch (IllegalArgumentException e) {
-            logger.Info("IllegalArgumentException when creating a session");
-            e.printStackTrace();
+            logger.Info("IllegalArgumentException when creating a session", e);
+            
         } catch (Throwable e) {
-            logger.Error("UE when creating a session");
-            e.printStackTrace();
+            logger.Error("UE when creating a session", e);
+            
         }
 
         try {
             session_attached = Session.attachSession(attachInfo, 1);
             logger.Error("EE is not thrown.");
         } catch (SessionException e1) {
-            logger.Info("Timeout when attaching a durable session");
-            e1.printStackTrace();
+            logger.Info("Timeout when attaching a durable session", e1);
+            
         } catch (SocketTimeoutException e1) {
-            logger.Info("Timeout when attaching a durable session");
-            e1.printStackTrace();
+            logger.Info("Timeout when attaching a durable session", e1);
+            
         }
 
         try {
@@ -471,23 +482,23 @@ public class SessionTest {
                     Integer.MIN_VALUE);
             logger.Error("EE is not thrown.");
         } catch (IllegalArgumentException e) {
-            logger.Info("IllegalArgumentException when creating a session");
-            e.printStackTrace();
+            logger.Info("IllegalArgumentException when creating a session", e);
+            
         } catch (Throwable e) {
-            logger.Error("UE when creating a session");
-            e.printStackTrace();
+            logger.Error("UE when creating a session", e);
+            
         }
 
         try {
             session.close();
         } catch (SessionException e) {
-            logger.Error("Timeout when closing a durable session");
-            e.printStackTrace();
+            logger.Error("Timeout when closing a durable session", e);
+            
         } catch (SocketTimeoutException e) {
-            logger.Error("Timeout when closing a durable session");
-            e.printStackTrace();
+            logger.Error("Timeout when closing a durable session", e);
+            
         }
-
+        logger.End();
     }
 
     private static Session iSession = null;

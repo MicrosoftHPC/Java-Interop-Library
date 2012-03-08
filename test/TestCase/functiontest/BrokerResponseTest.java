@@ -86,7 +86,7 @@ public class BrokerResponseTest {
      */
     @Before
     public void setUp() throws Exception {
-        logger.Start("BrokerResponseTest");
+        
 
     }
 
@@ -95,7 +95,7 @@ public class BrokerResponseTest {
      */
     @After
     public void tearDown() throws Exception {
-        logger.End("BrokerResponseTest");
+        
 
     }
 
@@ -105,8 +105,10 @@ public class BrokerResponseTest {
      */
     @Test
     public final void testGetMessage() {
+    	logger.Start();
         logger.Info(iResponse.getMessage().toString());
         logger.Info(iResponse.getMessage().getContentDescription());
+        logger.End();
 
     }
 
@@ -116,17 +118,18 @@ public class BrokerResponseTest {
      */
     @Test
     public final void testGetResult() {
+    	logger.Start();
         try {
             ComputerInfo value = dResponse.getResult().getEchoResult()
                     .getValue();
             logger.assertTrue("message compare",
                     value.getRefID().compareTo(request.getRefID()) == 0);
         } catch (SOAPFaultException e) {
-            logger.Error("response getresult error");
-            e.printStackTrace();
+            logger.Error("response getresult error", e);
+            
         } catch (SOAPException e) {
-            logger.Error("response getresult error");
-            e.printStackTrace();
+            logger.Error("response getresult error", e);
+            
         }
 
         try {
@@ -135,12 +138,13 @@ public class BrokerResponseTest {
             logger.assertTrue("message compare",
                     value.getRefID().compareTo(request.getRefID()) == 0);
         } catch (SOAPFaultException e) {
-            logger.Error("response getresult error");
-            e.printStackTrace();
+            logger.Error("response getresult error",e);
+            
         } catch (SOAPException e) {
-            logger.Error("response getresult error");
-            e.printStackTrace();
+            logger.Error("response getresult error",e);
+            
         }
+        logger.End();
 
     }
 
@@ -150,9 +154,10 @@ public class BrokerResponseTest {
      */
     @Test
     public final void testGetUserData() {
-
+    	logger.Start();
         logger.assertEqual("get user data", iResponse.getUserData(), "1");
         logger.assertEqual("get user data", dResponse.getUserData(), "2");
+        logger.End();
 
     }
 
@@ -163,9 +168,12 @@ public class BrokerResponseTest {
      */
     @Test
     public final void testGetSOAPMessage() {
+    	logger.Start();
 
         logger.Info(iResponse.getMessage().toString());
         // it is not public, do not test it here
+        
+        logger.End();
     }
 
     private static Session iSession = null;
