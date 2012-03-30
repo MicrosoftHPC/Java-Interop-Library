@@ -337,6 +337,17 @@ public class SessionStartInfo
             return 0;
         return contract.getPriority().getValue();
     }
+    
+    /**
+     * Gets the session priority of the job
+     * 
+     * @return priority value
+     */
+    public Integer getSessionPriority() {
+        if (contract.getExtendedPriority() == null)
+            return 0;
+        return contract.getExtendedPriority().getValue();
+    }
 
     /**
      * gets the requested nodes string
@@ -471,6 +482,17 @@ public class SessionStartInfo
     public void setPriority(Integer priority) {
         contract.setPriority(factory
                 .createSessionStartInfoContractPriority(priority));
+    }
+    
+    /**
+     * Sets the session priority of the job
+     * 
+     * @param priority
+     *            Priority value
+     */
+    public void setSessionPriority(Integer priority) {
+        contract.setExtendedPriority(factory
+                .createSessionStartInfoContractExtendedPriority(priority));
     }
 
     /**
