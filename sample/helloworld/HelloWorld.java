@@ -7,6 +7,8 @@
 // </summary>
 //------------------------------------------------------------------------------
 
+import java.util.Random;
+
 import org.tempuri.*;
 import javax.xml.soap.SOAPException;
 import javax.xml.ws.soap.SOAPFaultException;
@@ -27,8 +29,9 @@ public class HelloWorld
         nerrs += ParseCmdLine(args);
         if (nerrs == 0) {
             try {
-                nerrs += RunBasicTest();                                
-		nerrs += RunResponseHandlerTest();
+                nerrs += RunBasicTest();   
+                nerrs += RunCommonDataTest();
+                nerrs += RunResponseHandlerTest();
             }
             catch(Exception e) {
                 nerrs++;
@@ -84,7 +87,7 @@ public class HelloWorld
         {
             DurableSession session = DurableSession.createSession(info);
             System.out.printf("new session id = %d\n", session.getId());
-                    
+            
             BrokerClient<CcpEchoSvc> client = new BrokerClient<CcpEchoSvc>(session, CcpEchoSvc.class);
             System.out.printf("Sending %d requests...\n", nrequests);
             for(int i = 0; i < nrequests; i++)
@@ -115,16 +118,78 @@ public class HelloWorld
             System.out.printf("Done retrieving %d responses%n", nrequests);
             client.close();
             session.close();
-        } 
+        }
         catch (Throwable e)
         {
             nerrs++;
             e.printStackTrace();
         }       
-        
         return nerrs;
     }
 
+    private static int RunCommonDataTest()
+    {
+        int nerrs = 0;
+        SessionStartInfo info = new SessionStartInfo(headnode, serviceName, username, password);    
+        System.out.printf("Creating a session for %s...\n", serviceName);
+        
+        try
+        {
+            DurableSession session = DurableSession.createSession(info);
+            System.out.printf("new session id = %d\n", session.getId());
+            
+            // Prepare 1k binary data
+            byte[] data = new byte[1024];
+            Random r = new Random();
+            r.nextBytes(data);
+            
+            // Create common data client
+            String dataClientId = java.util.UUID.randomUUID().toString();
+            DataClient dataClient = DataClient.create(dataClientId, headnode, username, password); 
+            System.out.printf("new common data client id = %s\n", dataClientId);
+            // Write data to Windows HPC Cluster
+            dataClient.writeRawBytesAll(data, true); 
+            
+            BrokerClient<CcpEchoSvc> client = new BrokerClient<CcpEchoSvc>(session, CcpEchoSvc.class);
+            System.out.printf("Sending %d requests...\n", nrequests);
+            for(int i = 0; i < nrequests; i++)
+            {
+                ObjectFactory of = new ObjectFactory();
+                EchoData request = of.createEchoData();
+                request.setDataClientId(of.createEchoDataDataClientId(dataClientId));
+                client.sendRequest(request, i);
+            }
+            System.out.println("call endRequests() ...");
+            client.endRequests();       
+            
+            System.out.println("Retrieving responses...");
+            
+            for(BrokerResponse<EchoDataResponse> response : client.<EchoDataResponse>getResponses(EchoDataResponse.class))
+            {
+                try
+                {
+                    int reply = response.getResult().getEchoDataResult();
+                    System.out.printf("\tReceived response for request %s: %d%n", response.getUserData(), reply);
+                }
+                catch(Exception ex)
+                {
+                    nerrs++;
+                    System.out.printf("Error: process %s-th reuqest: %s%n", response.getUserData(), ex.toString());
+                }
+            }
+            System.out.printf("Done retrieving %d responses%n", nrequests);
+            client.close();
+            session.close();
+        }
+        catch (Throwable e)
+        {
+            nerrs++;
+            e.printStackTrace();
+        }       
+        return nerrs;
+    }
+
+    
     private static int RunResponseHandlerTest()
     {
         int nerrs = 0;
