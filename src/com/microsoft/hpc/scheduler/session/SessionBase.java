@@ -208,10 +208,11 @@ public class SessionBase
         else
             targetTimeout = Infinite;
 
-        if (!startInfo.getTransportScheme().contains(
-                TransportScheme.Http.getName())) {
-            throw new SessionException("Transport scheme not implemented: "
-                    + TransportScheme.Http.getName());
+        String transportScheme = startInfo.getTransportScheme().get(0);
+        if (transportScheme != TransportScheme.Http.getName() &&
+                transportScheme != TransportScheme.Custom.getName()) {
+            throw new IllegalArgumentException(
+                    SR.v("TransportSchemeNotSupport"));
         }
 
         if (NoServiceVersion.equals(startInfo.getServiceVersion())) {

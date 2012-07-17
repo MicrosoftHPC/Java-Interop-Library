@@ -241,21 +241,28 @@ public class BrokerClient<TContract extends Service>
 
         this.session = session;
 
-        String epr = session.getInfo().getBrokerEpr().getValue().getString()
-                .get(1);
-        client = new CxfBrokerClient<TContract>(session._username,
-                session._password, epr, service);
-
-        controllerClient = CreateControllerClient(session);
-
+        
         // Try to get the scheme from session info
         this.scheme = TransportScheme.valueOf((session.getInfo()
                 .getTransportScheme().get(0)));
 
+        controllerClient = CreateControllerClient(session);
+
         // Set the scheme
-        if (this.scheme != TransportScheme.Http) {
+        if (this.scheme != TransportScheme.Http &&
+                this.scheme != TransportScheme.Custom) {
             throw new UnsupportedOperationException();
         }
+        
+        String epr = "";
+        if(this.scheme == TransportScheme.Http) {
+            epr = session.getInfo().getBrokerEpr().getValue().getString().get(1);
+        } else if (this.scheme == TransportScheme.Custom) {
+            epr = session.getInfo().getBrokerEpr().getValue().getString().get(2);
+        }
+        
+        client = new CxfBrokerClient<TContract>(session._username,
+                session._password, epr, service);
 
         // If serviceOperationTimeout is specified, derive default timeouts for
         // EndRequest
@@ -273,8 +280,12 @@ public class BrokerClient<TContract extends Service>
     }
 
     private CxfBrokerControllerClient CreateControllerClient(SessionBase session) {
-        String controllerEpr = session.getInfo().getControllerEpr().getValue()
-                .getString().get(1);
+        String controllerEpr = "";
+        if(this.scheme == TransportScheme.Http) {
+            controllerEpr = session.getInfo().getControllerEpr().getValue().getString().get(1);
+        } else if (this.scheme == TransportScheme.Custom) {
+            controllerEpr = session.getInfo().getControllerEpr().getValue().getString().get(2);
+        }
 
         if (session.getInfo().isSecure()) {
             return new CxfBrokerControllerClient(session._username,

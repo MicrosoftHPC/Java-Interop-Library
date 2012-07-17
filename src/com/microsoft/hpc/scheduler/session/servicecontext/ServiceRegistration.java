@@ -64,7 +64,14 @@ Windows HPC Server.
 */
 package com.microsoft.hpc.scheduler.session.servicecontext;
 
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
+
 import org.w3c.dom.DOMException;
+import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -88,10 +95,13 @@ public class ServiceRegistration
     private final String serviceContractAttributeName = "contract";
     private final String serviceTypeAttributeName = "ServiceType";
     private final String includeFaultedExceptionAttributeName = "includeFaultedException";
+    private final String textEncodingPath = "//configuration/system.serviceModel/bindings/customBinding/binding[@name='Microsoft.Hpc.BackEndBinding']/textMessageEncoding[@messageVersion='Soap11WSAddressing10']";
     public Node serviceConfigNode = null;
     public String serviceAssemblyFullPath = null;
     public String traceLevel = "OFF";
     private boolean includeFaultedException;
+    private boolean enableWSAddressing = false;
+
 
     public boolean isIncludeFaultedException()
     {
@@ -122,6 +132,15 @@ public class ServiceRegistration
     public String getServiceContractName()
     {
         return serviceContractName;
+    }
+    
+    /**
+     * 
+     * @return enableWSAddressing
+     */
+    public Boolean getEnableWSAddressing()
+    {
+        return enableWSAddressing;
     }
     
     /**
@@ -242,6 +261,25 @@ public class ServiceRegistration
     public String getServiceAssemblyFullPath()
     {
         return serviceAssemblyFullPath;
+    }
+
+    /**
+     * setEnableWSAddressing
+     * @param doc
+     */
+    public void setEnableWSAddressing(Document doc)
+    {
+        XPath path = XPathFactory.newInstance().newXPath();
+        XPathExpression expr = null;
+        NodeList list = null;
+        try {
+            expr = path.compile(textEncodingPath);
+            list = (NodeList)expr.evaluate(doc, XPathConstants.NODESET);
+        } catch (XPathExpressionException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        enableWSAddressing = (list.getLength() == 1);
     }
 
 }

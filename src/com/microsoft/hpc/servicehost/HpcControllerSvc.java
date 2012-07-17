@@ -136,7 +136,6 @@ public class HpcControllerSvc implements IHpcController
                             cancelTaskGracePeriod };
                     method.invoke(ServiceContext.class.newInstance(),
                             argsObjects);
-
                     this.hostWrapper.isOnExitingCalled = true;
                 }
             }

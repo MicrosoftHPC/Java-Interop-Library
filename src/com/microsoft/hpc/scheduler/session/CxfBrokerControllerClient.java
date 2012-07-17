@@ -67,9 +67,8 @@ package com.microsoft.hpc.scheduler.session;
 
 import java.util.Collection;
 import java.util.Map;
-
 import javax.xml.namespace.QName;
-import javax.xml.ws.Service;
+import javax.xml.ws.soap.AddressingFeature;
 import javax.xml.ws.soap.SOAPBinding;
 
 import com.microsoft.hpc.BrokerClientStatus;
@@ -104,12 +103,13 @@ class CxfBrokerControllerClient extends CxfClientBase
 
         QName portName = new QName("http://hpc.microsoft.com",
                 "HpcBrokerControllerClientHttpsPort");
-        javax.xml.ws.Service soaService = Service
-                .create(new QName("http://hpc.microsoft.com/brokercontroller/", "BrokerController"));
+        
+        javax.xml.ws.Service soaService = javax.xml.ws.Service
+            .create(new QName("http://hpc.microsoft.com/brokercontroller/", "BrokerController"),
+                    new AddressingFeature(true));
         soaService.addPort(portName, SOAPBinding.SOAP11HTTP_BINDING, this.epr);
-        brokerController = soaService
-                .getPort(portName, IBrokerController.class);
 
+        brokerController = soaService.getPort(portName, IBrokerController.class);
         Initialize(username, password, brokerController);
     }
 

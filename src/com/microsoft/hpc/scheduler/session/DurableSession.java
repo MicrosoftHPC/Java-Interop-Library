@@ -129,10 +129,12 @@ public class DurableSession extends SessionBase
     public static DurableSession createSession(SessionStartInfo startInfo,
             int timeoutMilliseconds) throws SocketTimeoutException,
             SessionException {
-        if (!startInfo.getTransportScheme().contains(
-                TransportScheme.Http.getName()))
+        String transportScheme = startInfo.getTransportScheme().get(0);
+        if (transportScheme != TransportScheme.Http.getName() &&
+                transportScheme != TransportScheme.Custom.getName()) {
             throw new IllegalArgumentException(
                     SR.v("TransportSchemeNotSupport"));
+        }
         return (DurableSession) createSessionInternal(startInfo,
                 timeoutMilliseconds, true);
 

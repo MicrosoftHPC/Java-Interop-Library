@@ -112,7 +112,7 @@ public class Utility
             Element root = doc.getDocumentElement();
             serviceRegistration.setserviceConfigNode(root
                     .getElementsByTagName(serviceRegistration.serviceConfigurationsName));
-
+            serviceRegistration.setEnableWSAddressing(doc);
             serviceAssemblyFullPath = serviceRegistration.getServiceAssemblyFullPath();
             try
             {

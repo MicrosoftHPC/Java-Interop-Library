@@ -74,13 +74,22 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import javax.jws.WebService;
+import javax.xml.ws.WebServiceFeature;
+import javax.xml.ws.soap.AddressingFeature;
+
+import org.apache.cxf.Bus;
 import org.apache.cxf.endpoint.Server;
+import org.apache.cxf.feature.AbstractFeature;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.jaxws.JaxWsServerFactoryBean;
 import org.apache.cxf.transport.http_jetty.JettyHTTPDestination;
 import org.apache.cxf.transport.http_jetty.JettyHTTPServerEngine;
 import org.apache.cxf.transports.http.configuration.HTTPServerPolicy;
+import org.apache.cxf.ws.addressing.MAPAggregator;
+import org.apache.cxf.ws.addressing.WSAddressingFeature;
+import org.apache.cxf.ws.addressing.soap.MAPCodec;
+
 import com.microsoft.hpc.properties.ErrorCode;
 import com.microsoft.hpc.scheduler.session.Constant;
 import com.microsoft.hpc.scheduler.session.servicecontext.Environment;
@@ -482,12 +491,19 @@ public class HpcServiceHostWrapper
         try
         {
             host = new JaxWsServerFactoryBean();
+            if(serviceRegistration.getEnableWSAddressing() == true)
+            {
+                // add ws-addressing feature
+                host.getFeatures().add(new WSAddressingFeature());
+            }
+
             host.setAddress(listenUri);
             host.setServiceBean(userclass.newInstance());
-
+            
             // log the in/out bound message
             host.getInInterceptors().add(new LoggingInInterceptor());
             host.getOutInterceptors().add(new LoggingOutInterceptor());
+            
 
             // if users specify the WSDL location, try to find it from jar
             WebService annotation = userclass
@@ -524,8 +540,7 @@ public class HpcServiceHostWrapper
             }
             
             //enable the debug to stack trace in fault soap message
-            host.getBus().setProperty( "faultStackTraceEnabled", "true"); 
-            
+            host.getBus().setProperty( "faultStackTraceEnabled", "true");             
             TraceHelper.traceInformation(StringResource
                     .getResource("TryCreateHost"));
             Server server = host.create();
@@ -599,6 +614,7 @@ public class HpcServiceHostWrapper
         TraceHelper.traceInformation("Adding endpoint to controller.");
         controllerhost.setAddress(listenUri);
         controllerhost.setServiceBean(ControllerService);
+        
 
         // log the in/out bound message
         controllerhost.getInInterceptors().add(new LoggingInInterceptor());
@@ -627,11 +643,6 @@ public class HpcServiceHostWrapper
         ServiceContext.Logger.traceEvent(Level.ALL,
                 "[HpcServiceHost]: Java network prefix = " + jarNetworkPrefix);
         
-        if (jarNetworkPrefix.equals(Constant.EnterpriseNetwork))
-        {
-            jarNetworkPrefix = "";
-        }
-
         String hostnameWithPrefix = InetAddress.getLocalHost().getHostName();
         if (jarNetworkPrefix != null && !jarNetworkPrefix.isEmpty())
         {

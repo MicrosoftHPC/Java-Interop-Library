@@ -69,7 +69,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -91,6 +90,7 @@ import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.frontend.ClientProxy;
 import org.apache.cxf.jaxws.DispatchImpl;
 import org.apache.cxf.transport.http.HTTPConduit;
+
 
 /**
  * @author junsu
@@ -211,8 +211,7 @@ class CxfBrokerClient<TContract extends Service> extends CxfClientBase
         } else {
             Dispatch<SOAPMessage> dispatch = soaService.createDispatch(
                     portName, SOAPMessage.class, Service.Mode.MESSAGE,
-                    new AddressingFeature(false));
-
+                    new AddressingFeature(true));
             DispatchImpl<SOAPMessage> dispImpl = (DispatchImpl<SOAPMessage>) dispatch;
             trustAll((HTTPConduit) dispImpl.getClient().getConduit());
             addWSSHeaders(dispImpl.getClient().getEndpoint());
@@ -308,7 +307,7 @@ class CxfBrokerClient<TContract extends Service> extends CxfClientBase
                 Constant.HpcHeaderNS, Constant.UserDataHeaderName));
         headerElement.setValue(userData.toString());
     }
-
+    
     /**
      * Send the message by OneWay Operation
      * 

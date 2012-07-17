@@ -157,7 +157,7 @@ public final class ServiceContext
                                         "[HpcServiceHost]: Exception thrown when firing OnExiting event - %s",
                                         e.toString()));
             }
-        }
+        } 
     }
 
     /**

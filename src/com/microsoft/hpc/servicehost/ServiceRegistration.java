@@ -126,6 +126,8 @@ public class ServiceRegistration
         return serviceContractName;
     }
     
+
+    
     /**
      * @field user jar file name
      */

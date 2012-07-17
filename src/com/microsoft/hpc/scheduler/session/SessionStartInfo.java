@@ -398,6 +398,11 @@ public class SessionStartInfo
     public List<String> getTransportScheme() {
         return contract.getTransportScheme();
     }
+    
+    public void setTransportScheme(String transportScheme) {
+        contract.getTransportScheme().clear();
+        contract.getTransportScheme().add(transportScheme);
+    }
 
     /**
      * Gets the username
