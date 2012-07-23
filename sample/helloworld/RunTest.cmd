@@ -16,7 +16,7 @@ if [%1]==[src] (
     "%JAVA_HOME%\bin\javac" -Djava.endorsed.dirs="%CXF_HOME%\lib\endorsed" HelloWorld.java
 )
 if [%1]==[run] (
-    "%JAVA_HOME%\bin\java" HelloWorld -Djavax.net.ssl.trustStore="%JAVA_HOME%\jre\lib\security\cacerts" -Djavax.net.ssl.trustStorePassword=%Keystore_Password% -Djava.endorsed.dirs="%CXF_HOME%\lib\endorsed"
+    "%JAVA_HOME%\bin\java" -Djava.endorsed.dirs="%CXF_HOME%\lib\endorsed" -Djavax.net.ssl.trustStore="%JAVA_HOME%\jre\lib\security\cacerts" -Djavax.net.ssl.trustStorePassword=%Keystore_Password% HelloWorld
 )
 
 
