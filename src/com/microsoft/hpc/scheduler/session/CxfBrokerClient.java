@@ -69,6 +69,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -90,6 +92,11 @@ import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.frontend.ClientProxy;
 import org.apache.cxf.jaxws.DispatchImpl;
 import org.apache.cxf.transport.http.HTTPConduit;
+import org.apache.cxf.ws.addressing.AddressingBuilder;
+import org.apache.cxf.ws.addressing.AddressingProperties;
+import org.apache.cxf.ws.addressing.AttributedURIType;
+import org.apache.cxf.ws.addressing.ObjectFactory;
+import static org.apache.cxf.ws.addressing.JAXWSAConstants.CLIENT_ADDRESSING_PROPERTIES;
 
 
 /**
@@ -108,6 +115,7 @@ class CxfBrokerClient<TContract extends Service> extends CxfClientBase
     javax.xml.ws.Service soaService;
     String EPR;
     Client client;
+    ObjectFactory wsaObjectFactory;
 
     public CxfBrokerClient(String username, String password, String epr,
             Class<TContract> service) {
@@ -126,6 +134,7 @@ class CxfBrokerClient<TContract extends Service> extends CxfClientBase
         client = ClientProxy.getClient(serviceObj);
 
         this.dispatchMap = new HashMap<String, Dispatch<SOAPMessage>>();
+        wsaObjectFactory = new ObjectFactory(); 
     }
 
     private QName GetServiceName(Class<TContract> service) {
@@ -215,15 +224,24 @@ class CxfBrokerClient<TContract extends Service> extends CxfClientBase
             DispatchImpl<SOAPMessage> dispImpl = (DispatchImpl<SOAPMessage>) dispatch;
             trustAll((HTTPConduit) dispImpl.getClient().getConduit());
             addWSSHeaders(dispImpl.getClient().getEndpoint());
-
+           
+            /* Per CXF FAQ.  future calls to getRequestContext() will use a thread local 
+            request context. That allows the request context to be threadsafe. 
+            (Note: the response context is always thread local in CXF) */
+            dispatch.getRequestContext().put("thread.local.request.context", "true");
             dispatch.getRequestContext().put(
                     Dispatch.ENDPOINT_ADDRESS_PROPERTY, this.EPR);
             dispatch.getRequestContext().put(Dispatch.SOAPACTION_USE_PROPERTY,
                     true);
             dispatch.getRequestContext().put(Dispatch.SOAPACTION_URI_PROPERTY,
                     action);
+            /* Create message id
+               get Message Addressing Properties instance */
+            
+            AddressingBuilder builder = AddressingBuilder.getAddressingBuilder();
+            AddressingProperties maps = builder.newAddressingProperties();
+            dispatch.getRequestContext().put(CLIENT_ADDRESSING_PROPERTIES, maps);
             dispatchMap.put(action, dispatch);
-
             return dispatch;
         }
     }
@@ -244,13 +262,15 @@ class CxfBrokerClient<TContract extends Service> extends CxfClientBase
      * @return
      */
     private SOAPMessage createSOAPMessage(Dispatch<SOAPMessage> dispatch,
-            Object payload, String clientid, Object userData)
+            Object payload, String clientid, Object userData, UUID messageId)
             throws SessionException {
         try {
             // Create message factory
             MessageFactory mf = ((SOAPBinding) dispatch.getBinding())
                     .getMessageFactory();
             SOAPMessage msg = mf.createMessage();
+            // Add messageId as a SOAP header
+            generateMessageIdHeader(dispatch.getRequestContext(), messageId);
 
             // Add userData as a SOAP header
             generateUserDataHeader(userData, msg);
@@ -269,6 +289,22 @@ class CxfBrokerClient<TContract extends Service> extends CxfClientBase
         } catch (Exception e) {
             throw new SessionException(e);
         }
+    }
+    
+    /**
+     * Set SOAP header for messageId
+     * 
+     * @param requestContext
+     *              the requestContext of the dispatcher
+     * @param messageId
+     *              messageId of the message to send
+     * @return
+     */
+    private void generateMessageIdHeader(Map<String, Object> requestContext, UUID messageId) {
+        AddressingProperties maps = (AddressingProperties) requestContext.get(CLIENT_ADDRESSING_PROPERTIES);
+        AttributedURIType messageID = wsaObjectFactory.createAttributedURIType();
+        messageID.setValue("urn:uuid:" + messageId.toString());
+        maps.setMessageID(messageID);
     }
 
     /**
@@ -313,10 +349,11 @@ class CxfBrokerClient<TContract extends Service> extends CxfClientBase
      * 
      * @param payload
      * @param userData
+     * @param messageId
      * @throws SessionException
      */
     public void SendMessage(Object payload, String clientId, Object userData,
-            int timeout) throws SessionException {
+            int timeout, UUID messageId) throws SessionException {
         // find out the action name
         String className = payload.getClass().getName();
         if (!actionMap.containsKey(className)
@@ -326,17 +363,18 @@ class CxfBrokerClient<TContract extends Service> extends CxfClientBase
         }
 
         String Action = actionMap.get(className);
-        SendMessage(payload, clientId, userData, Action, timeout);
+        SendMessage(payload, clientId, userData, Action, timeout, messageId);
     }
 
     public void SendMessage(Object payload, String clientId, Object userData,
-            String action, int timeout) throws SessionException {
+            String action, int timeout, UUID messageId) throws SessionException {
         // find the Dispatcher
         Dispatch<SOAPMessage> dispatch = getSOAPDispatch(action);
+        
 
         // create the message based on payload and userData
         SOAPMessage msg;
-        msg = createSOAPMessage(dispatch, payload, clientId, userData);
+        msg = createSOAPMessage(dispatch, payload, clientId, userData, messageId);
 
         setClientTimeout(((DispatchImpl<SOAPMessage>) dispatch).getClient(),
                 timeout);

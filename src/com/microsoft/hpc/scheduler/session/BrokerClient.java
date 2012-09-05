@@ -61,6 +61,7 @@ package com.microsoft.hpc.scheduler.session;
 
 import java.net.SocketTimeoutException;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 import javax.xml.ws.Service;
 import javax.xml.ws.WebServiceException;
@@ -142,6 +143,13 @@ public class BrokerClient<TContract extends Service>
      * if this client is disposed
      */
     private boolean isDisposed = false;
+    
+    /**
+     * if the broker response handler is configured. 
+     * Only one response handler is allowed 
+     */
+    private Boolean isHandlerSet = false;
+    
 
     /**
      * Creates instances of the BrokerClient
@@ -308,8 +316,27 @@ public class BrokerClient<TContract extends Service>
      */
     public <TMessage> void sendRequest(TMessage request)
             throws SessionException, SocketTimeoutException {
-        sendRequest(request, "");
+        sendRequest(request, "", UUID.randomUUID());
     }
+    
+    /**
+     * Send typed message to broker
+     * 
+     * @param <TMessage>
+     *            Typed message type
+     * @param request
+     *            Typed message to send
+     * @param messageId
+     *            messageId of the message to send
+     * @throws SessionException
+     * @throws TimeoutException
+     * @see {@link HpcJava#createRequest(Class, Object...)}
+     */
+    public <TMessage> void sendRequest(TMessage request, UUID messageId)
+            throws SessionException, SocketTimeoutException {
+        sendRequest(request, "", messageId);
+    }
+
 
     /**
      * Send typed messages with user data to broker
@@ -327,7 +354,28 @@ public class BrokerClient<TContract extends Service>
      */
     public void sendRequest(Object request, Object userData)
             throws SessionException, SocketTimeoutException {
-        sendRequest(request, userData, defaultSendTimeout);
+        sendRequest(request, userData, defaultSendTimeout, UUID.randomUUID());
+    }
+    
+    /**
+     * Send typed messages with user data to broker
+     * 
+     * @param <TMessage>
+     *            Typed message type
+     * @param request
+     *            Typed message to send
+     * @param userData
+     *            User data (will be converted to String because of Java
+     *            limitations)
+     * @param messageId
+     *            messageId of the message to send
+     * @throws SessionException
+     * @throws TimeoutException
+     * @see {@link HpcJava#createRequest(Class, Object...)}
+     */
+    public void sendRequest(Object request, Object userData, UUID messageId)
+            throws SessionException, SocketTimeoutException {
+        sendRequest(request, userData, defaultSendTimeout, messageId);
     }
 
     /**
@@ -348,8 +396,32 @@ public class BrokerClient<TContract extends Service>
      */
     public void sendRequest(Object request, Object userData, int timeout)
             throws SessionException, SocketTimeoutException {
+        sendRequest(request, userData, timeout, UUID.randomUUID());
+    }
+
+    /**
+     * Send typed messages with user data to broker
+     * 
+     * @param <TMessage>
+     *            Typed message type
+     * @param request
+     *            Typed message to send
+     * @param userData
+     *            User data (will be converted to String because of Java
+     *            limitations)
+     * @param timeout
+     *            send timeout
+     * @param messageId
+     *            messageId of the message to send
+     * @throws SessionException
+     * @throws TimeoutException
+     * @see {@link HpcJava#createRequest(Class, Object...)}
+     */
+    public void sendRequest(Object request, Object userData, int timeout, UUID messageId)
+            throws SessionException, SocketTimeoutException {
         Utility.throwIfNull(request, "request");
         Utility.throwIfNull(userData, "userData");
+        Utility.throwIfNull(messageId, "messageId");
         if (timeout < 0) {
             throw new IllegalArgumentException(SR.v("InvalidTimeout"));
         }
@@ -361,7 +433,7 @@ public class BrokerClient<TContract extends Service>
         }
 
         try {
-            client.SendMessage(request, this.clientId, userData, timeout);
+            client.SendMessage(request, this.clientId, userData, timeout, messageId);
             sendCount.incrementAndGet();
             uncommitCount.incrementAndGet();
         } catch (WebServiceException we) {
@@ -391,9 +463,32 @@ public class BrokerClient<TContract extends Service>
      */
     public void sendRequest(Object request, Object userData, String action)
             throws SessionException, SocketTimeoutException {
-        sendRequest(request, userData, action, defaultSendTimeout);
+        sendRequest(request, userData, action, defaultSendTimeout, UUID.randomUUID());
     }
-
+    
+    /**
+     * Send typed messages with user data to broker
+     * 
+     * @param <TMessage>
+     *            Typed message type
+     * @param request
+     *            Typed message to send
+     * @param userData
+     *            User data (will be converted to String because of Java
+     *            limitations)
+     * @param action
+     *            Action of typed message if type is ambiguous
+     * @param messageId
+     *            messageId of message to send
+     * @throws SessionException
+     * @throws TimeoutException
+     * @see {@link HpcJava#createRequest(Class, Object...)}
+     */
+    public void sendRequest(Object request, Object userData, String action, UUID messageId)
+            throws SessionException, SocketTimeoutException {
+        sendRequest(request, userData, action, defaultSendTimeout, messageId);
+    }
+    
     /**
      * Send typed messages with user data to broker
      * 
@@ -414,9 +509,35 @@ public class BrokerClient<TContract extends Service>
      */
     public void sendRequest(Object request, Object userData, String action,
             int timeout) throws SessionException, SocketTimeoutException {
+        sendRequest(request, userData, action, timeout, UUID.randomUUID());
+    }
+    
+    /**
+     * Send typed messages with user data to broker
+     * 
+     * @param <TMessage>
+     *            Typed message type
+     * @param request
+     *            Typed message to send
+     * @param userData
+     *            User data (will be converted to String because of Java
+     *            limitations)
+     * @param action
+     *            Action of typed message if type is ambiguous
+     * @param timeout
+     *            send timeout
+     * @param messageId
+     *            messageId of message to send
+     * @throws SessionException
+     * @throws TimeoutException
+     * @see {@link HpcJava#createRequest(Class, Object...)}
+     */
+    public void sendRequest(Object request, Object userData, String action,
+            int timeout, UUID messageId) throws SessionException, SocketTimeoutException {
         Utility.throwIfNull(request, "request");
         Utility.throwIfNull(userData, "userData");
         Utility.throwIfNull(action, "action");
+        Utility.throwIfNull(messageId, "messageId");
         if (timeout < 0) {
             throw new IllegalArgumentException(SR.v("InvalidTimeout"));
         }
@@ -429,7 +550,7 @@ public class BrokerClient<TContract extends Service>
 
         try {
             client.SendMessage(request, this.clientId, userData, action,
-                    timeout);
+                    timeout, messageId);
             sendCount.incrementAndGet();
             uncommitCount.incrementAndGet();
         } catch (WebServiceException we) {
@@ -533,32 +654,7 @@ public class BrokerClient<TContract extends Service>
      */
     public <TMessage> void setResponseHandler(final Class<TMessage> message,
             final ResponseListener<TMessage> responselistener) {
-        Utility.throwIfNull(responselistener, "responselistener");
-        if (isDisposed) {
-            throw new IllegalStateException(SR.v("ClientAlreadyClosed"));
-        }
-
-        Runnable runnable = new Runnable() {
-            public void run() {
-                Iterable<BrokerResponse<TMessage>> responses;
-                try {
-                    responses = getResponses(message);
-                    for (BrokerResponse<TMessage> r : responses) {
-                        responselistener.responseReturned(r);
-                    }
-                    responselistener.endOfMessage();
-                } catch (SessionException e) {
-                    responselistener.raiseError(e);
-                } catch (RuntimeException e) {
-                    if (e.getCause() == null)
-                        responselistener.raiseError(e);
-                    else
-                        responselistener.raiseError((Exception)e.getCause());
-                }
-            }
-        };
-        Thread thread = new Thread(runnable);
-        thread.start();
+        setResponseHandler(message, responselistener, 0);
     }
 
     /**
@@ -599,8 +695,16 @@ public class BrokerClient<TContract extends Service>
                 }
             }
         };
-        Thread thread = new Thread(runnable);
-        thread.start();
+        synchronized (this.isHandlerSet) {
+            if (this.isHandlerSet == true) {
+                throw new UnsupportedOperationException(
+                        SR.v("OneResponseEnumerationPerBrokerClient"));
+            }
+
+            Thread thread = new Thread(runnable);
+            thread.start();
+            this.isHandlerSet = true;
+        }
     }
 
     /**
@@ -612,32 +716,7 @@ public class BrokerClient<TContract extends Service>
      */
     public void setResponseHandler(
             final ResponseListener<Object> responselistener) {
-        Utility.throwIfNull(responselistener, "responselistener");
-        if (isDisposed) {
-            throw new IllegalStateException(SR.v("ClientAlreadyClosed"));
-        }
-
-        Runnable runnable = new Runnable() {
-            public void run() {
-                Iterable<BrokerResponse<Object>> responses;
-                try {
-                    responses = getResponses();
-                    for (BrokerResponse<Object> r : responses) {
-                        responselistener.responseReturned(r);
-                    }
-                    responselistener.endOfMessage();
-                } catch (SessionException e) {
-                    responselistener.raiseError(e);
-                } catch (RuntimeException e) {
-                    if (e.getCause() == null)
-                        responselistener.raiseError(e);
-                    else
-                        responselistener.raiseError((Exception) e.getCause());
-                }
-            }
-        };
-        Thread thread = new Thread(runnable);
-        thread.start();
+        setResponseHandler(responselistener, 0);
     }
 
     /**
@@ -678,8 +757,16 @@ public class BrokerClient<TContract extends Service>
                 }
             }
         };
-        Thread thread = new Thread(runnable);
-        thread.start();
+        synchronized (this.isHandlerSet) {
+            if (this.isHandlerSet == true) {
+                throw new UnsupportedOperationException(
+                        SR.v("OneResponseEnumerationPerBrokerClient"));
+            }
+
+            Thread thread = new Thread(runnable);
+            thread.start();
+            this.isHandlerSet = true;
+        }
     }
 
     /**
