@@ -941,6 +941,16 @@ public final class ErrorCode
     // An unexpected exception occurred while validating the job.
     public static int Validation_UnexpectedExceptionWhenValidating = -2147219991;
     public static int Validation_Unknown = -2147219990;
+    //
+    // Summary:
+    // An unexpected exception occurred while calling ETW.
+    public static int ERROR_INVALIDFLAG         = -2147220001;
+    public static int ERROR_NULLMSG             = -2147220002;
+    public static int ERROR_INVALIDMESSAGEID    = -2147220003;
+    public static int ERROR_INVALIDDISPATCHID   = -2147220004;
+    public static int ERROR_DLLNOTEXIST         = -2147220005;
+    public static int ERROR_REGISTRATIONFAILED  = -2147220006;
+    public static int ERROR_WRITEEVENTFAILED    = -2147220007;
 
     // Summary:
     // Defines the category of errors into which the

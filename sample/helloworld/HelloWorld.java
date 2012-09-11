@@ -8,11 +8,11 @@
 //------------------------------------------------------------------------------
 
 import java.util.Random;
+import java.util.UUID;
 
 import org.tempuri.*;
 import javax.xml.soap.SOAPException;
 import javax.xml.ws.soap.SOAPFaultException;
-
 import com.microsoft.hpc.scheduler.session.*;
 
 public class HelloWorld
@@ -32,6 +32,7 @@ public class HelloWorld
                 nerrs += RunBasicTest();   
                 nerrs += RunCommonDataTest();
                 nerrs += RunResponseHandlerTest();
+                nerrs += RunSoaTracingTest();
             }
             catch(Exception e) {
                 nerrs++;
@@ -45,7 +46,6 @@ public class HelloWorld
     {
         System.out.println("Usage: HelloWorld /scheduler scheduler /username user /password pwd /nrequests N");
     }
-
 
     private static int ParseCmdLine(String [] args)
     {
@@ -76,11 +76,10 @@ public class HelloWorld
         return nerrs;
     }
 
-
     private static int RunBasicTest()
     {
         int nerrs = 0;
-        SessionStartInfo info = new SessionStartInfo(headnode, serviceName, username, password);    
+        SessionStartInfo info = new SessionStartInfo(headnode, serviceName, username, password);
         System.out.printf("Creating a session for %s...\n", serviceName);
         
         try
@@ -190,6 +189,7 @@ public class HelloWorld
     }
 
     
+    
     private static int RunResponseHandlerTest()
     {
         int nerrs = 0;
@@ -203,36 +203,36 @@ public class HelloWorld
                     
             BrokerClient<CcpEchoSvc> client = new BrokerClient<CcpEchoSvc>(session, CcpEchoSvc.class);
 
-	    client.setResponseHandler(EchoResponse.class,
-	    				new ResponseListener<EchoResponse>() {
-						int fetchedCount = 0;
+            client.setResponseHandler(EchoResponse.class,
+                    new ResponseListener<EchoResponse>() {
+                    int fetchedCount = 0;
 
-						@Override
-						public void endOfMessage() {
-							synchronized(session) {
-								session.notify();
-							}
-						}
+                    @Override
+                    public void endOfMessage() {
+                        synchronized(session) {
+                            session.notify();
+                        }
+                    }
 
-						@Override
-						public void raiseError(Exception e) {
-							e.printStackTrace();
-						}
+                    @Override
+                    public void raiseError(Exception e) {
+                        e.printStackTrace();
+                    }
 
-						@Override
-						public void responseReturned(BrokerResponse<EchoResponse> response) {
-							try {
-                    						String reply = response.getResult().getEchoResult().getValue();
-                    						System.out.printf("\tReceived response for request %s: %s%n", response.getUserData(), reply);
-							} catch(SOAPFaultException e) {
-								e.printStackTrace();
-							} catch(SOAPException e) {
-								e.printStackTrace();
-							}
+                    @Override
+                    public void responseReturned(BrokerResponse<EchoResponse> response) {
+                        try {
+                                        String reply = response.getResult().getEchoResult().getValue();
+                                        System.out.printf("\tReceived response for request %s: %s%n", response.getUserData(), reply);
+                        } catch(SOAPFaultException e) {
+                            e.printStackTrace();
+                        } catch(SOAPException e) {
+                            e.printStackTrace();
+                        }
 
-						}
-							
-					});
+                    }
+                        
+                });
 
             System.out.printf("Sending %d requests...\n", nrequests);
             for(int i = 0; i < nrequests; i++)
@@ -241,6 +241,8 @@ public class HelloWorld
                 Echo request = of.createEcho();
                 request.setInput(of.createEchoInput("hello world!"));
                 client.sendRequest(request, i);
+                
+         
             }
             System.out.println("call endRequests() ...");
             client.endRequests();       
@@ -259,6 +261,59 @@ public class HelloWorld
             e.printStackTrace();
         }       
         
+        return nerrs;
+    }
+    
+    private static int RunSoaTracingTest()
+    {
+        int nerrs = 0;
+        SessionStartInfo info = new SessionStartInfo(headnode, serviceName, username, password);
+        // Set transport scheme to Custom to enable SOA tracing 
+        info.setTransportScheme("Custom");
+        System.out.printf("Creating a session for %s...\n", serviceName);
+        
+        try
+        {
+            DurableSession session = DurableSession.createSession(info);
+            System.out.printf("new session id = %d\n", session.getId());
+            
+            BrokerClient<CcpEchoSvc> client = new BrokerClient<CcpEchoSvc>(session, CcpEchoSvc.class);
+            System.out.printf("Sending %d requests...\n", nrequests);
+            for(int i = 0; i < nrequests; i++)
+            {
+                ObjectFactory of = new ObjectFactory();
+                Echo request = of.createEcho();
+                request.setInput(of.createEchoInput("hello world!"));
+                // Specify message id in each request for message correlation
+                client.sendRequest(request, i, UUID.randomUUID());
+            }
+            System.out.println("call endRequests() ...");
+            client.endRequests();       
+            
+            System.out.println("Retrieving responses...");
+            
+            for(BrokerResponse<EchoResponse> response : client.<EchoResponse>getResponses(EchoResponse.class))
+            {
+                try
+                {
+                    String reply = response.getResult().getEchoResult().getValue();
+                    System.out.printf("\tReceived response for request %s: %s%n", response.getUserData(), reply);
+                }
+                catch(Exception ex)
+                {
+                    nerrs++;
+                    System.out.printf("Error: process %s-th reuqest: %s%n", response.getUserData(), ex.toString());
+                }
+            }
+            System.out.printf("Done retrieving %d responses%n", nrequests);
+            client.close();
+            session.close();
+        }
+        catch (Throwable e)
+        {
+            nerrs++;
+            e.printStackTrace();
+        }       
         return nerrs;
     }
    

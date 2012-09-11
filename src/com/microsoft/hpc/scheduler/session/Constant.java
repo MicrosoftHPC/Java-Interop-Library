@@ -296,6 +296,24 @@ public class Constant
      **/
     final public static String MessageHeaderPreemption = "preemption";
     
+    /**
+     * @field DispatchID LocalPart in Header
+     **/
+    final public static String DISPATCHIDLOCALPART = "HPCServer2008_Broker_DispatchIdNS";
+    
+    /**
+     * @field MessageID LocalPart in Header
+     **/
+    final public static String MESSAGEIDLOCALPART = "MessageID";
+ 
+    /**
+     * @field The 5 trace level used to call .dll when using etw
+     **/
+    final public static int TRACE_CRITICAL  = 5;
+    final public static int TRACE_ERROR     = 4;
+    final public static int TRACE_WARNING   = 3;
+    final public static int TRACE_INFO      = 2;
+    final public static int TRACE_VERBOSE   = 1;
  
     /**
      * @field ETW trace format

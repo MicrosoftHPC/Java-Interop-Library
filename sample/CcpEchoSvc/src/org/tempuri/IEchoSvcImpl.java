@@ -18,7 +18,7 @@ import org.w3c.dom.NodeList;
 
 import com.microsoft.hpc.scheduler.session.DataClient;
 import com.microsoft.hpc.scheduler.session.servicecontext.ServiceContext;
-
+import com.microsoft.hpc.scheduler.session.servicecontext.etw.*;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
@@ -135,6 +135,9 @@ public class IEchoSvcImpl implements IEchoSvc {
         ServiceContext.Logger
                 .traceEvent(Level.INFO, "Executing operation echo");
         ServiceContext.Logger.traceEvent(Level.ALL, input);
+        ServiceContext.Logger.traceEvent(Level.INFO, "Start to use ETW tracing...");
+        ETWTraceEvent etw =new ETWTraceEvent(wsContext);
+        etw.TraceInfo(input);
 
         String userData = getUserData();
         ServiceContext.Logger.traceEvent(Level.INFO, "UserData : " + userData);
