@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="http://hpc.microsoft.com/SoaDiagService/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" targetNamespace="http://hpc.microsoft.com/SoaDiagService/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://hpc.microsoft.com/SoaDiagService/Imports">
+      <xsd:import namespace="http://hpc.microsoft.com/SoaDiagService/" schemaLocation="hpc.microsoft.com.SoaDiagService.xsd" />
+      <xsd:import namespace="http://hpc.microsoft.com/session/" schemaLocation="hpc.microsoft.com.session.xsd" />
+      <xsd:import namespace="http://hpc.microsoft.com/" schemaLocation="hpc.microsoft.com.xsd" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" schemaLocation="schemas.microsoft.com.2003.10.Serialization.xsd" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" schemaLocation="schemas.microsoft.com.2003.10.Serialization.Arrays.xsd" />
+      <xsd:import namespace="http://hpc.microsoft.com" schemaLocation="hpc.microsoft.com1.xsd" />
+      <xsd:import namespace="http://schemas.microsoft.com/Message" schemaLocation="schemas.microsoft.com.Message.xsd" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ISoaDiagService_QuerySessionTrace_InputMessage">
+    <wsdl:part name="parameters" element="tns:QuerySessionTrace" />
+  </wsdl:message>
+  <wsdl:message name="ISoaDiagService_QuerySessionTrace_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QuerySessionTraceResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISoaDiagService_QuerySessionTrace_SessionFaultFault_FaultMessage">
+    <wsdl:part name="detail" xmlns:q1="http://hpc.microsoft.com/session/" element="q1:SessionFault" />
+  </wsdl:message>
+  <wsdl:message name="ISoaDiagService_QueryForRequest_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryForRequest" />
+  </wsdl:message>
+  <wsdl:message name="ISoaDiagService_QueryForRequest_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryForRequestResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISoaDiagService_QueryForRequest_SessionFaultFault_FaultMessage">
+    <wsdl:part name="detail" xmlns:q2="http://hpc.microsoft.com/session/" element="q2:SessionFault" />
+  </wsdl:message>
+  <wsdl:message name="ISoaDiagService_QueryUserTraceByRequest_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryUserTraceByRequest" />
+  </wsdl:message>
+  <wsdl:message name="ISoaDiagService_QueryUserTraceByRequest_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryUserTraceByRequestResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISoaDiagService_QueryUserTraceByRequest_SessionFaultFault_FaultMessage">
+    <wsdl:part name="detail" xmlns:q3="http://hpc.microsoft.com/session/" element="q3:SessionFault" />
+  </wsdl:message>
+  <wsdl:message name="ISoaDiagService_DumpTrace_InputMessage">
+    <wsdl:part name="parameters" element="tns:DumpTrace" />
+  </wsdl:message>
+  <wsdl:message name="ISoaDiagService_DumpTrace_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DumpTraceResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISoaDiagService_DumpTrace_SessionFaultFault_FaultMessage">
+    <wsdl:part name="detail" xmlns:q4="http://hpc.microsoft.com/session/" element="q4:SessionFault" />
+  </wsdl:message>
+  <wsdl:message name="ISoaDiagService_CleanupTrace_InputMessage">
+    <wsdl:part name="parameters" element="tns:CleanupTrace" />
+  </wsdl:message>
+  <wsdl:message name="ISoaDiagService_CleanupTrace_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CleanupTraceResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISoaDiagService_CleanupTrace_SessionFaultFault_FaultMessage">
+    <wsdl:part name="detail" xmlns:q5="http://hpc.microsoft.com/session/" element="q5:SessionFault" />
+  </wsdl:message>
+  <wsdl:portType name="ISoaDiagService">
+    <wsdl:operation name="QuerySessionTrace">
+      <wsdl:input wsaw:Action="http://hpc.microsoft.com/SoaDiagService/ISoaDiagService/QuerySessionTrace" message="tns:ISoaDiagService_QuerySessionTrace_InputMessage" />
+      <wsdl:output wsaw:Action="http://hpc.microsoft.com/SoaDiagService/ISoaDiagService/QuerySessionTraceResponse" message="tns:ISoaDiagService_QuerySessionTrace_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://hpc.microsoft.com/session/SessionFault" name="SessionFaultFault" message="tns:ISoaDiagService_QuerySessionTrace_SessionFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryForRequest">
+      <wsdl:input wsaw:Action="http://hpc.microsoft.com/SoaDiagService/ISoaDiagService/QueryForRequest" message="tns:ISoaDiagService_QueryForRequest_InputMessage" />
+      <wsdl:output wsaw:Action="http://hpc.microsoft.com/SoaDiagService/ISoaDiagService/QueryForRequestResponse" message="tns:ISoaDiagService_QueryForRequest_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://hpc.microsoft.com/session/SessionFault" name="SessionFaultFault" message="tns:ISoaDiagService_QueryForRequest_SessionFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryUserTraceByRequest">
+      <wsdl:input wsaw:Action="http://hpc.microsoft.com/SoaDiagService/ISoaDiagService/QueryUserTraceByRequest" message="tns:ISoaDiagService_QueryUserTraceByRequest_InputMessage" />
+      <wsdl:output wsaw:Action="http://hpc.microsoft.com/SoaDiagService/ISoaDiagService/QueryUserTraceByRequestResponse" message="tns:ISoaDiagService_QueryUserTraceByRequest_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://hpc.microsoft.com/session/SessionFault" name="SessionFaultFault" message="tns:ISoaDiagService_QueryUserTraceByRequest_SessionFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DumpTrace">
+      <wsdl:input wsaw:Action="http://hpc.microsoft.com/SoaDiagService/ISoaDiagService/DumpTrace" message="tns:ISoaDiagService_DumpTrace_InputMessage" />
+      <wsdl:output wsaw:Action="http://hpc.microsoft.com/SoaDiagService/ISoaDiagService/DumpTraceResponse" message="tns:ISoaDiagService_DumpTrace_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://hpc.microsoft.com/session/SessionFault" name="SessionFaultFault" message="tns:ISoaDiagService_DumpTrace_SessionFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CleanupTrace">
+      <wsdl:input wsaw:Action="http://hpc.microsoft.com/SoaDiagService/ISoaDiagService/CleanupTrace" message="tns:ISoaDiagService_CleanupTrace_InputMessage" />
+      <wsdl:output wsaw:Action="http://hpc.microsoft.com/SoaDiagService/ISoaDiagService/CleanupTraceResponse" message="tns:ISoaDiagService_CleanupTrace_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://hpc.microsoft.com/session/SessionFault" name="SessionFaultFault" message="tns:ISoaDiagService_CleanupTrace_SessionFaultFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DefaultBinding_ISoaDiagService" type="tns:ISoaDiagService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="QuerySessionTrace">
+      <soap:operation soapAction="http://hpc.microsoft.com/SoaDiagService/ISoaDiagService/QuerySessionTrace" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="SessionFaultFault">
+        <soap:fault name="SessionFaultFault" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="QueryForRequest">
+      <soap:operation soapAction="http://hpc.microsoft.com/SoaDiagService/ISoaDiagService/QueryForRequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="SessionFaultFault">
+        <soap:fault name="SessionFaultFault" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="QueryUserTraceByRequest">
+      <soap:operation soapAction="http://hpc.microsoft.com/SoaDiagService/ISoaDiagService/QueryUserTraceByRequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="SessionFaultFault">
+        <soap:fault name="SessionFaultFault" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="DumpTrace">
+      <soap:operation soapAction="http://hpc.microsoft.com/SoaDiagService/ISoaDiagService/DumpTrace" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="SessionFaultFault">
+        <soap:fault name="SessionFaultFault" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="CleanupTrace">
+      <soap:operation soapAction="http://hpc.microsoft.com/SoaDiagService/ISoaDiagService/CleanupTrace" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="SessionFaultFault">
+        <soap:fault name="SessionFaultFault" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SoaDiagService">
+      <wsdl:port name="DefaultBinding_ISoaDiagService" binding="tns:DefaultBinding_ISoaDiagService">
+          <soap:address location="https://localhost/Broker" />
+      </wsdl:port>
+  </wsdl:service>
+
+</wsdl:definitions>

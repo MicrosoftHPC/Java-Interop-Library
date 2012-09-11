@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://hpc.microsoft.com/SoaDiagService/" elementFormDefault="qualified" targetNamespace="http://hpc.microsoft.com/SoaDiagService/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://hpc.microsoft.com" />
+  <xs:import namespace="http://schemas.microsoft.com/Message" />
+  <xs:element name="QuerySessionTrace">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sessionId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="QuerySessionTraceResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="QuerySessionTraceResult" nillable="true" xmlns:q1="http://hpc.microsoft.com" type="q1:ArrayOfTraceEventItem" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="QueryForRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sessionId" type="xs:int" />
+        <xs:element minOccurs="0" name="state" xmlns:q2="http://hpc.microsoft.com" type="q2:RequestState" />
+        <xs:element minOccurs="0" name="token" xmlns:q3="http://hpc.microsoft.com" type="q3:RequestContinuationToken" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="QueryForRequestResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="QueryForRequestResult" nillable="true" xmlns:q4="http://hpc.microsoft.com" type="q4:ArrayOfRequestData" />
+        <xs:element minOccurs="0" name="token" xmlns:q5="http://hpc.microsoft.com" type="q5:RequestContinuationToken" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="QueryUserTraceByRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sessionId" type="xs:int" />
+        <xs:element minOccurs="0" name="request" nillable="true" xmlns:q6="http://hpc.microsoft.com" type="q6:RequestData" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="QueryUserTraceByRequestResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="request" nillable="true" xmlns:q7="http://hpc.microsoft.com" type="q7:RequestData" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DumpTrace">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sessionId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DumpTraceResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="DumpTraceResult" xmlns:q8="http://schemas.microsoft.com/Message" type="q8:StreamBody" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CleanupTrace">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sessionId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CleanupTraceResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
