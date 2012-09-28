@@ -33,18 +33,18 @@ public class ObjectFactory {
     private final static QName _StatisticInfo_QNAME = new QName("http://schemas.datacontract.org/2004/07/services", "StatisticInfo");
     private final static QName _ClassStr_QNAME = new QName("http://schemas.datacontract.org/2004/07/services", "ClassStr");
     private final static QName _Sub_QNAME = new QName("http://schemas.datacontract.org/2004/07/services", "Sub");
-    private final static QName _StatisticInfoInstanceId_QNAME = new QName("http://schemas.datacontract.org/2004/07/services", "instanceId");
-    private final static QName _StatisticInfoResponseData_QNAME = new QName("http://schemas.datacontract.org/2004/07/services", "responseData");
-    private final static QName _ClassObjType_QNAME = new QName("http://schemas.datacontract.org/2004/07/services", "type");
-    private final static QName _ClassObjO_QNAME = new QName("http://schemas.datacontract.org/2004/07/services", "o");
     private final static QName _ComputerInfoRunAsUser_QNAME = new QName("http://schemas.datacontract.org/2004/07/services", "runAsUser");
     private final static QName _ComputerInfoEnvs_QNAME = new QName("http://schemas.datacontract.org/2004/07/services", "envs");
     private final static QName _ComputerInfoScheduler_QNAME = new QName("http://schemas.datacontract.org/2004/07/services", "scheduler");
     private final static QName _ComputerInfoName_QNAME = new QName("http://schemas.datacontract.org/2004/07/services", "Name");
     private final static QName _ComputerInfoSub_QNAME = new QName("http://schemas.datacontract.org/2004/07/services", "sub");
-    private final static QName _ClassStrStr_QNAME = new QName("http://schemas.datacontract.org/2004/07/services", "str");
-    private final static QName _ClassFooS_QNAME = new QName("http://schemas.datacontract.org/2004/07/services", "s");
     private final static QName _SubSubS_QNAME = new QName("http://schemas.datacontract.org/2004/07/services", "sub_s");
+    private final static QName _ClassObjType_QNAME = new QName("http://schemas.datacontract.org/2004/07/services", "type");
+    private final static QName _ClassObjO_QNAME = new QName("http://schemas.datacontract.org/2004/07/services", "o");
+    private final static QName _StatisticInfoInstanceId_QNAME = new QName("http://schemas.datacontract.org/2004/07/services", "instanceId");
+    private final static QName _StatisticInfoResponseData_QNAME = new QName("http://schemas.datacontract.org/2004/07/services", "responseData");
+    private final static QName _TestStructS_QNAME = new QName("http://schemas.datacontract.org/2004/07/services", "s");
+    private final static QName _ClassStrStr_QNAME = new QName("http://schemas.datacontract.org/2004/07/services", "str");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.datacontract.schemas._2004._07.services
@@ -185,42 +185,6 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/services", name = "instanceId", scope = StatisticInfo.class)
-    public JAXBElement<String> createStatisticInfoInstanceId(String value) {
-        return new JAXBElement<String>(_StatisticInfoInstanceId_QNAME, String.class, StatisticInfo.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link byte[]}{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/services", name = "responseData", scope = StatisticInfo.class)
-    public JAXBElement<byte[]> createStatisticInfoResponseData(byte[] value) {
-        return new JAXBElement<byte[]>(_StatisticInfoResponseData_QNAME, byte[].class, StatisticInfo.class, ((byte[]) value));
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/services", name = "type", scope = ClassObj.class)
-    public JAXBElement<String> createClassObjType(String value) {
-        return new JAXBElement<String>(_ClassObjType_QNAME, String.class, ClassObj.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Object }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/services", name = "o", scope = ClassObj.class)
-    public JAXBElement<Object> createClassObjO(Object value) {
-        return new JAXBElement<Object>(_ClassObjO_QNAME, Object.class, ClassObj.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
     @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/services", name = "runAsUser", scope = ComputerInfo.class)
     public JAXBElement<String> createComputerInfoRunAsUser(String value) {
         return new JAXBElement<String>(_ComputerInfoRunAsUser_QNAME, String.class, ComputerInfo.class, value);
@@ -266,6 +230,60 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/services", name = "sub_s", scope = Sub.class)
+    public JAXBElement<String> createSubSubS(String value) {
+        return new JAXBElement<String>(_SubSubS_QNAME, String.class, Sub.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/services", name = "type", scope = ClassObj.class)
+    public JAXBElement<String> createClassObjType(String value) {
+        return new JAXBElement<String>(_ClassObjType_QNAME, String.class, ClassObj.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Object }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/services", name = "o", scope = ClassObj.class)
+    public JAXBElement<Object> createClassObjO(Object value) {
+        return new JAXBElement<Object>(_ClassObjO_QNAME, Object.class, ClassObj.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/services", name = "instanceId", scope = StatisticInfo.class)
+    public JAXBElement<String> createStatisticInfoInstanceId(String value) {
+        return new JAXBElement<String>(_StatisticInfoInstanceId_QNAME, String.class, StatisticInfo.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link byte[]}{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/services", name = "responseData", scope = StatisticInfo.class)
+    public JAXBElement<byte[]> createStatisticInfoResponseData(byte[] value) {
+        return new JAXBElement<byte[]>(_StatisticInfoResponseData_QNAME, byte[].class, StatisticInfo.class, ((byte[]) value));
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/services", name = "s", scope = TestStruct.class)
+    public JAXBElement<String> createTestStructS(String value) {
+        return new JAXBElement<String>(_TestStructS_QNAME, String.class, TestStruct.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
     @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/services", name = "str", scope = ClassStr.class)
     public JAXBElement<String> createClassStrStr(String value) {
         return new JAXBElement<String>(_ClassStrStr_QNAME, String.class, ClassStr.class, value);
@@ -277,25 +295,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/services", name = "s", scope = ClassFoo.class)
     public JAXBElement<String> createClassFooS(String value) {
-        return new JAXBElement<String>(_ClassFooS_QNAME, String.class, ClassFoo.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/services", name = "sub_s", scope = Sub.class)
-    public JAXBElement<String> createSubSubS(String value) {
-        return new JAXBElement<String>(_SubSubS_QNAME, String.class, Sub.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/services", name = "s", scope = TestStruct.class)
-    public JAXBElement<String> createTestStructS(String value) {
-        return new JAXBElement<String>(_ClassFooS_QNAME, String.class, TestStruct.class, value);
+        return new JAXBElement<String>(_TestStructS_QNAME, String.class, ClassFoo.class, value);
     }
 
 }

@@ -5,7 +5,8 @@
   <xs:complexType name="ComputerInfo">
     <xs:sequence>
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="called" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="callIn" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="callOut" type="xs:dateTime" />
       <xs:element minOccurs="0" name="envs" nillable="true" xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" type="q1:ArrayOfKeyValueOfstringstring" />
       <xs:element minOccurs="0" name="jobID" type="xs:int" />
       <xs:element minOccurs="0" name="onExitCalled" type="xs:boolean" />

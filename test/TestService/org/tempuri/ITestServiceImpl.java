@@ -19,6 +19,7 @@ import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.security.MessageDigest;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -27,10 +28,21 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.UUID;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.Duration;
+import javax.annotation.Resource;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.XMLGregorianCalendar;
+import javax.xml.namespace.QName;
+import javax.xml.ws.WebServiceContext;
+import javax.xml.ws.handler.MessageContext;
 
+import org.apache.cxf.headers.Header;
+import org.apache.cxf.helpers.CastUtils;
+import org.apache.cxf.jaxws.context.WrappedMessageContext;
+import org.apache.cxf.message.Message;
 import org.datacontract.schemas._2004._07.services.ClassObj;
 import org.datacontract.schemas._2004._07.services.ComputerInfo;
 import org.datacontract.schemas._2004._07.services.StatisticInfo;
@@ -40,14 +52,20 @@ import org.datacontract.schemas._2004._07.system.ArgumentException;
 import org.datacontract.schemas._2004._07.system.ArgumentNullException;
 import org.datacontract.schemas._2004._07.system.DivideByZeroException;
 import org.datacontract.schemas._2004._07.system.OutOfMemoryException;
+import org.w3c.dom.Element;
 
+import com.microsoft.hpc.scheduler.session.Constant;
 import com.microsoft.hpc.scheduler.session.DataClient;
+import com.microsoft.hpc.scheduler.session.servicecontext.Environment;
 import com.microsoft.hpc.scheduler.session.servicecontext.ServiceContext;
 import com.microsoft.hpc.scheduler.session.servicecontext.ExitEventListener;
 import com.microsoft.hpc.scheduler.session.servicecontext.SOAEventArg;
 import com.microsoft.hpc.scheduler.session.servicecontext.Sender;
+import com.microsoft.hpc.scheduler.session.servicecontext.etw.ETWTraceEvent;
+import com.microsoft.hpc.scheduler.session.servicecontext.JavaTraceLevelConverterEnum;
 
-import com.microsoft.hpc.aitestsvclib.session.RetryOperationError;
+
+import com.microsoft.hpc.session.RetryOperationError;
 import com.microsoft.schemas._2003._10.serialization.arrays.ArrayOfKeyValueOfstringstring.KeyValueOfstringstring;
 
 /**
@@ -64,6 +82,8 @@ import com.microsoft.schemas._2003._10.serialization.arrays.ArrayOfKeyValueOfstr
         endpointInterface = "org.tempuri.ITestService")
 public class ITestServiceImpl implements ITestService
 {
+    @Resource
+    WebServiceContext wsContext;
 
     private static final Logger                                              LOG                           = Logger.getLogger(ITestServiceImpl.class
                                                                                                                    .getName());
@@ -283,7 +303,7 @@ public class ITestServiceImpl implements ITestService
             info.setJobID(jobid);
             info.setTaskID(taskid);
             info.setScheduler(svcObjFact.createComputerInfoScheduler(scheduler));
-            info.setCalled(Utility.getXMLCurrentTime());
+            info.setCallIn(Utility.getXMLCurrentTime());
 
             info.setTs(ts);
             org.datacontract.schemas._2004._07.services.ObjectFactory fact = new org.datacontract.schemas._2004._07.services.ObjectFactory();
@@ -331,7 +351,7 @@ public class ITestServiceImpl implements ITestService
             info.setJobID(jobid);
             info.setTaskID(taskid);
             info.setScheduler(svcObjFact.createComputerInfoScheduler(scheduler));
-            info.setCalled(Utility.getXMLCurrentTime());
+            info.setCallIn(Utility.getXMLCurrentTime());
 
             info.setTs(s);
             return info;
@@ -392,61 +412,125 @@ public class ITestServiceImpl implements ITestService
         }
     }
 
-    // In the Java version of AITestServiceLib, trace() takes a string of format
-    // "LEVEL:MSG"
-    // It records the trace message with the specified level, and then returns
-    // the expected trace file path.
-    // The path is later used by client to pull the trace file.
-    public java.lang.String trace(java.lang.String msg)
-    {
-        ServiceContext.Logger.traceEvent(Level.ALL, "Executing operation trace");
-        try
-        {
-            String level = msg.substring(0, msg.indexOf(':'));
-            msg = msg.substring(msg.indexOf(':') + 1);
-
-            if (level.equals("ALL"))
-                ServiceContext.Logger.traceEvent(Level.ALL, msg);
-            else if (level.equals("CONFIG"))
-                ServiceContext.Logger.traceEvent(Level.CONFIG, msg);
-            else if (level.equals("FINE"))
-                ServiceContext.Logger.traceEvent(Level.FINE, msg);
-            else if (level.equals("FINER"))
-                ServiceContext.Logger.traceEvent(Level.FINER, msg);
-            else if (level.equals("FINEST"))
-                ServiceContext.Logger.traceEvent(Level.FINEST, msg);
-            else if (level.equals("INFO"))
-                ServiceContext.Logger.traceEvent(Level.INFO, msg);
-            else if (level.equals("OFF"))
-                ServiceContext.Logger.traceEvent(Level.OFF, msg);
-            else if (level.equals("SEVERE"))
-                ServiceContext.Logger.traceEvent(Level.SEVERE, msg);
-            else if (level.equals("WARNING"))
-                ServiceContext.Logger.traceEvent(Level.WARNING, msg);
-            else
-                return "Fail";
-            String machineName;
-            try
-            {
-                machineName = InetAddress.getLocalHost().getHostName();
-            }
-            catch (UnknownHostException e)
-            {
-                machineName = "";
-            }
-            String fileName = String.format("%d_%s.%s_trace.svclog", jobid,
-                    System.getenv(EnvVarNames.CCP_TASKID),
-                    System.getenv(EnvVarNames.CCP_TASKINSTANCEID));
-            String tracePath = String.format("%sSoaTrace\\", System.getenv("CCP_DATA"));
-            tracePath = tracePath.replace(':', '$');
-            return String.format("\\\\%s\\%s%s", machineName, tracePath, fileName);
+    /* (non-Javadoc)
+     * @see org.tempuri.ITestService#trace(java.lang.Integer  refID ,)com.microsoft.schemas._2003._10.serialization.arrays.ArrayOfstring  traceMsgs ,)javax.xml.datatype.Duration  sleepBeforeTrace ,)javax.xml.datatype.Duration  sleepAfterTrace ,)java.lang.Integer  testActionId )*
+     */
+    public org.datacontract.schemas._2004._07.services.ComputerInfo trace(java.lang.Integer refID,com.microsoft.schemas._2003._10.serialization.arrays.ArrayOfstring traceMsgs,javax.xml.datatype.Duration sleepBeforeTrace,javax.xml.datatype.Duration sleepAfterTrace,java.lang.Integer testActionId) throws ITestServiceTraceRetryOperationErrorFaultFaultMessage , ITestServiceTraceOutOfMemoryExceptionFaultFaultMessage    { 
+        LOG.info("Executing operation trace");
+        ETWTraceEvent etw = new ETWTraceEvent(wsContext);
+        etw.TraceEvent(JavaTraceLevelConverterEnum.Verbose, refID, "[HpcServiceHost]: Request is received.");
+        Date callIn = new Date();
+        
+        etw.TraceEvent(JavaTraceLevelConverterEnum.Verbose, refID, "CallIn:" + callIn.toString());
+        ComputerInfo info = buildComputerInfo(refID);
+        
+        try {
+            info.setCallIn(Utility.convertXMLGregorianCalendar(callIn));
+        } catch (DatatypeConfigurationException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
-        catch (java.lang.Exception ex)
-        {
-            ex.printStackTrace();
-            throw new RuntimeException(ex);
+        
+        if(TracingTestActionId.fromInteger(testActionId) == TracingTestActionId.TraceFaultException) {
+            etw.TraceEvent(JavaTraceLevelConverterEnum.Error, refID, "ThrowFaultException");
+            etw.TraceEvent(JavaTraceLevelConverterEnum.Verbose, refID, "[HpcServiceHost]: Response is sent back. IsFault = True");
+            OutOfMemoryException err = new OutOfMemoryException();
+            throw new ITestServiceTraceOutOfMemoryExceptionFaultFaultMessage("Testing fault.", err);
+            
+        } else if(TracingTestActionId.fromInteger(testActionId) == TracingTestActionId.RetryOperationError) {
+            etw.TraceEvent(JavaTraceLevelConverterEnum.Error, refID, "ThrowRetryOperationError");
+            etw.TraceEvent(JavaTraceLevelConverterEnum.Verbose, refID, "[HpcServiceHost]: Response is sent back. IsFault = True");
+            RetryOperationError err = new RetryOperationError();
+            throw new ITestServiceTraceRetryOperationErrorFaultFaultMessage("Testting RetryOperationError.", err);
+        } else if(TracingTestActionId.fromInteger(testActionId) == TracingTestActionId.TraceProcessExit) {
+            etw.TraceEvent(JavaTraceLevelConverterEnum.Error, refID, "ProcessExit");
+            etw.Flush();
+            Utility.sleep(20 * 1000);
+            Runtime.getRuntime().exit(refID);
+//            System.exit(refID);
+        } else if(TracingTestActionId.fromInteger(testActionId) == TracingTestActionId.NoUserTrace) {
+            try {
+                info.setCallOut(Utility.convertXMLGregorianCalendar(new Date()));
+                etw.TraceEvent(JavaTraceLevelConverterEnum.Verbose, refID, "CallOut:" + info.getCallOut().toString());
+                return info;
+            } catch (DatatypeConfigurationException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
+        try {
+            Thread.sleep(sleepBeforeTrace.getTimeInMillis(new Date()));
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        int count = 1;
+        if(TracingTestActionId.fromInteger(testActionId) == TracingTestActionId.TraceLargeAmount) {
+            count = 10000 / traceMsgs.getString().size();
+        }
+        for(int i = 0; i < count; i++) {
+            for(String traceMsg : traceMsgs.getString()) {
+                String[] splitters = traceMsg.split("\\|", 5);
+                int iTracingType = Integer.parseInt(splitters[0]);
+                int iEventType = Integer.parseInt(splitters[1]);
+                int eventId = Integer.parseInt(splitters[2]);
+                int sleepTime = Integer.parseInt(splitters[3]);
+                String msg = splitters[4];
+                TracingType tracingType = TracingType.fromInteger(iTracingType);
+                JavaTraceLevelConverterEnum eventType = JavaTraceLevelConverterEnum.convertFromInteger(iEventType);
+                if(tracingType == TracingType.TraceEvent) {
+                    etw.TraceEvent(eventType, eventId, msg);
+                    if(TracingTestActionId.fromInteger(testActionId) == TracingTestActionId.TraceRequestProcessing) {
+                        etw.Flush();
+                    }
+                } else if(tracingType == TracingType.TraceInformation) {
+                    etw.TraceInformation(msg);
+                    if(TracingTestActionId.fromInteger(testActionId) == TracingTestActionId.TraceRequestProcessing) {
+                        etw.Flush();
+                    }
+                } else if(tracingType == TracingType.TraceData) {
+                    if(TracingTestActionId.fromInteger(testActionId) == TracingTestActionId.TraceBigSize) {
+                        StringBuffer data = new StringBuffer();
+                        for (int j = 0; j < 63 * 512; j++) {
+                            data.append('0');
+                        }
+                        etw.TraceData(eventType, eventId, data);
+                        if(TracingTestActionId.fromInteger(testActionId) == TracingTestActionId.TraceRequestProcessing) {
+                            etw.Flush();
+                        }
+                        for (int j = 0; j < 2 * 512; j++) {
+                            data.append('1');
+                        }
+                        etw.TraceData(eventType, eventId, data);
+                        if(TracingTestActionId.fromInteger(testActionId) == TracingTestActionId.TraceRequestProcessing) {
+                            etw.Flush();
+                        }
+                    } else {
+                        TraceDataObj data = new TraceDataObj(msg);
+                        etw.TraceData(eventType, eventId, data);
+                        if(TracingTestActionId.fromInteger(testActionId) == TracingTestActionId.TraceRequestProcessing) {
+                            etw.Flush();
+                        }
+                    }
+                } else if(tracingType == TracingType.TraceTransfer) {
+                    etw.TraceTransfer(eventId, msg, UUID.randomUUID());
+                }
+                Utility.sleep(sleepTime);
+            }
+            
+        }
+        Utility.sleep(sleepAfterTrace.getTimeInMillis(new Date()));
+        try {
+            info.setCallOut(Utility.convertXMLGregorianCalendar(new Date()));
+        } catch (DatatypeConfigurationException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        etw.TraceEvent(JavaTraceLevelConverterEnum.Verbose, refID, "CallOut:" + info.getCallOut().toString());
+        etw.TraceEvent(JavaTraceLevelConverterEnum.Verbose, refID, "[HpcServiceHost]: Response is sent back. IsFault = False");
+        return info;
     }
+
 
     /*
      * (non-Javadoc)
@@ -1086,7 +1170,7 @@ public class ITestServiceImpl implements ITestService
 
         try
         {
-            info.setCalled(Utility.getXMLCurrentTime());
+            info.setCallIn(Utility.getXMLCurrentTime());
         }
         catch (DatatypeConfigurationException e1)
         {
@@ -1102,8 +1186,7 @@ public class ITestServiceImpl implements ITestService
         info.setOnExitCalled(false);
 
         Map<String, String> envMap = System.getenv();
-        List<KeyValueOfstringstring> envList = info.getEnvs().getValue()
-                .getKeyValueOfstringstring();
+        List<KeyValueOfstringstring> envList = new ArrayList<KeyValueOfstringstring>();
         for (String envName : envMap.keySet())
         {
             KeyValueOfstringstring entry = new KeyValueOfstringstring();
@@ -1151,11 +1234,6 @@ public class ITestServiceImpl implements ITestService
         System.out.format("Called %d%n", refID);
 
         return info;
-
-        // throw new
-        // ITestServiceEchoAuthenticationFailureFaultFaultMessage("ITestService_Echo_AuthenticationFailureFault_FaultMessage...");
-        // throw new
-        // ITestServiceEchoRetryOperationErrorFaultFaultMessage("ITestService_Echo_RetryOperationErrorFault_FaultMessage...");
     }
 
     /*
@@ -1369,4 +1447,56 @@ public class ITestServiceImpl implements ITestService
         // TODO Auto-generated method stub
         return null;
     }
+    
+    private ComputerInfo buildComputerInfo(int refID)
+    {
+        TestStruct ts = new TestStruct();
+        ts.setD((double) 2);
+        ts.setF((float)3);
+        ts.setI64((long) 4);
+        ts.setI321(1);
+        ts.setI322(2);
+        ts.setS(svcObjFact.createTestStructS(""));
+        
+        ComputerInfo info = new ComputerInfo();
+        info.setRefID(refID);
+        String machineName;
+        try
+        {
+            machineName = InetAddress.getLocalHost().getHostName();
+        }
+        catch (UnknownHostException e)
+        {
+            machineName = "";
+        }
+        info.setName(svcObjFact.createComputerInfoName(machineName));
+        info.setJobID(jobid);
+        info.setTaskID(taskid);
+        info.setScheduler(svcObjFact.createComputerInfoScheduler(scheduler));
+
+        try
+        {
+            info.setCallIn(Utility.getXMLCurrentTime());
+        }
+        catch (DatatypeConfigurationException e1)
+        {
+            e1.printStackTrace();
+            System.exit(1);
+        }
+        info.setTs(ts);
+        return info;
+    }
+
+    
+    private class TraceDataObj {
+        private String s;
+        public TraceDataObj(String value) {
+            s = value;
+        }
+        
+        public String toString() {
+            return s;
+        }
+    }
+
 }

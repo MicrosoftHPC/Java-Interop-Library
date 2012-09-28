@@ -61,6 +61,7 @@ import java.util.UUID;
 import com.microsoft.hpc.properties.ErrorCode;
 import com.microsoft.hpc.scheduler.session.Constant;
 import com.microsoft.hpc.scheduler.session.servicecontext.JavaTraceLevelConverterEnum;
+import com.microsoft.hpc.scheduler.session.servicecontext.ServiceContext;
 
 /**
  * @author t-hengz
@@ -102,6 +103,10 @@ public class UserEvent {
 		//check if .dll exist
 		if(!dllexist)
 			return ErrorCode.ERROR_DLLNOTEXIST;
+		// filter by trace level
+		if(ServiceContext.getSoaDiagTraceLevel().ordinal() < level.ordinal()) {
+		    return 0;
+		}
 		
 		//check input
 		if (msg==null)

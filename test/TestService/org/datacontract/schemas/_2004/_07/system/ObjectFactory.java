@@ -44,6 +44,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Exception }
+     * 
+     */
+    public Exception createException() {
+        return new Exception();
+    }
+
+    /**
      * Create an instance of {@link ArgumentException }
      * 
      */
@@ -57,14 +65,6 @@ public class ObjectFactory {
      */
     public SystemException createSystemException() {
         return new SystemException();
-    }
-
-    /**
-     * Create an instance of {@link Exception }
-     * 
-     */
-    public Exception createException() {
-        return new Exception();
     }
 
     /**
@@ -92,19 +92,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ArithmeticException }
-     * 
-     */
-    public ArithmeticException createArithmeticException() {
-        return new ArithmeticException();
-    }
-
-    /**
      * Create an instance of {@link OutOfMemoryException }
      * 
      */
     public OutOfMemoryException createOutOfMemoryException() {
         return new OutOfMemoryException();
+    }
+
+    /**
+     * Create an instance of {@link ArithmeticException }
+     * 
+     */
+    public ArithmeticException createArithmeticException() {
+        return new ArithmeticException();
     }
 
     /**

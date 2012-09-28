@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
 import javax.xml.namespace.QName;
 import com.microsoft.schemas._2003._10.serialization.arrays.ArrayOfKeyValueOfstringstring;
+import com.microsoft.schemas._2003._10.serialization.arrays.ArrayOfstring;
 import org.datacontract.schemas._2004._07.services.ClassFoo;
 import org.datacontract.schemas._2004._07.services.ClassObj;
 import org.datacontract.schemas._2004._07.services.ComputerInfo;
@@ -30,47 +31,47 @@ import org.datacontract.schemas._2004._07.system.Exception;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _EchoObjectResponseEchoObjectResult_QNAME = new QName("http://tempuri.org/", "EchoObjectResult");
-    private final static QName _EchoObject3ResponseEchoObject3Result_QNAME = new QName("http://tempuri.org/", "EchoObject3Result");
-    private final static QName _EchoObject4Obj_QNAME = new QName("http://tempuri.org/", "obj");
-    private final static QName _EchoFaultResponseEchoFaultResult_QNAME = new QName("http://tempuri.org/", "EchoFaultResult");
+    private final static QName _EchoWithDelayOnSelectedNodeSelectedNode_QNAME = new QName("http://tempuri.org/", "selectedNode");
     private final static QName _EchoObject2ResponseEchoObject2Result_QNAME = new QName("http://tempuri.org/", "EchoObject2Result");
-    private final static QName _EchoResponseEchoResult_QNAME = new QName("http://tempuri.org/", "EchoResult");
-    private final static QName _EchoWithDelayResponseEchoWithDelayResult_QNAME = new QName("http://tempuri.org/", "EchoWithDelayResult");
-    private final static QName _GenerateLoadWithInputFileResponseGenerateLoadWithInputFileResult_QNAME = new QName("http://tempuri.org/", "GenerateLoadWithInputFileResult");
-    private final static QName _EchoWithOnExitLogPath_QNAME = new QName("http://tempuri.org/", "logPath");
-    private final static QName _EchoClassCls_QNAME = new QName("http://tempuri.org/", "cls");
-    private final static QName _EchoWithOnExitResponseEchoWithOnExitResult_QNAME = new QName("http://tempuri.org/", "EchoWithOnExitResult");
-    private final static QName _ConsumeCPUResponseConsumeCPUResult_QNAME = new QName("http://tempuri.org/", "ConsumeCPUResult");
+    private final static QName _GenerateLoadResponseGenerateLoadResult_QNAME = new QName("http://tempuri.org/", "GenerateLoadResult");
+    private final static QName _EchoObjectType_QNAME = new QName("http://tempuri.org/", "type");
+    private final static QName _EchoObjectO_QNAME = new QName("http://tempuri.org/", "o");
     private final static QName _EchoFaultWithNameExceptionName_QNAME = new QName("http://tempuri.org/", "exceptionName");
-    private final static QName _EchoFaultEx_QNAME = new QName("http://tempuri.org/", "ex");
-    private final static QName _GenerateLoadCommonDataPath_QNAME = new QName("http://tempuri.org/", "common_data_path");
-    private final static QName _GenerateLoadInputData_QNAME = new QName("http://tempuri.org/", "input_data");
+    private final static QName _EchoResponseEchoResult_QNAME = new QName("http://tempuri.org/", "EchoResult");
+    private final static QName _TraceResponseTraceResult_QNAME = new QName("http://tempuri.org/", "TraceResult");
+    private final static QName _GetCommonDataResponseGetCommonDataResult_QNAME = new QName("http://tempuri.org/", "GetCommonDataResult");
+    private final static QName _EchoObjectResponseEchoObjectResult_QNAME = new QName("http://tempuri.org/", "EchoObjectResult");
     private final static QName _EchoObject4ResponseEchoObject4Result_QNAME = new QName("http://tempuri.org/", "EchoObject4Result");
     private final static QName _EchoWithParamS_QNAME = new QName("http://tempuri.org/", "s");
-    private final static QName _EchoWithDelayOnSelectedNodeSelectedNode_QNAME = new QName("http://tempuri.org/", "selectedNode");
-    private final static QName _GetCommonDataResponseGetCommonDataResult_QNAME = new QName("http://tempuri.org/", "GetCommonDataResult");
-    private final static QName _EchoClassResponseEchoClassResult_QNAME = new QName("http://tempuri.org/", "EchoClassResult");
-    private final static QName _EchoObject3Type_QNAME = new QName("http://tempuri.org/", "type");
-    private final static QName _EchoObject3O_QNAME = new QName("http://tempuri.org/", "o");
+    private final static QName _GenerateLoadWithInputFileResponseGenerateLoadWithInputFileResult_QNAME = new QName("http://tempuri.org/", "GenerateLoadWithInputFileResult");
+    private final static QName _EchoObject3ResponseEchoObject3Result_QNAME = new QName("http://tempuri.org/", "EchoObject3Result");
     private final static QName _EchoWithDelayOnSelectedNodeResponseEchoWithDelayOnSelectedNodeResult_QNAME = new QName("http://tempuri.org/", "EchoWithDelayOnSelectedNodeResult");
-    private final static QName _TraceMsg_QNAME = new QName("http://tempuri.org/", "msg");
-    private final static QName _EchoAppSettingsResponseEchoAppSettingsResult_QNAME = new QName("http://tempuri.org/", "EchoAppSettingsResult");
-    private final static QName _CheckACLOnAzureResponseCheckACLOnAzureResult_QNAME = new QName("http://tempuri.org/", "CheckACLOnAzureResult");
-    private final static QName _GenerateLoadResponseGenerateLoadResult_QNAME = new QName("http://tempuri.org/", "GenerateLoadResult");
-    private final static QName _EchoStructResponseEchoStructResult_QNAME = new QName("http://tempuri.org/", "EchoStructResult");
-    private final static QName _ServiceSideAsyncEchoResponseServiceSideAsyncEchoResult_QNAME = new QName("http://tempuri.org/", "ServiceSideAsyncEchoResult");
-    private final static QName _TraceResponseTraceResult_QNAME = new QName("http://tempuri.org/", "TraceResult");
     private final static QName _SerializationTestStream_QNAME = new QName("http://tempuri.org/", "stream");
+    private final static QName _RunInprocSoaJobResponseRunInprocSoaJobResult_QNAME = new QName("http://tempuri.org/", "RunInprocSoaJobResult");
+    private final static QName _EchoStructResponseEchoStructResult_QNAME = new QName("http://tempuri.org/", "EchoStructResult");
+    private final static QName _EchoObject4Obj_QNAME = new QName("http://tempuri.org/", "obj");
+    private final static QName _ServiceSideAsyncEchoResponseServiceSideAsyncEchoResult_QNAME = new QName("http://tempuri.org/", "ServiceSideAsyncEchoResult");
+    private final static QName _EchoFaultResponseEchoFaultResult_QNAME = new QName("http://tempuri.org/", "EchoFaultResult");
+    private final static QName _EchoWithOnExitLogPath_QNAME = new QName("http://tempuri.org/", "logPath");
+    private final static QName _ConsumeCPUResponseConsumeCPUResult_QNAME = new QName("http://tempuri.org/", "ConsumeCPUResult");
+    private final static QName _EchoWithOnExitResponseEchoWithOnExitResult_QNAME = new QName("http://tempuri.org/", "EchoWithOnExitResult");
+    private final static QName _CheckACLOnAzureResponseCheckACLOnAzureResult_QNAME = new QName("http://tempuri.org/", "CheckACLOnAzureResult");
+    private final static QName _EchoWithDelayResponseEchoWithDelayResult_QNAME = new QName("http://tempuri.org/", "EchoWithDelayResult");
+    private final static QName _EchoClassResponseEchoClassResult_QNAME = new QName("http://tempuri.org/", "EchoClassResult");
     private final static QName _GetCommonDataExpectedMd5Hash_QNAME = new QName("http://tempuri.org/", "expectedMd5Hash");
     private final static QName _GetCommonDataDataClientId_QNAME = new QName("http://tempuri.org/", "dataClientId");
+    private final static QName _EchoFaultEx_QNAME = new QName("http://tempuri.org/", "ex");
+    private final static QName _GenerateLoadWithResponseDataResponseGenerateLoadWithResponseDataResult_QNAME = new QName("http://tempuri.org/", "GenerateLoadWithResponseDataResult");
+    private final static QName _EchoAppSettingsResponseEchoAppSettingsResult_QNAME = new QName("http://tempuri.org/", "EchoAppSettingsResult");
+    private final static QName _EchoClassCls_QNAME = new QName("http://tempuri.org/", "cls");
+    private final static QName _GenerateLoadWithInputFileCommonDataPath_QNAME = new QName("http://tempuri.org/", "common_data_path");
+    private final static QName _GenerateLoadWithInputFileInputDataPath_QNAME = new QName("http://tempuri.org/", "input_data_path");
+    private final static QName _GenerateLoadWithResponseDataInputData_QNAME = new QName("http://tempuri.org/", "input_data");
+    private final static QName _EchoWithFailResponseEchoWithFailResult_QNAME = new QName("http://tempuri.org/", "EchoWithFailResult");
     private final static QName _EchoExceptionResponseEchoExceptionResult_QNAME = new QName("http://tempuri.org/", "EchoExceptionResult");
-    private final static QName _RunInprocSoaJobResponseRunInprocSoaJobResult_QNAME = new QName("http://tempuri.org/", "RunInprocSoaJobResult");
     private final static QName _EchoWithParamResponseEchoWithParamResult_QNAME = new QName("http://tempuri.org/", "EchoWithParamResult");
     private final static QName _EchoFaultWithNameResponseEchoFaultWithNameResult_QNAME = new QName("http://tempuri.org/", "EchoFaultWithNameResult");
-    private final static QName _GenerateLoadWithInputFileInputDataPath_QNAME = new QName("http://tempuri.org/", "input_data_path");
-    private final static QName _EchoWithFailResponseEchoWithFailResult_QNAME = new QName("http://tempuri.org/", "EchoWithFailResult");
-    private final static QName _GenerateLoadWithResponseDataResponseGenerateLoadWithResponseDataResult_QNAME = new QName("http://tempuri.org/", "GenerateLoadWithResponseDataResult");
+    private final static QName _TraceTraceMsgs_QNAME = new QName("http://tempuri.org/", "traceMsgs");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.tempuri
@@ -80,19 +81,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link EchoAppSettings }
-     * 
-     */
-    public EchoAppSettings createEchoAppSettings() {
-        return new EchoAppSettings();
-    }
-
-    /**
      * Create an instance of {@link EchoFaultWithNameResponse }
      * 
      */
     public EchoFaultWithNameResponse createEchoFaultWithNameResponse() {
         return new EchoFaultWithNameResponse();
+    }
+
+    /**
+     * Create an instance of {@link EchoAppSettings }
+     * 
+     */
+    public EchoAppSettings createEchoAppSettings() {
+        return new EchoAppSettings();
     }
 
     /**
@@ -184,19 +185,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetCommonDataResponse }
-     * 
-     */
-    public GetCommonDataResponse createGetCommonDataResponse() {
-        return new GetCommonDataResponse();
-    }
-
-    /**
      * Create an instance of {@link ServiceSideAsyncEchoResponse }
      * 
      */
     public ServiceSideAsyncEchoResponse createServiceSideAsyncEchoResponse() {
         return new ServiceSideAsyncEchoResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetCommonDataResponse }
+     * 
+     */
+    public GetCommonDataResponse createGetCommonDataResponse() {
+        return new GetCommonDataResponse();
     }
 
     /**
@@ -280,19 +281,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link EchoDoubleResponse }
-     * 
-     */
-    public EchoDoubleResponse createEchoDoubleResponse() {
-        return new EchoDoubleResponse();
-    }
-
-    /**
      * Create an instance of {@link GenerateLoad }
      * 
      */
     public GenerateLoad createGenerateLoad() {
         return new GenerateLoad();
+    }
+
+    /**
+     * Create an instance of {@link EchoDoubleResponse }
+     * 
+     */
+    public EchoDoubleResponse createEchoDoubleResponse() {
+        return new EchoDoubleResponse();
     }
 
     /**
@@ -472,11 +473,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link EchoWithDelayOnSelectedNodeResponse }
+     * Create an instance of {@link CheckACLOnAzureResponse }
      * 
      */
-    public EchoWithDelayOnSelectedNodeResponse createEchoWithDelayOnSelectedNodeResponse() {
-        return new EchoWithDelayOnSelectedNodeResponse();
+    public CheckACLOnAzureResponse createCheckACLOnAzureResponse() {
+        return new CheckACLOnAzureResponse();
     }
 
     /**
@@ -488,11 +489,27 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link EchoWithDelayOnSelectedNodeResponse }
+     * 
+     */
+    public EchoWithDelayOnSelectedNodeResponse createEchoWithDelayOnSelectedNodeResponse() {
+        return new EchoWithDelayOnSelectedNodeResponse();
+    }
+
+    /**
      * Create an instance of {@link RunInprocSoaJob }
      * 
      */
     public RunInprocSoaJob createRunInprocSoaJob() {
         return new RunInprocSoaJob();
+    }
+
+    /**
+     * Create an instance of {@link CheckACLOnAzure }
+     * 
+     */
+    public CheckACLOnAzure createCheckACLOnAzure() {
+        return new CheckACLOnAzure();
     }
 
     /**
@@ -544,39 +561,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Object }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://tempuri.org/", name = "EchoObjectResult", scope = EchoObjectResponse.class)
-    public JAXBElement<Object> createEchoObjectResponseEchoObjectResult(Object value) {
-        return new JAXBElement<Object>(_EchoObjectResponseEchoObjectResult_QNAME, Object.class, EchoObjectResponse.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Object }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://tempuri.org/", name = "EchoObject3Result", scope = EchoObject3Response.class)
-    public JAXBElement<Object> createEchoObject3ResponseEchoObject3Result(Object value) {
-        return new JAXBElement<Object>(_EchoObject3ResponseEchoObject3Result_QNAME, Object.class, EchoObject3Response.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ClassObj }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://tempuri.org/", name = "obj", scope = EchoObject4 .class)
-    public JAXBElement<ClassObj> createEchoObject4Obj(ClassObj value) {
-        return new JAXBElement<ClassObj>(_EchoObject4Obj_QNAME, ClassObj.class, EchoObject4 .class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ComputerInfo }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://tempuri.org/", name = "EchoFaultResult", scope = EchoFaultResponse.class)
-    public JAXBElement<ComputerInfo> createEchoFaultResponseEchoFaultResult(ComputerInfo value) {
-        return new JAXBElement<ComputerInfo>(_EchoFaultResponseEchoFaultResult_QNAME, ComputerInfo.class, EchoFaultResponse.class, value);
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "selectedNode", scope = EchoWithDelayOnSelectedNode.class)
+    public JAXBElement<String> createEchoWithDelayOnSelectedNodeSelectedNode(String value) {
+        return new JAXBElement<String>(_EchoWithDelayOnSelectedNodeSelectedNode_QNAME, String.class, EchoWithDelayOnSelectedNode.class, value);
     }
 
     /**
@@ -586,6 +576,42 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://tempuri.org/", name = "EchoObject2Result", scope = EchoObject2Response.class)
     public JAXBElement<ClassObj> createEchoObject2ResponseEchoObject2Result(ClassObj value) {
         return new JAXBElement<ClassObj>(_EchoObject2ResponseEchoObject2Result_QNAME, ClassObj.class, EchoObject2Response.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link StatisticInfo }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "GenerateLoadResult", scope = GenerateLoadResponse.class)
+    public JAXBElement<StatisticInfo> createGenerateLoadResponseGenerateLoadResult(StatisticInfo value) {
+        return new JAXBElement<StatisticInfo>(_GenerateLoadResponseGenerateLoadResult_QNAME, StatisticInfo.class, GenerateLoadResponse.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "type", scope = EchoObject.class)
+    public JAXBElement<String> createEchoObjectType(String value) {
+        return new JAXBElement<String>(_EchoObjectType_QNAME, String.class, EchoObject.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Object }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "o", scope = EchoObject.class)
+    public JAXBElement<Object> createEchoObjectO(Object value) {
+        return new JAXBElement<Object>(_EchoObjectO_QNAME, Object.class, EchoObject.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "exceptionName", scope = EchoFaultWithName.class)
+    public JAXBElement<String> createEchoFaultWithNameExceptionName(String value) {
+        return new JAXBElement<String>(_EchoFaultWithNameExceptionName_QNAME, String.class, EchoFaultWithName.class, value);
     }
 
     /**
@@ -601,90 +627,27 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link ComputerInfo }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://tempuri.org/", name = "EchoWithDelayResult", scope = EchoWithDelayResponse.class)
-    public JAXBElement<ComputerInfo> createEchoWithDelayResponseEchoWithDelayResult(ComputerInfo value) {
-        return new JAXBElement<ComputerInfo>(_EchoWithDelayResponseEchoWithDelayResult_QNAME, ComputerInfo.class, EchoWithDelayResponse.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link StatisticInfo }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://tempuri.org/", name = "GenerateLoadWithInputFileResult", scope = GenerateLoadWithInputFileResponse.class)
-    public JAXBElement<StatisticInfo> createGenerateLoadWithInputFileResponseGenerateLoadWithInputFileResult(StatisticInfo value) {
-        return new JAXBElement<StatisticInfo>(_GenerateLoadWithInputFileResponseGenerateLoadWithInputFileResult_QNAME, StatisticInfo.class, GenerateLoadWithInputFileResponse.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://tempuri.org/", name = "logPath", scope = EchoWithOnExit.class)
-    public JAXBElement<String> createEchoWithOnExitLogPath(String value) {
-        return new JAXBElement<String>(_EchoWithOnExitLogPath_QNAME, String.class, EchoWithOnExit.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ClassFoo }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://tempuri.org/", name = "cls", scope = EchoClass.class)
-    public JAXBElement<ClassFoo> createEchoClassCls(ClassFoo value) {
-        return new JAXBElement<ClassFoo>(_EchoClassCls_QNAME, ClassFoo.class, EchoClass.class, value);
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "TraceResult", scope = TraceResponse.class)
+    public JAXBElement<ComputerInfo> createTraceResponseTraceResult(ComputerInfo value) {
+        return new JAXBElement<ComputerInfo>(_TraceResponseTraceResult_QNAME, ComputerInfo.class, TraceResponse.class, value);
     }
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link ComputerInfo }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://tempuri.org/", name = "EchoWithOnExitResult", scope = EchoWithOnExitResponse.class)
-    public JAXBElement<ComputerInfo> createEchoWithOnExitResponseEchoWithOnExitResult(ComputerInfo value) {
-        return new JAXBElement<ComputerInfo>(_EchoWithOnExitResponseEchoWithOnExitResult_QNAME, ComputerInfo.class, EchoWithOnExitResponse.class, value);
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "GetCommonDataResult", scope = GetCommonDataResponse.class)
+    public JAXBElement<ComputerInfo> createGetCommonDataResponseGetCommonDataResult(ComputerInfo value) {
+        return new JAXBElement<ComputerInfo>(_GetCommonDataResponseGetCommonDataResult_QNAME, ComputerInfo.class, GetCommonDataResponse.class, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link Object }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://tempuri.org/", name = "ConsumeCPUResult", scope = ConsumeCPUResponse.class)
-    public JAXBElement<String> createConsumeCPUResponseConsumeCPUResult(String value) {
-        return new JAXBElement<String>(_ConsumeCPUResponseConsumeCPUResult_QNAME, String.class, ConsumeCPUResponse.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://tempuri.org/", name = "exceptionName", scope = EchoFaultWithName.class)
-    public JAXBElement<String> createEchoFaultWithNameExceptionName(String value) {
-        return new JAXBElement<String>(_EchoFaultWithNameExceptionName_QNAME, String.class, EchoFaultWithName.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Exception }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://tempuri.org/", name = "ex", scope = EchoFault.class)
-    public JAXBElement<Exception> createEchoFaultEx(Exception value) {
-        return new JAXBElement<Exception>(_EchoFaultEx_QNAME, Exception.class, EchoFault.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://tempuri.org/", name = "common_data_path", scope = GenerateLoad.class)
-    public JAXBElement<String> createGenerateLoadCommonDataPath(String value) {
-        return new JAXBElement<String>(_GenerateLoadCommonDataPath_QNAME, String.class, GenerateLoad.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link byte[]}{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://tempuri.org/", name = "input_data", scope = GenerateLoad.class)
-    public JAXBElement<byte[]> createGenerateLoadInputData(byte[] value) {
-        return new JAXBElement<byte[]>(_GenerateLoadInputData_QNAME, byte[].class, GenerateLoad.class, ((byte[]) value));
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "EchoObjectResult", scope = EchoObjectResponse.class)
+    public JAXBElement<Object> createEchoObjectResponseEchoObjectResult(Object value) {
+        return new JAXBElement<Object>(_EchoObjectResponseEchoObjectResult_QNAME, Object.class, EchoObjectResponse.class, value);
     }
 
     /**
@@ -706,48 +669,21 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link StatisticInfo }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://tempuri.org/", name = "selectedNode", scope = EchoWithDelayOnSelectedNode.class)
-    public JAXBElement<String> createEchoWithDelayOnSelectedNodeSelectedNode(String value) {
-        return new JAXBElement<String>(_EchoWithDelayOnSelectedNodeSelectedNode_QNAME, String.class, EchoWithDelayOnSelectedNode.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ComputerInfo }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://tempuri.org/", name = "GetCommonDataResult", scope = GetCommonDataResponse.class)
-    public JAXBElement<ComputerInfo> createGetCommonDataResponseGetCommonDataResult(ComputerInfo value) {
-        return new JAXBElement<ComputerInfo>(_GetCommonDataResponseGetCommonDataResult_QNAME, ComputerInfo.class, GetCommonDataResponse.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ClassFoo }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://tempuri.org/", name = "EchoClassResult", scope = EchoClassResponse.class)
-    public JAXBElement<ClassFoo> createEchoClassResponseEchoClassResult(ClassFoo value) {
-        return new JAXBElement<ClassFoo>(_EchoClassResponseEchoClassResult_QNAME, ClassFoo.class, EchoClassResponse.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://tempuri.org/", name = "type", scope = EchoObject3 .class)
-    public JAXBElement<String> createEchoObject3Type(String value) {
-        return new JAXBElement<String>(_EchoObject3Type_QNAME, String.class, EchoObject3 .class, value);
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "GenerateLoadWithInputFileResult", scope = GenerateLoadWithInputFileResponse.class)
+    public JAXBElement<StatisticInfo> createGenerateLoadWithInputFileResponseGenerateLoadWithInputFileResult(StatisticInfo value) {
+        return new JAXBElement<StatisticInfo>(_GenerateLoadWithInputFileResponseGenerateLoadWithInputFileResult_QNAME, StatisticInfo.class, GenerateLoadWithInputFileResponse.class, value);
     }
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Object }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://tempuri.org/", name = "o", scope = EchoObject3 .class)
-    public JAXBElement<Object> createEchoObject3O(Object value) {
-        return new JAXBElement<Object>(_EchoObject3O_QNAME, Object.class, EchoObject3 .class, value);
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "EchoObject3Result", scope = EchoObject3Response.class)
+    public JAXBElement<Object> createEchoObject3ResponseEchoObject3Result(Object value) {
+        return new JAXBElement<Object>(_EchoObject3ResponseEchoObject3Result_QNAME, Object.class, EchoObject3Response.class, value);
     }
 
     /**
@@ -760,30 +696,21 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link byte[]}{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "stream", scope = SerializationTest.class)
+    public JAXBElement<byte[]> createSerializationTestStream(byte[] value) {
+        return new JAXBElement<byte[]>(_SerializationTestStream_QNAME, byte[].class, SerializationTest.class, ((byte[]) value));
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://tempuri.org/", name = "msg", scope = Trace.class)
-    public JAXBElement<String> createTraceMsg(String value) {
-        return new JAXBElement<String>(_TraceMsg_QNAME, String.class, Trace.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfKeyValueOfstringstring }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://tempuri.org/", name = "EchoAppSettingsResult", scope = EchoAppSettingsResponse.class)
-    public JAXBElement<ArrayOfKeyValueOfstringstring> createEchoAppSettingsResponseEchoAppSettingsResult(ArrayOfKeyValueOfstringstring value) {
-        return new JAXBElement<ArrayOfKeyValueOfstringstring>(_EchoAppSettingsResponseEchoAppSettingsResult_QNAME, ArrayOfKeyValueOfstringstring.class, EchoAppSettingsResponse.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link StatisticInfo }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://tempuri.org/", name = "GenerateLoadResult", scope = GenerateLoadResponse.class)
-    public JAXBElement<StatisticInfo> createGenerateLoadResponseGenerateLoadResult(StatisticInfo value) {
-        return new JAXBElement<StatisticInfo>(_GenerateLoadResponseGenerateLoadResult_QNAME, StatisticInfo.class, GenerateLoadResponse.class, value);
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "RunInprocSoaJobResult", scope = RunInprocSoaJobResponse.class)
+    public JAXBElement<String> createRunInprocSoaJobResponseRunInprocSoaJobResult(String value) {
+        return new JAXBElement<String>(_RunInprocSoaJobResponseRunInprocSoaJobResult_QNAME, String.class, RunInprocSoaJobResponse.class, value);
     }
 
     /**
@@ -796,6 +723,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ClassObj }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "obj", scope = EchoObject4 .class)
+    public JAXBElement<ClassObj> createEchoObject4Obj(ClassObj value) {
+        return new JAXBElement<ClassObj>(_EchoObject4Obj_QNAME, ClassObj.class, EchoObject4 .class, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link ComputerInfo }{@code >}}
      * 
      */
@@ -805,39 +741,84 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ComputerInfo }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "EchoFaultResult", scope = EchoFaultResponse.class)
+    public JAXBElement<ComputerInfo> createEchoFaultResponseEchoFaultResult(ComputerInfo value) {
+        return new JAXBElement<ComputerInfo>(_EchoFaultResponseEchoFaultResult_QNAME, ComputerInfo.class, EchoFaultResponse.class, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://tempuri.org/", name = "TraceResult", scope = TraceResponse.class)
-    public JAXBElement<String> createTraceResponseTraceResult(String value) {
-        return new JAXBElement<String>(_TraceResponseTraceResult_QNAME, String.class, TraceResponse.class, value);
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "logPath", scope = EchoWithOnExit.class)
+    public JAXBElement<String> createEchoWithOnExitLogPath(String value) {
+        return new JAXBElement<String>(_EchoWithOnExitLogPath_QNAME, String.class, EchoWithOnExit.class, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Exception }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://tempuri.org/", name = "ex", scope = EchoException.class)
-    public JAXBElement<Exception> createEchoExceptionEx(Exception value) {
-        return new JAXBElement<Exception>(_EchoFaultEx_QNAME, Exception.class, EchoException.class, value);
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "ConsumeCPUResult", scope = ConsumeCPUResponse.class)
+    public JAXBElement<String> createConsumeCPUResponseConsumeCPUResult(String value) {
+        return new JAXBElement<String>(_ConsumeCPUResponseConsumeCPUResult_QNAME, String.class, ConsumeCPUResponse.class, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link byte[]}{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link ComputerInfo }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://tempuri.org/", name = "stream", scope = SerializationTest.class)
-    public JAXBElement<byte[]> createSerializationTestStream(byte[] value) {
-        return new JAXBElement<byte[]>(_SerializationTestStream_QNAME, byte[].class, SerializationTest.class, ((byte[]) value));
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "EchoWithOnExitResult", scope = EchoWithOnExitResponse.class)
+    public JAXBElement<ComputerInfo> createEchoWithOnExitResponseEchoWithOnExitResult(ComputerInfo value) {
+        return new JAXBElement<ComputerInfo>(_EchoWithOnExitResponseEchoWithOnExitResult_QNAME, ComputerInfo.class, EchoWithOnExitResponse.class, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link byte[]}{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://tempuri.org/", name = "input_data", scope = GenerateLoadWithResponseData.class)
-    public JAXBElement<byte[]> createGenerateLoadWithResponseDataInputData(byte[] value) {
-        return new JAXBElement<byte[]>(_GenerateLoadInputData_QNAME, byte[].class, GenerateLoadWithResponseData.class, ((byte[]) value));
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "CheckACLOnAzureResult", scope = CheckACLOnAzureResponse.class)
+    public JAXBElement<String> createCheckACLOnAzureResponseCheckACLOnAzureResult(String value) {
+        return new JAXBElement<String>(_CheckACLOnAzureResponseCheckACLOnAzureResult_QNAME, String.class, CheckACLOnAzureResponse.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "type", scope = EchoObject3 .class)
+    public JAXBElement<String> createEchoObject3Type(String value) {
+        return new JAXBElement<String>(_EchoObjectType_QNAME, String.class, EchoObject3 .class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Object }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "o", scope = EchoObject3 .class)
+    public JAXBElement<Object> createEchoObject3O(Object value) {
+        return new JAXBElement<Object>(_EchoObjectO_QNAME, Object.class, EchoObject3 .class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ComputerInfo }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "EchoWithDelayResult", scope = EchoWithDelayResponse.class)
+    public JAXBElement<ComputerInfo> createEchoWithDelayResponseEchoWithDelayResult(ComputerInfo value) {
+        return new JAXBElement<ComputerInfo>(_EchoWithDelayResponseEchoWithDelayResult_QNAME, ComputerInfo.class, EchoWithDelayResponse.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ClassFoo }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "EchoClassResult", scope = EchoClassResponse.class)
+    public JAXBElement<ClassFoo> createEchoClassResponseEchoClassResult(ClassFoo value) {
+        return new JAXBElement<ClassFoo>(_EchoClassResponseEchoClassResult_QNAME, ClassFoo.class, EchoClassResponse.class, value);
     }
 
     /**
@@ -859,39 +840,30 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ComputerInfo }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link Exception }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://tempuri.org/", name = "EchoExceptionResult", scope = EchoExceptionResponse.class)
-    public JAXBElement<ComputerInfo> createEchoExceptionResponseEchoExceptionResult(ComputerInfo value) {
-        return new JAXBElement<ComputerInfo>(_EchoExceptionResponseEchoExceptionResult_QNAME, ComputerInfo.class, EchoExceptionResponse.class, value);
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "ex", scope = EchoFault.class)
+    public JAXBElement<Exception> createEchoFaultEx(Exception value) {
+        return new JAXBElement<Exception>(_EchoFaultEx_QNAME, Exception.class, EchoFault.class, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link Exception }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://tempuri.org/", name = "type", scope = EchoObject.class)
-    public JAXBElement<String> createEchoObjectType(String value) {
-        return new JAXBElement<String>(_EchoObject3Type_QNAME, String.class, EchoObject.class, value);
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "ex", scope = EchoException.class)
+    public JAXBElement<Exception> createEchoExceptionEx(Exception value) {
+        return new JAXBElement<Exception>(_EchoFaultEx_QNAME, Exception.class, EchoException.class, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Object }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link StatisticInfo }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://tempuri.org/", name = "o", scope = EchoObject.class)
-    public JAXBElement<Object> createEchoObjectO(Object value) {
-        return new JAXBElement<Object>(_EchoObject3O_QNAME, Object.class, EchoObject.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://tempuri.org/", name = "RunInprocSoaJobResult", scope = RunInprocSoaJobResponse.class)
-    public JAXBElement<String> createRunInprocSoaJobResponseRunInprocSoaJobResult(String value) {
-        return new JAXBElement<String>(_RunInprocSoaJobResponseRunInprocSoaJobResult_QNAME, String.class, RunInprocSoaJobResponse.class, value);
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "GenerateLoadWithResponseDataResult", scope = GenerateLoadWithResponseDataResponse.class)
+    public JAXBElement<StatisticInfo> createGenerateLoadWithResponseDataResponseGenerateLoadWithResponseDataResult(StatisticInfo value) {
+        return new JAXBElement<StatisticInfo>(_GenerateLoadWithResponseDataResponseGenerateLoadWithResponseDataResult_QNAME, StatisticInfo.class, GenerateLoadWithResponseDataResponse.class, value);
     }
 
     /**
@@ -901,6 +873,69 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://tempuri.org/", name = "obj", scope = EchoObject2 .class)
     public JAXBElement<ClassObj> createEchoObject2Obj(ClassObj value) {
         return new JAXBElement<ClassObj>(_EchoObject4Obj_QNAME, ClassObj.class, EchoObject2 .class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfKeyValueOfstringstring }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "EchoAppSettingsResult", scope = EchoAppSettingsResponse.class)
+    public JAXBElement<ArrayOfKeyValueOfstringstring> createEchoAppSettingsResponseEchoAppSettingsResult(ArrayOfKeyValueOfstringstring value) {
+        return new JAXBElement<ArrayOfKeyValueOfstringstring>(_EchoAppSettingsResponseEchoAppSettingsResult_QNAME, ArrayOfKeyValueOfstringstring.class, EchoAppSettingsResponse.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ClassFoo }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "cls", scope = EchoClass.class)
+    public JAXBElement<ClassFoo> createEchoClassCls(ClassFoo value) {
+        return new JAXBElement<ClassFoo>(_EchoClassCls_QNAME, ClassFoo.class, EchoClass.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "common_data_path", scope = GenerateLoadWithInputFile.class)
+    public JAXBElement<String> createGenerateLoadWithInputFileCommonDataPath(String value) {
+        return new JAXBElement<String>(_GenerateLoadWithInputFileCommonDataPath_QNAME, String.class, GenerateLoadWithInputFile.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "input_data_path", scope = GenerateLoadWithInputFile.class)
+    public JAXBElement<String> createGenerateLoadWithInputFileInputDataPath(String value) {
+        return new JAXBElement<String>(_GenerateLoadWithInputFileInputDataPath_QNAME, String.class, GenerateLoadWithInputFile.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link byte[]}{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "input_data", scope = GenerateLoadWithResponseData.class)
+    public JAXBElement<byte[]> createGenerateLoadWithResponseDataInputData(byte[] value) {
+        return new JAXBElement<byte[]>(_GenerateLoadWithResponseDataInputData_QNAME, byte[].class, GenerateLoadWithResponseData.class, ((byte[]) value));
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ComputerInfo }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "EchoWithFailResult", scope = EchoWithFailResponse.class)
+    public JAXBElement<ComputerInfo> createEchoWithFailResponseEchoWithFailResult(ComputerInfo value) {
+        return new JAXBElement<ComputerInfo>(_EchoWithFailResponseEchoWithFailResult_QNAME, ComputerInfo.class, EchoWithFailResponse.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ComputerInfo }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "EchoExceptionResult", scope = EchoExceptionResponse.class)
+    public JAXBElement<ComputerInfo> createEchoExceptionResponseEchoExceptionResult(ComputerInfo value) {
+        return new JAXBElement<ComputerInfo>(_EchoExceptionResponseEchoExceptionResult_QNAME, ComputerInfo.class, EchoExceptionResponse.class, value);
     }
 
     /**
@@ -925,36 +960,27 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://tempuri.org/", name = "common_data_path", scope = GenerateLoadWithInputFile.class)
-    public JAXBElement<String> createGenerateLoadWithInputFileCommonDataPath(String value) {
-        return new JAXBElement<String>(_GenerateLoadCommonDataPath_QNAME, String.class, GenerateLoadWithInputFile.class, value);
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "common_data_path", scope = GenerateLoad.class)
+    public JAXBElement<String> createGenerateLoadCommonDataPath(String value) {
+        return new JAXBElement<String>(_GenerateLoadWithInputFileCommonDataPath_QNAME, String.class, GenerateLoad.class, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link byte[]}{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://tempuri.org/", name = "input_data_path", scope = GenerateLoadWithInputFile.class)
-    public JAXBElement<String> createGenerateLoadWithInputFileInputDataPath(String value) {
-        return new JAXBElement<String>(_GenerateLoadWithInputFileInputDataPath_QNAME, String.class, GenerateLoadWithInputFile.class, value);
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "input_data", scope = GenerateLoad.class)
+    public JAXBElement<byte[]> createGenerateLoadInputData(byte[] value) {
+        return new JAXBElement<byte[]>(_GenerateLoadWithResponseDataInputData_QNAME, byte[].class, GenerateLoad.class, ((byte[]) value));
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ComputerInfo }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfstring }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://tempuri.org/", name = "EchoWithFailResult", scope = EchoWithFailResponse.class)
-    public JAXBElement<ComputerInfo> createEchoWithFailResponseEchoWithFailResult(ComputerInfo value) {
-        return new JAXBElement<ComputerInfo>(_EchoWithFailResponseEchoWithFailResult_QNAME, ComputerInfo.class, EchoWithFailResponse.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link StatisticInfo }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://tempuri.org/", name = "GenerateLoadWithResponseDataResult", scope = GenerateLoadWithResponseDataResponse.class)
-    public JAXBElement<StatisticInfo> createGenerateLoadWithResponseDataResponseGenerateLoadWithResponseDataResult(StatisticInfo value) {
-        return new JAXBElement<StatisticInfo>(_GenerateLoadWithResponseDataResponseGenerateLoadWithResponseDataResult_QNAME, StatisticInfo.class, GenerateLoadWithResponseDataResponse.class, value);
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "traceMsgs", scope = Trace.class)
+    public JAXBElement<ArrayOfstring> createTraceTraceMsgs(ArrayOfstring value) {
+        return new JAXBElement<ArrayOfstring>(_TraceTraceMsgs_QNAME, ArrayOfstring.class, Trace.class, value);
     }
 
 }

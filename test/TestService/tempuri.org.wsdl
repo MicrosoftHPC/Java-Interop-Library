@@ -1,16 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://tempuri.org/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="http://tempuri.org/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" schemaLocation="tempuri.org.xsd" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" schemaLocation="schemas.microsoft.com.2003.10.Serialization.xsd" />
-      <xsd:import namespace="http://hpc.microsoft.com/session/" schemaLocation="hpc.microsoft.com.session.xsd" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/AITestLib.Helper" schemaLocation="AITestLib.Helper.xsd" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/services" schemaLocation="services.xsd" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" schemaLocation="schemas.microsoft.com.2003.10.Serialization.Arrays.xsd" />
+      <xsd:import namespace="http://hpc.microsoft.com/session/" schemaLocation="hpc.microsoft.com.session.xsd" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/System" schemaLocation="System.xsd" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/AITestLib.Helper" schemaLocation="AITestLib.Helper.xsd" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="ITestService_CheckACLOnAzure_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckACLOnAzure" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_CheckACLOnAzure_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckACLOnAzureResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_GetCommonData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCommonData" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_GetCommonData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCommonDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_GetCommonData_CommonDataErrorFault_FaultMessage">
+    <wsdl:part name="detail" xmlns:q1="http://schemas.datacontract.org/2004/07/AITestLib.Helper" element="q1:CommonDataError" />
+  </wsdl:message>
   <wsdl:message name="ITestService_Ping_InputMessage">
     <wsdl:part name="parameters" element="tns:Ping" />
   </wsdl:message>
@@ -29,11 +44,11 @@
   <wsdl:message name="ITestService_Echo_OutputMessage">
     <wsdl:part name="parameters" element="tns:EchoResponse" />
   </wsdl:message>
-  <wsdl:message name="ITestService_Echo_AuthenticationFailureFault_FaultMessage">
-    <wsdl:part name="detail" xmlns:q1="http://hpc.microsoft.com/session/" element="q1:AuthenticationFailure" />
-  </wsdl:message>
   <wsdl:message name="ITestService_Echo_RetryOperationErrorFault_FaultMessage">
     <wsdl:part name="detail" xmlns:q2="http://hpc.microsoft.com/session/" element="q2:RetryOperationError" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_Echo_AuthenticationFailureFault_FaultMessage">
+    <wsdl:part name="detail" xmlns:q3="http://hpc.microsoft.com/session/" element="q3:AuthenticationFailure" />
   </wsdl:message>
   <wsdl:message name="ITestService_EchoException_InputMessage">
     <wsdl:part name="parameters" element="tns:EchoException" />
@@ -47,17 +62,17 @@
   <wsdl:message name="ITestService_EchoFault_OutputMessage">
     <wsdl:part name="parameters" element="tns:EchoFaultResponse" />
   </wsdl:message>
-  <wsdl:message name="ITestService_EchoFault_ArgumentNullExceptionFault_FaultMessage">
-    <wsdl:part name="detail" xmlns:q3="http://schemas.datacontract.org/2004/07/System" element="q3:ArgumentNullException" />
+  <wsdl:message name="ITestService_EchoFault_DivideByZeroExceptionFault_FaultMessage">
+    <wsdl:part name="detail" xmlns:q4="http://schemas.datacontract.org/2004/07/System" element="q4:DivideByZeroException" />
   </wsdl:message>
   <wsdl:message name="ITestService_EchoFault_ExceptionFault_FaultMessage">
-    <wsdl:part name="detail" xmlns:q4="http://schemas.datacontract.org/2004/07/System" element="q4:Exception" />
+    <wsdl:part name="detail" xmlns:q5="http://schemas.datacontract.org/2004/07/System" element="q5:Exception" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoFault_ArgumentNullExceptionFault_FaultMessage">
+    <wsdl:part name="detail" xmlns:q6="http://schemas.datacontract.org/2004/07/System" element="q6:ArgumentNullException" />
   </wsdl:message>
   <wsdl:message name="ITestService_EchoFault_OutOfMemoryExceptionFault_FaultMessage">
-    <wsdl:part name="detail" xmlns:q5="http://schemas.datacontract.org/2004/07/System" element="q5:OutOfMemoryException" />
-  </wsdl:message>
-  <wsdl:message name="ITestService_EchoFault_DivideByZeroExceptionFault_FaultMessage">
-    <wsdl:part name="detail" xmlns:q6="http://schemas.datacontract.org/2004/07/System" element="q6:DivideByZeroException" />
+    <wsdl:part name="detail" xmlns:q7="http://schemas.datacontract.org/2004/07/System" element="q7:OutOfMemoryException" />
   </wsdl:message>
   <wsdl:message name="ITestService_EchoFaultWithName_InputMessage">
     <wsdl:part name="parameters" element="tns:EchoFaultWithName" />
@@ -65,17 +80,17 @@
   <wsdl:message name="ITestService_EchoFaultWithName_OutputMessage">
     <wsdl:part name="parameters" element="tns:EchoFaultWithNameResponse" />
   </wsdl:message>
-  <wsdl:message name="ITestService_EchoFaultWithName_OutOfMemoryExceptionFault_FaultMessage">
-    <wsdl:part name="detail" xmlns:q7="http://schemas.datacontract.org/2004/07/System" element="q7:OutOfMemoryException" />
+  <wsdl:message name="ITestService_EchoFaultWithName_DivideByZeroExceptionFault_FaultMessage">
+    <wsdl:part name="detail" xmlns:q8="http://schemas.datacontract.org/2004/07/System" element="q8:DivideByZeroException" />
   </wsdl:message>
   <wsdl:message name="ITestService_EchoFaultWithName_ArgumentNullExceptionFault_FaultMessage">
-    <wsdl:part name="detail" xmlns:q8="http://schemas.datacontract.org/2004/07/System" element="q8:ArgumentNullException" />
+    <wsdl:part name="detail" xmlns:q9="http://schemas.datacontract.org/2004/07/System" element="q9:ArgumentNullException" />
   </wsdl:message>
-  <wsdl:message name="ITestService_EchoFaultWithName_DivideByZeroExceptionFault_FaultMessage">
-    <wsdl:part name="detail" xmlns:q9="http://schemas.datacontract.org/2004/07/System" element="q9:DivideByZeroException" />
+  <wsdl:message name="ITestService_EchoFaultWithName_OutOfMemoryExceptionFault_FaultMessage">
+    <wsdl:part name="detail" xmlns:q10="http://schemas.datacontract.org/2004/07/System" element="q10:OutOfMemoryException" />
   </wsdl:message>
   <wsdl:message name="ITestService_EchoFaultWithName_ExceptionFault_FaultMessage">
-    <wsdl:part name="detail" xmlns:q10="http://schemas.datacontract.org/2004/07/System" element="q10:Exception" />
+    <wsdl:part name="detail" xmlns:q11="http://schemas.datacontract.org/2004/07/System" element="q11:Exception" />
   </wsdl:message>
   <wsdl:message name="ITestService_EchoWithDelay_InputMessage">
     <wsdl:part name="parameters" element="tns:EchoWithDelay" />
@@ -83,11 +98,11 @@
   <wsdl:message name="ITestService_EchoWithDelay_OutputMessage">
     <wsdl:part name="parameters" element="tns:EchoWithDelayResponse" />
   </wsdl:message>
-  <wsdl:message name="ITestService_EchoWithDelay_AuthenticationFailureFault_FaultMessage">
-    <wsdl:part name="detail" xmlns:q11="http://hpc.microsoft.com/session/" element="q11:AuthenticationFailure" />
-  </wsdl:message>
   <wsdl:message name="ITestService_EchoWithDelay_RetryOperationErrorFault_FaultMessage">
     <wsdl:part name="detail" xmlns:q12="http://hpc.microsoft.com/session/" element="q12:RetryOperationError" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_EchoWithDelay_AuthenticationFailureFault_FaultMessage">
+    <wsdl:part name="detail" xmlns:q13="http://hpc.microsoft.com/session/" element="q13:AuthenticationFailure" />
   </wsdl:message>
   <wsdl:message name="ITestService_EchoWithDelayOnSelectedNode_InputMessage">
     <wsdl:part name="parameters" element="tns:EchoWithDelayOnSelectedNode" />
@@ -102,10 +117,10 @@
     <wsdl:part name="parameters" element="tns:EchoWithFailResponse" />
   </wsdl:message>
   <wsdl:message name="ITestService_EchoWithFail_AuthenticationFailureFault_FaultMessage">
-    <wsdl:part name="detail" xmlns:q13="http://hpc.microsoft.com/session/" element="q13:AuthenticationFailure" />
+    <wsdl:part name="detail" xmlns:q14="http://hpc.microsoft.com/session/" element="q14:AuthenticationFailure" />
   </wsdl:message>
   <wsdl:message name="ITestService_EchoWithFail_RetryOperationErrorFault_FaultMessage">
-    <wsdl:part name="detail" xmlns:q14="http://hpc.microsoft.com/session/" element="q14:RetryOperationError" />
+    <wsdl:part name="detail" xmlns:q15="http://hpc.microsoft.com/session/" element="q15:RetryOperationError" />
   </wsdl:message>
   <wsdl:message name="ITestService_EchoWithParam_InputMessage">
     <wsdl:part name="parameters" element="tns:EchoWithParam" />
@@ -191,6 +206,12 @@
   <wsdl:message name="ITestService_Trace_OutputMessage">
     <wsdl:part name="parameters" element="tns:TraceResponse" />
   </wsdl:message>
+  <wsdl:message name="ITestService_Trace_OutOfMemoryExceptionFault_FaultMessage">
+    <wsdl:part name="detail" xmlns:q16="http://schemas.datacontract.org/2004/07/System" element="q16:OutOfMemoryException" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_Trace_RetryOperationErrorFault_FaultMessage">
+    <wsdl:part name="detail" xmlns:q17="http://hpc.microsoft.com/session/" element="q17:RetryOperationError" />
+  </wsdl:message>
   <wsdl:message name="ITestService_GenerateLoad_InputMessage">
     <wsdl:part name="parameters" element="tns:GenerateLoad" />
   </wsdl:message>
@@ -221,16 +242,16 @@
   <wsdl:message name="ITestService_RunInprocSoaJob_OutputMessage">
     <wsdl:part name="parameters" element="tns:RunInprocSoaJobResponse" />
   </wsdl:message>
-  <wsdl:message name="ITestService_GetCommonData_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetCommonData" />
-  </wsdl:message>
-  <wsdl:message name="ITestService_GetCommonData_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetCommonDataResponse" />
-  </wsdl:message>
-  <wsdl:message name="ITestService_GetCommonData_CommonDataErrorFault_FaultMessage">
-    <wsdl:part name="detail" xmlns:q15="http://schemas.datacontract.org/2004/07/AITestLib.Helper" element="q15:CommonDataError" />
-  </wsdl:message>
   <wsdl:portType name="ITestService">
+    <wsdl:operation name="CheckACLOnAzure">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITestService/CheckACLOnAzure" message="tns:ITestService_CheckACLOnAzure_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITestService/CheckACLOnAzureResponse" message="tns:ITestService_CheckACLOnAzure_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCommonData">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITestService/GetCommonData" message="tns:ITestService_GetCommonData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITestService/GetCommonDataResponse" message="tns:ITestService_GetCommonData_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ITestService/GetCommonDataCommonDataErrorFault" name="CommonDataErrorFault" message="tns:ITestService_GetCommonData_CommonDataErrorFault_FaultMessage" />
+    </wsdl:operation>
     <wsdl:operation name="Ping">
       <wsdl:input wsaw:Action="http://tempuri.org/ITestService/Ping" message="tns:ITestService_Ping_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITestService/PingResponse" message="tns:ITestService_Ping_OutputMessage" />
@@ -242,8 +263,8 @@
     <wsdl:operation name="Echo">
       <wsdl:input wsaw:Action="http://tempuri.org/ITestService/Echo" message="tns:ITestService_Echo_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITestService/EchoResponse" message="tns:ITestService_Echo_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://hpc.microsoft.com/session/AuthenticationFailure" name="AuthenticationFailureFault" message="tns:ITestService_Echo_AuthenticationFailureFault_FaultMessage" />
       <wsdl:fault wsaw:Action="http://hpc.microsoft.com/session/RetryOperationError" name="RetryOperationErrorFault" message="tns:ITestService_Echo_RetryOperationErrorFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://hpc.microsoft.com/session/AuthenticationFailure" name="AuthenticationFailureFault" message="tns:ITestService_Echo_AuthenticationFailureFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="EchoException">
       <wsdl:input wsaw:Action="http://tempuri.org/ITestService/EchoException" message="tns:ITestService_EchoException_InputMessage" />
@@ -252,24 +273,24 @@
     <wsdl:operation name="EchoFault">
       <wsdl:input wsaw:Action="http://tempuri.org/ITestService/EchoFault" message="tns:ITestService_EchoFault_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITestService/EchoFaultResponse" message="tns:ITestService_EchoFault_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/ITestService/EchoFaultArgumentNullExceptionFault" name="ArgumentNullExceptionFault" message="tns:ITestService_EchoFault_ArgumentNullExceptionFault_FaultMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/ITestService/EchoFaultExceptionFault" name="ExceptionFault" message="tns:ITestService_EchoFault_ExceptionFault_FaultMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/ITestService/EchoFaultOutOfMemoryExceptionFault" name="OutOfMemoryExceptionFault" message="tns:ITestService_EchoFault_OutOfMemoryExceptionFault_FaultMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/ITestService/EchoFaultDivideByZeroExceptionFault" name="DivideByZeroExceptionFault" message="tns:ITestService_EchoFault_DivideByZeroExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ITestService/EchoFaultExceptionFault" name="ExceptionFault" message="tns:ITestService_EchoFault_ExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ITestService/EchoFaultArgumentNullExceptionFault" name="ArgumentNullExceptionFault" message="tns:ITestService_EchoFault_ArgumentNullExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ITestService/EchoFaultOutOfMemoryExceptionFault" name="OutOfMemoryExceptionFault" message="tns:ITestService_EchoFault_OutOfMemoryExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="EchoFaultWithName">
       <wsdl:input wsaw:Action="http://tempuri.org/ITestService/EchoFaultWithName" message="tns:ITestService_EchoFaultWithName_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITestService/EchoFaultWithNameResponse" message="tns:ITestService_EchoFaultWithName_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/ITestService/EchoFaultWithNameOutOfMemoryExceptionFault" name="OutOfMemoryExceptionFault" message="tns:ITestService_EchoFaultWithName_OutOfMemoryExceptionFault_FaultMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/ITestService/EchoFaultWithNameArgumentNullExceptionFault" name="ArgumentNullExceptionFault" message="tns:ITestService_EchoFaultWithName_ArgumentNullExceptionFault_FaultMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/ITestService/EchoFaultWithNameDivideByZeroExceptionFault" name="DivideByZeroExceptionFault" message="tns:ITestService_EchoFaultWithName_DivideByZeroExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ITestService/EchoFaultWithNameArgumentNullExceptionFault" name="ArgumentNullExceptionFault" message="tns:ITestService_EchoFaultWithName_ArgumentNullExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ITestService/EchoFaultWithNameOutOfMemoryExceptionFault" name="OutOfMemoryExceptionFault" message="tns:ITestService_EchoFaultWithName_OutOfMemoryExceptionFault_FaultMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/ITestService/EchoFaultWithNameExceptionFault" name="ExceptionFault" message="tns:ITestService_EchoFaultWithName_ExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="EchoWithDelay">
       <wsdl:input wsaw:Action="http://tempuri.org/ITestService/EchoWithDelay" message="tns:ITestService_EchoWithDelay_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITestService/EchoWithDelayResponse" message="tns:ITestService_EchoWithDelay_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://hpc.microsoft.com/session/AuthenticationFailure" name="AuthenticationFailureFault" message="tns:ITestService_EchoWithDelay_AuthenticationFailureFault_FaultMessage" />
       <wsdl:fault wsaw:Action="http://hpc.microsoft.com/session/RetryOperationError" name="RetryOperationErrorFault" message="tns:ITestService_EchoWithDelay_RetryOperationErrorFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://hpc.microsoft.com/session/AuthenticationFailure" name="AuthenticationFailureFault" message="tns:ITestService_EchoWithDelay_AuthenticationFailureFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="EchoWithDelayOnSelectedNode">
       <wsdl:input wsaw:Action="http://tempuri.org/ITestService/EchoWithDelayOnSelectedNode" message="tns:ITestService_EchoWithDelayOnSelectedNode_InputMessage" />
@@ -336,6 +357,8 @@
     <wsdl:operation name="Trace">
       <wsdl:input wsaw:Action="http://tempuri.org/ITestService/Trace" message="tns:ITestService_Trace_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITestService/TraceResponse" message="tns:ITestService_Trace_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ITestService/TraceOutOfMemoryExceptionFault" name="OutOfMemoryExceptionFault" message="tns:ITestService_Trace_OutOfMemoryExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://hpc.microsoft.com/session/RetryOperationError" name="RetryOperationErrorFault" message="tns:ITestService_Trace_RetryOperationErrorFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="GenerateLoad">
       <wsdl:input wsaw:Action="http://tempuri.org/ITestService/GenerateLoad" message="tns:ITestService_GenerateLoad_InputMessage" />
@@ -357,14 +380,30 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ITestService/RunInprocSoaJob" message="tns:ITestService_RunInprocSoaJob_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITestService/RunInprocSoaJobResponse" message="tns:ITestService_RunInprocSoaJob_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetCommonData">
-      <wsdl:input wsaw:Action="http://tempuri.org/ITestService/GetCommonData" message="tns:ITestService_GetCommonData_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ITestService/GetCommonDataResponse" message="tns:ITestService_GetCommonData_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/ITestService/GetCommonDataCommonDataErrorFault" name="CommonDataErrorFault" message="tns:ITestService_GetCommonData_CommonDataErrorFault_FaultMessage" />
-    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="DefaultBinding_ITestService" type="tns:ITestService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CheckACLOnAzure">
+      <soap:operation soapAction="http://tempuri.org/ITestService/CheckACLOnAzure" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCommonData">
+      <soap:operation soapAction="http://tempuri.org/ITestService/GetCommonData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CommonDataErrorFault">
+        <soap:fault name="CommonDataErrorFault" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
     <wsdl:operation name="Ping">
       <soap:operation soapAction="http://tempuri.org/ITestService/Ping" style="document" />
       <wsdl:input>
@@ -391,11 +430,11 @@
       <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="AuthenticationFailureFault">
-        <soap:fault name="AuthenticationFailureFault" use="literal" />
-      </wsdl:fault>
       <wsdl:fault name="RetryOperationErrorFault">
         <soap:fault name="RetryOperationErrorFault" use="literal" />
+      </wsdl:fault>
+      <wsdl:fault name="AuthenticationFailureFault">
+        <soap:fault name="AuthenticationFailureFault" use="literal" />
       </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="EchoException">
@@ -415,17 +454,17 @@
       <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="ArgumentNullExceptionFault">
-        <soap:fault name="ArgumentNullExceptionFault" use="literal" />
+      <wsdl:fault name="DivideByZeroExceptionFault">
+        <soap:fault name="DivideByZeroExceptionFault" use="literal" />
       </wsdl:fault>
       <wsdl:fault name="ExceptionFault">
         <soap:fault name="ExceptionFault" use="literal" />
       </wsdl:fault>
+      <wsdl:fault name="ArgumentNullExceptionFault">
+        <soap:fault name="ArgumentNullExceptionFault" use="literal" />
+      </wsdl:fault>
       <wsdl:fault name="OutOfMemoryExceptionFault">
         <soap:fault name="OutOfMemoryExceptionFault" use="literal" />
-      </wsdl:fault>
-      <wsdl:fault name="DivideByZeroExceptionFault">
-        <soap:fault name="DivideByZeroExceptionFault" use="literal" />
       </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="EchoFaultWithName">
@@ -436,14 +475,14 @@
       <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="OutOfMemoryExceptionFault">
-        <soap:fault name="OutOfMemoryExceptionFault" use="literal" />
+      <wsdl:fault name="DivideByZeroExceptionFault">
+        <soap:fault name="DivideByZeroExceptionFault" use="literal" />
       </wsdl:fault>
       <wsdl:fault name="ArgumentNullExceptionFault">
         <soap:fault name="ArgumentNullExceptionFault" use="literal" />
       </wsdl:fault>
-      <wsdl:fault name="DivideByZeroExceptionFault">
-        <soap:fault name="DivideByZeroExceptionFault" use="literal" />
+      <wsdl:fault name="OutOfMemoryExceptionFault">
+        <soap:fault name="OutOfMemoryExceptionFault" use="literal" />
       </wsdl:fault>
       <wsdl:fault name="ExceptionFault">
         <soap:fault name="ExceptionFault" use="literal" />
@@ -457,11 +496,11 @@
       <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="AuthenticationFailureFault">
-        <soap:fault name="AuthenticationFailureFault" use="literal" />
-      </wsdl:fault>
       <wsdl:fault name="RetryOperationErrorFault">
         <soap:fault name="RetryOperationErrorFault" use="literal" />
+      </wsdl:fault>
+      <wsdl:fault name="AuthenticationFailureFault">
+        <soap:fault name="AuthenticationFailureFault" use="literal" />
       </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="EchoWithDelayOnSelectedNode">
@@ -613,6 +652,12 @@
       <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="OutOfMemoryExceptionFault">
+        <soap:fault name="OutOfMemoryExceptionFault" use="literal" />
+      </wsdl:fault>
+      <wsdl:fault name="RetryOperationErrorFault">
+        <soap:fault name="RetryOperationErrorFault" use="literal" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="GenerateLoad">
       <soap:operation soapAction="http://tempuri.org/ITestService/GenerateLoad" style="document" />
@@ -659,22 +704,10 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetCommonData">
-      <soap:operation soapAction="http://tempuri.org/ITestService/GetCommonData" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-      <wsdl:fault name="CommonDataErrorFault">
-        <soap:fault name="CommonDataErrorFault" use="literal" />
-      </wsdl:fault>
-    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="ITestService">
       <wsdl:port name="DefaultBinding_ITestService" binding="tns:DefaultBinding_ITestService">
-          <soap:address location="http://localhost:9200/Broker" />
+          <soap:address location="https://localhost/Broker" />
       </wsdl:port>
   </wsdl:service>
 

@@ -23,7 +23,8 @@ import com.microsoft.schemas._2003._10.serialization.arrays.ArrayOfKeyValueOfstr
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="Name" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="called" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
+ *         &lt;element name="callIn" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
+ *         &lt;element name="callOut" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="envs" type="{http://schemas.microsoft.com/2003/10/Serialization/Arrays}ArrayOfKeyValueOfstringstring" minOccurs="0"/>
  *         &lt;element name="jobID" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="onExitCalled" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
@@ -44,7 +45,8 @@ import com.microsoft.schemas._2003._10.serialization.arrays.ArrayOfKeyValueOfstr
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ComputerInfo", propOrder = {
     "name",
-    "called",
+    "callIn",
+    "callOut",
     "envs",
     "jobID",
     "onExitCalled",
@@ -59,9 +61,10 @@ public class ComputerInfo {
 
     @XmlElementRef(name = "Name", namespace = "http://schemas.datacontract.org/2004/07/services", type = JAXBElement.class, required = false)
     protected JAXBElement<String> name;
-    @XmlSchemaType(name = "dateTime")
-    @XmlElement(name="called", namespace="http://schemas.datacontract.org/2004/07/services")
-    protected XMLGregorianCalendar called;
+    @XmlElement(name = "callIn", namespace = "http://schemas.datacontract.org/2004/07/services")
+    protected XMLGregorianCalendar callIn;
+    @XmlElement(name = "callOut", namespace = "http://schemas.datacontract.org/2004/07/services")
+    protected XMLGregorianCalendar callOut;
     @XmlElementRef(name = "envs", namespace = "http://schemas.datacontract.org/2004/07/services", type = JAXBElement.class, required = false)
     protected JAXBElement<ArrayOfKeyValueOfstringstring> envs;
     @XmlElement(name = "jobID", namespace = "http://schemas.datacontract.org/2004/07/services")
@@ -81,12 +84,12 @@ public class ComputerInfo {
     @XmlElement(name = "ts", namespace = "http://schemas.datacontract.org/2004/07/services")
     protected TestStruct ts;
 
-    public ComputerInfo()
+    public ComputerInfo() 
     {
         ObjectFactory fact = new ObjectFactory();
         envs = fact.createComputerInfoEnvs(new com.microsoft.schemas._2003._10.serialization.arrays.ArrayOfKeyValueOfstringstring());
     }
-        
+    
     /**
      * Gets the value of the name property.
      * 
@@ -112,27 +115,51 @@ public class ComputerInfo {
     }
 
     /**
-     * Gets the value of the called property.
+     * Gets the value of the callIn property.
      * 
      * @return
      *     possible object is
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public XMLGregorianCalendar getCalled() {
-        return called;
+    public XMLGregorianCalendar getCallIn() {
+        return callIn;
     }
 
     /**
-     * Sets the value of the called property.
+     * Sets the value of the callIn property.
      * 
      * @param value
      *     allowed object is
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public void setCalled(XMLGregorianCalendar value) {
-        this.called = value;
+    public void setCallIn(XMLGregorianCalendar value) {
+        this.callIn = value;
+    }
+
+    /**
+     * Gets the value of the callOut property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link XMLGregorianCalendar }
+     *     
+     */
+    public XMLGregorianCalendar getCallOut() {
+        return callOut;
+    }
+
+    /**
+     * Sets the value of the callOut property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link XMLGregorianCalendar }
+     *     
+     */
+    public void setCallOut(XMLGregorianCalendar value) {
+        this.callOut = value;
     }
 
     /**

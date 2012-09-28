@@ -137,7 +137,7 @@ public class IEchoSvcImpl implements IEchoSvc {
         ServiceContext.Logger.traceEvent(Level.ALL, input);
         ServiceContext.Logger.traceEvent(Level.INFO, "Start to use ETW tracing...");
         ETWTraceEvent etw =new ETWTraceEvent(wsContext);
-        etw.TraceInfo(input);
+        etw.TraceInformation(input);
 
         String userData = getUserData();
         ServiceContext.Logger.traceEvent(Level.INFO, "UserData : " + userData);

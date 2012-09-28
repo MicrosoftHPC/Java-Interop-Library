@@ -78,6 +78,7 @@ import javax.xml.ws.WebServiceFeature;
 import javax.xml.ws.soap.AddressingFeature;
 
 import org.apache.cxf.Bus;
+import org.apache.cxf.binding.soap.interceptor.Soap11FaultOutInterceptor;
 import org.apache.cxf.endpoint.Server;
 import org.apache.cxf.feature.AbstractFeature;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
@@ -500,10 +501,15 @@ public class HpcServiceHostWrapper
             host.setAddress(listenUri);
             host.setServiceBean(userclass.newInstance());
             
+            LoggingInInterceptor login = new LoggingInInterceptor();
+            LoggingOutInterceptor logout = new LoggingOutInterceptor();
             // log the in/out bound message
-            host.getInInterceptors().add(new LoggingInInterceptor());
-            host.getOutInterceptors().add(new LoggingOutInterceptor());
-            
+            host.getInInterceptors().add(login);
+            host.getOutInterceptors().add(logout);
+            host.getOutFaultInterceptors().add(logout);
+            host.getOutFaultInterceptors().add(
+                  new AddHeaderOutInterceptor(this));
+
 
             // if users specify the WSDL location, try to find it from jar
             WebService annotation = userclass
@@ -535,10 +541,8 @@ public class HpcServiceHostWrapper
                         new MessagePreemptionInInterceptor(this));
                 host.getOutInterceptors().add(
                         new MessagePreemptionOutInterceptor(this));
-                host.getOutFaultInterceptors().add(
-                        new AddHeaderOutInterceptor(this));
             }
-            
+           
             //enable the debug to stack trace in fault soap message
             host.getBus().setProperty( "faultStackTraceEnabled", "true");             
             TraceHelper.traceInformation(StringResource

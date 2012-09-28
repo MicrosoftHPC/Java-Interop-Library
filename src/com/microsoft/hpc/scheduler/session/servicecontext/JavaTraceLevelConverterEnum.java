@@ -70,13 +70,21 @@ package com.microsoft.hpc.scheduler.session.servicecontext;
  * @description Convert the ETW trace level to java trace level
  */
 public enum JavaTraceLevelConverterEnum {
-     
-    Verbose("ALL"),     
-    Critical("SEVERE"),
-    Information("INFO"),
     Off("OFF"),
+    
+    Critical("SEVERE"), 
+    Error("SEVERE"),
     Warning("WARNING"),
-    Error("SEVERE");
+    
+    // below are only available in System.Diagnostics.TraceEventType 
+    Start("START"),
+    Stop("STOP"),
+    Suspend("SUSPEND"),
+    Resume("RESUME"),
+    Transfer("TRANSFER"),
+    
+    Information("INFO"),
+    Verbose("ALL");
     
     private final String value; 
     
@@ -86,4 +94,30 @@ public enum JavaTraceLevelConverterEnum {
     public String getValue() {
         return value;
     }
+    
+    public static JavaTraceLevelConverterEnum convertFromInteger(int value) {
+        switch(value) {
+        case 0:
+            return Off;
+        case 1:
+            return Critical;
+        case 2:
+            return Error;
+        case 4:
+            return Warning;
+        case 8:
+            return Information;
+        case 16:
+            return Verbose;
+        case 256:
+        case 512:
+        case 1024:
+        case 2048:
+        case 4096:
+            return Information;
+        }
+        return null;
+    }
+    
+    
 }

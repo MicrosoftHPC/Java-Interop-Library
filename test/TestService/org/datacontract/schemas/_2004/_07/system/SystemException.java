@@ -27,8 +27,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "SystemException")
 @XmlSeeAlso({
     ArgumentException.class,
-    ArithmeticException.class,
-    OutOfMemoryException.class
+    OutOfMemoryException.class,
+    ArithmeticException.class
 })
 public class SystemException
     extends Exception

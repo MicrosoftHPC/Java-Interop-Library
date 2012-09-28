@@ -134,7 +134,7 @@ public class Main
 
             // set the Environment Variable for the debug
             Environment.setEnvironmentVariable(Constant.JobIDEnvVar, param.getJobIdParameter().getValue().toString());
-            Environment.setEnvironmentVariable(Constant.TaskSystemIDEnvVar, param.getJobIdParameter().getValue().toString());
+            Environment.setEnvironmentVariable(Constant.TaskSystemIDEnvVar, param.getTaskIdParameter().getValue().toString());
             Environment.setEnvironmentVariable(Constant.CoreIdsEnvVar, param.getCoreIdParameter().getValue().toString());
             Environment.setEnvironmentVariable(Constant.RegistryPathEnv, param.getPathParameter().getValue());
             Environment.setEnvironmentVariable(Constant.ServiceConfigFileNameEnvVar, param.getFileNameParameter()

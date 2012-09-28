@@ -144,7 +144,7 @@ public class MessagePreemptionOutInterceptor extends AbstractSoapInterceptor
                 {
                     int messageCount = this.hpcHostWrapper.processingMessageIds
                             .size();
-                    InterceptorUtility.addMessageHeader(message,
+                    InterceptorUtility.addOrUpdateMessageHeader(message,
                             Constant.MessageHeaderPreemption,
                             Constant.HpcHeaderNS, messageCount);
                 }

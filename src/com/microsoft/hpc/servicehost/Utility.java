@@ -124,6 +124,7 @@ public class Utility
             }
             TraceHelper.traceInformation("Trace Level is "+serviceRegistration.traceLevel);
             ServiceContext.setTraceLevel(serviceRegistration.traceLevel);
+            ServiceContext.setSoaDiagTraceLevel(serviceRegistration.soaDiagTraceLevel);
 
         } catch (Exception e)
         {

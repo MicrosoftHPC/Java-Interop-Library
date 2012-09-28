@@ -90,9 +90,12 @@ public class ServiceRegistration
     private final String serviceContractAttributeName = "contract";
     private final String serviceTypeAttributeName = "ServiceType";
     private final String includeFaultedExceptionAttributeName = "includeFaultedException";
+    private final String soaDiagTraceLevelAttributeName = "soaDiagTraceLevel";
     public Node serviceConfigNode = null;
     public String serviceAssemblyFullPath = null;
     public String traceLevel = "OFF";
+    public String soaDiagTraceLevel = "Off";
+    
     private boolean includeFaultedException;
 
     public boolean isIncludeFaultedException()
@@ -190,6 +193,16 @@ public class ServiceRegistration
 
                     } catch (Exception e)
                     {
+                        TraceHelper.traceError(e.toString());
+                    }
+                    
+                    try 
+                    {
+                        if(map.getNamedItem(soaDiagTraceLevelAttributeName) != null &&
+                                map.getNamedItem(soaDiagTraceLevelAttributeName).getNodeValue() != null) {
+                            soaDiagTraceLevel = map.getNamedItem(soaDiagTraceLevelAttributeName).getNodeValue().split(",")[0];
+                        }
+                    } catch(Exception e) {
                         TraceHelper.traceError(e.toString());
                     }
                 }

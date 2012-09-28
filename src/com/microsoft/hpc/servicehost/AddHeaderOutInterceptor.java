@@ -64,10 +64,32 @@ Windows HPC Server.
 */
 package com.microsoft.hpc.servicehost;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Pattern;
+
+import javax.xml.namespace.QName;
+import javax.xml.soap.SOAPException;
+
+import org.apache.cxf.binding.soap.SoapFault;
+import org.apache.cxf.binding.soap.SoapHeader;
 import org.apache.cxf.binding.soap.SoapMessage;
 import org.apache.cxf.binding.soap.interceptor.AbstractSoapInterceptor;
+import org.apache.cxf.binding.soap.interceptor.Soap11FaultOutInterceptor;
+import org.apache.cxf.common.logging.LogUtils;
+import org.apache.cxf.headers.Header;
+import org.apache.cxf.helpers.CastUtils;
 import org.apache.cxf.interceptor.Fault;
+import org.apache.cxf.message.Message;
 import org.apache.cxf.phase.Phase;
+import org.w3c.dom.Element;
+
+import com.microsoft.hpc.scheduler.session.servicecontext.ServiceContext;
+import com.microsoft.hpc.session.RetryOperationError;
 
 /**
  * @author t-junchw
@@ -76,6 +98,7 @@ import org.apache.cxf.phase.Phase;
  */
 public class AddHeaderOutInterceptor extends AbstractSoapInterceptor
 {
+    private static final Logger LOG = LogUtils.getL7dLogger(AddHeaderOutInterceptor.class);
     HpcServiceHostWrapper hpcHostWrapper;
 
     /**
@@ -83,7 +106,7 @@ public class AddHeaderOutInterceptor extends AbstractSoapInterceptor
      */
     public AddHeaderOutInterceptor(HpcServiceHostWrapper wrapper)
     {
-        super(Phase.WRITE);
+        super(Phase.PRE_PROTOCOL);
         this.hpcHostWrapper = wrapper;
     }
 
@@ -94,16 +117,37 @@ public class AddHeaderOutInterceptor extends AbstractSoapInterceptor
     public void handleMessage(SoapMessage message) throws Fault
     {
 
-        if (hpcHostWrapper.enableMessageLevelPreemption)
-	{
+        if (hpcHostWrapper.enableMessageLevelPreemption) {
             String guid = (String) message.getExchange().get("ID");
             if (guid == null)
-                return ;
-            
-            InterceptorUtility.addMessageHeader(message, "Action",
-                    "http://www.w3.org/2005/08/addressing",
-                    com.microsoft.hpc.scheduler.session.fault.SvcHostSessionFault.Action);
+                return;
+
+            // InterceptorUtility.addOrUpdateMessageHeader(message, "Action",
+            // "http://www.w3.org/2005/08/addressing",
+            // com.microsoft.hpc.scheduler.session.fault.SvcHostSessionFault.Action);
         }
+        
+        Fault f = (Fault) message.getContent(Exception.class);
+        QName qn = new QName("http://www.w3.org/2005/08/addressing", "Action");
+        Header header = message.getHeader(qn);
+        if (header.getObject() != null) {
+            Element root = (Element) header.getObject();
+            if (Pattern
+                    .compile(Pattern.quote("RetryOperationError"),
+                            Pattern.CASE_INSENSITIVE)
+                    .matcher(root.getTextContent()).find()) {
+                root.setTextContent("http://hpc.microsoft.com/session/RetryOperationError");
+                RetryOperationError error = new RetryOperationError();
+                Element detailElement = InterceptorUtility
+                        .createDetailElement(error);
+                f.setDetail(detailElement);
+                message.setContextualProperty(
+                        org.apache.cxf.message.Message.FAULT_STACKTRACE_ENABLED,
+                        "false"); // disable stack trace to make it compatible
+                                  // with broker
+            }
+        }
+
     }
 
 }

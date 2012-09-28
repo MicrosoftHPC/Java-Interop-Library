@@ -1,9 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:import namespace="http://schemas.datacontract.org/2004/07/services" />
   <xs:import namespace="http://schemas.datacontract.org/2004/07/System" />
-  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:element name="CheckACLOnAzure">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckACLOnAzureResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CheckACLOnAzureResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCommonData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="refID" type="xs:int" />
+        <xs:element minOccurs="0" name="sleepBeforeGet" xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/" type="q1:duration" />
+        <xs:element minOccurs="0" name="sleepAfterGet" xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/" type="q2:duration" />
+        <xs:element minOccurs="0" name="dataClientId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="expectedMd5Hash" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="testActionId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCommonDataResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetCommonDataResult" nillable="true" xmlns:q3="http://schemas.datacontract.org/2004/07/services" type="q3:ComputerInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="Ping">
     <xs:complexType>
       <xs:sequence />
@@ -40,7 +71,7 @@
   <xs:element name="EchoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="EchoResult" nillable="true" xmlns:q1="http://schemas.datacontract.org/2004/07/services" type="q1:ComputerInfo" />
+        <xs:element minOccurs="0" name="EchoResult" nillable="true" xmlns:q4="http://schemas.datacontract.org/2004/07/services" type="q4:ComputerInfo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -48,14 +79,14 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="refID" type="xs:int" />
-        <xs:element minOccurs="0" name="ex" nillable="true" xmlns:q2="http://schemas.datacontract.org/2004/07/System" type="q2:Exception" />
+        <xs:element minOccurs="0" name="ex" nillable="true" xmlns:q5="http://schemas.datacontract.org/2004/07/System" type="q5:Exception" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="EchoExceptionResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="EchoExceptionResult" nillable="true" xmlns:q3="http://schemas.datacontract.org/2004/07/services" type="q3:ComputerInfo" />
+        <xs:element minOccurs="0" name="EchoExceptionResult" nillable="true" xmlns:q6="http://schemas.datacontract.org/2004/07/services" type="q6:ComputerInfo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -63,14 +94,14 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="refID" type="xs:int" />
-        <xs:element minOccurs="0" name="ex" nillable="true" xmlns:q4="http://schemas.datacontract.org/2004/07/System" type="q4:Exception" />
+        <xs:element minOccurs="0" name="ex" nillable="true" xmlns:q7="http://schemas.datacontract.org/2004/07/System" type="q7:Exception" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="EchoFaultResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="EchoFaultResult" nillable="true" xmlns:q5="http://schemas.datacontract.org/2004/07/services" type="q5:ComputerInfo" />
+        <xs:element minOccurs="0" name="EchoFaultResult" nillable="true" xmlns:q8="http://schemas.datacontract.org/2004/07/services" type="q8:ComputerInfo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -85,7 +116,7 @@
   <xs:element name="EchoFaultWithNameResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="EchoFaultWithNameResult" nillable="true" xmlns:q6="http://schemas.datacontract.org/2004/07/services" type="q6:ComputerInfo" />
+        <xs:element minOccurs="0" name="EchoFaultWithNameResult" nillable="true" xmlns:q9="http://schemas.datacontract.org/2004/07/services" type="q9:ComputerInfo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -93,14 +124,14 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="refID" type="xs:int" />
-        <xs:element minOccurs="0" name="delay" xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/" type="q7:duration" />
+        <xs:element minOccurs="0" name="delay" xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/" type="q10:duration" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="EchoWithDelayResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="EchoWithDelayResult" nillable="true" xmlns:q8="http://schemas.datacontract.org/2004/07/services" type="q8:ComputerInfo" />
+        <xs:element minOccurs="0" name="EchoWithDelayResult" nillable="true" xmlns:q11="http://schemas.datacontract.org/2004/07/services" type="q11:ComputerInfo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -109,15 +140,15 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="refID" type="xs:int" />
         <xs:element minOccurs="0" name="selectedNode" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="delayOnSelectedNode" xmlns:q9="http://schemas.microsoft.com/2003/10/Serialization/" type="q9:duration" />
-        <xs:element minOccurs="0" name="delayOnOtherNodes" xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/" type="q10:duration" />
+        <xs:element minOccurs="0" name="delayOnSelectedNode" xmlns:q12="http://schemas.microsoft.com/2003/10/Serialization/" type="q12:duration" />
+        <xs:element minOccurs="0" name="delayOnOtherNodes" xmlns:q13="http://schemas.microsoft.com/2003/10/Serialization/" type="q13:duration" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="EchoWithDelayOnSelectedNodeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="EchoWithDelayOnSelectedNodeResult" nillable="true" xmlns:q11="http://schemas.datacontract.org/2004/07/services" type="q11:ComputerInfo" />
+        <xs:element minOccurs="0" name="EchoWithDelayOnSelectedNodeResult" nillable="true" xmlns:q14="http://schemas.datacontract.org/2004/07/services" type="q14:ComputerInfo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -132,7 +163,7 @@
   <xs:element name="EchoWithFailResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="EchoWithFailResult" nillable="true" xmlns:q12="http://schemas.datacontract.org/2004/07/services" type="q12:ComputerInfo" />
+        <xs:element minOccurs="0" name="EchoWithFailResult" nillable="true" xmlns:q15="http://schemas.datacontract.org/2004/07/services" type="q15:ComputerInfo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -145,7 +176,7 @@
         <xs:element minOccurs="0" name="i64" type="xs:long" />
         <xs:element minOccurs="0" name="i32_1" type="xs:int" />
         <xs:element minOccurs="0" name="i32_2" type="xs:int" />
-        <xs:element minOccurs="0" name="e" xmlns:q13="http://schemas.datacontract.org/2004/07/services" type="q13:TestEnum" />
+        <xs:element minOccurs="0" name="e" xmlns:q16="http://schemas.datacontract.org/2004/07/services" type="q16:TestEnum" />
         <xs:element minOccurs="0" name="s" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -153,7 +184,7 @@
   <xs:element name="EchoWithParamResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="EchoWithParamResult" nillable="true" xmlns:q14="http://schemas.datacontract.org/2004/07/services" type="q14:ComputerInfo" />
+        <xs:element minOccurs="0" name="EchoWithParamResult" nillable="true" xmlns:q17="http://schemas.datacontract.org/2004/07/services" type="q17:ComputerInfo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -161,14 +192,14 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="refID" type="xs:int" />
-        <xs:element minOccurs="0" name="s" xmlns:q15="http://schemas.datacontract.org/2004/07/services" type="q15:TestStruct" />
+        <xs:element minOccurs="0" name="s" xmlns:q18="http://schemas.datacontract.org/2004/07/services" type="q18:TestStruct" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="EchoStructResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="EchoStructResult" nillable="true" xmlns:q16="http://schemas.datacontract.org/2004/07/services" type="q16:ComputerInfo" />
+        <xs:element minOccurs="0" name="EchoStructResult" nillable="true" xmlns:q19="http://schemas.datacontract.org/2004/07/services" type="q19:ComputerInfo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -176,8 +207,8 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="refID" type="xs:int" />
-        <xs:element minOccurs="0" name="runTime" xmlns:q17="http://schemas.microsoft.com/2003/10/Serialization/" type="q17:duration" />
-        <xs:element minOccurs="0" name="exitDelay" xmlns:q18="http://schemas.microsoft.com/2003/10/Serialization/" type="q18:duration" />
+        <xs:element minOccurs="0" name="runTime" xmlns:q20="http://schemas.microsoft.com/2003/10/Serialization/" type="q20:duration" />
+        <xs:element minOccurs="0" name="exitDelay" xmlns:q21="http://schemas.microsoft.com/2003/10/Serialization/" type="q21:duration" />
         <xs:element minOccurs="0" name="logPath" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -185,7 +216,7 @@
   <xs:element name="EchoWithOnExitResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="EchoWithOnExitResult" nillable="true" xmlns:q19="http://schemas.datacontract.org/2004/07/services" type="q19:ComputerInfo" />
+        <xs:element minOccurs="0" name="EchoWithOnExitResult" nillable="true" xmlns:q22="http://schemas.datacontract.org/2004/07/services" type="q22:ComputerInfo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -199,7 +230,7 @@
   <xs:element name="EchoAppSettingsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="EchoAppSettingsResult" nillable="true" xmlns:q20="http://schemas.microsoft.com/2003/10/Serialization/Arrays" type="q20:ArrayOfKeyValueOfstringstring" />
+        <xs:element minOccurs="0" name="EchoAppSettingsResult" nillable="true" xmlns:q23="http://schemas.microsoft.com/2003/10/Serialization/Arrays" type="q23:ArrayOfKeyValueOfstringstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -220,14 +251,14 @@
   <xs:element name="EchoClass">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="cls" nillable="true" xmlns:q21="http://schemas.datacontract.org/2004/07/services" type="q21:ClassFoo" />
+        <xs:element minOccurs="0" name="cls" nillable="true" xmlns:q24="http://schemas.datacontract.org/2004/07/services" type="q24:ClassFoo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="EchoClassResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="EchoClassResult" nillable="true" xmlns:q22="http://schemas.datacontract.org/2004/07/services" type="q22:ClassFoo" />
+        <xs:element minOccurs="0" name="EchoClassResult" nillable="true" xmlns:q25="http://schemas.datacontract.org/2004/07/services" type="q25:ClassFoo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -249,14 +280,14 @@
   <xs:element name="EchoObject2">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="obj" nillable="true" xmlns:q23="http://schemas.datacontract.org/2004/07/services" type="q23:ClassObj" />
+        <xs:element minOccurs="0" name="obj" nillable="true" xmlns:q26="http://schemas.datacontract.org/2004/07/services" type="q26:ClassObj" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="EchoObject2Response">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="EchoObject2Result" nillable="true" xmlns:q24="http://schemas.datacontract.org/2004/07/services" type="q24:ClassObj" />
+        <xs:element minOccurs="0" name="EchoObject2Result" nillable="true" xmlns:q27="http://schemas.datacontract.org/2004/07/services" type="q27:ClassObj" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -278,21 +309,21 @@
   <xs:element name="EchoObject4">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="obj" nillable="true" xmlns:q25="http://schemas.datacontract.org/2004/07/services" type="q25:ClassObj" />
+        <xs:element minOccurs="0" name="obj" nillable="true" xmlns:q28="http://schemas.datacontract.org/2004/07/services" type="q28:ClassObj" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="EchoObject4Response">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="EchoObject4Result" nillable="true" xmlns:q26="http://schemas.datacontract.org/2004/07/services" type="q26:ClassObj" />
+        <xs:element minOccurs="0" name="EchoObject4Result" nillable="true" xmlns:q29="http://schemas.datacontract.org/2004/07/services" type="q29:ClassObj" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ConsumeCPU">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="time" xmlns:q27="http://schemas.microsoft.com/2003/10/Serialization/" type="q27:duration" />
+        <xs:element minOccurs="0" name="time" xmlns:q30="http://schemas.microsoft.com/2003/10/Serialization/" type="q30:duration" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -330,14 +361,18 @@
   <xs:element name="Trace">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="msg" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="refID" type="xs:int" />
+        <xs:element minOccurs="0" name="traceMsgs" nillable="true" xmlns:q31="http://schemas.microsoft.com/2003/10/Serialization/Arrays" type="q31:ArrayOfstring" />
+        <xs:element minOccurs="0" name="sleepBeforeTrace" xmlns:q32="http://schemas.microsoft.com/2003/10/Serialization/" type="q32:duration" />
+        <xs:element minOccurs="0" name="sleepAfterTrace" xmlns:q33="http://schemas.microsoft.com/2003/10/Serialization/" type="q33:duration" />
+        <xs:element minOccurs="0" name="testActionId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="TraceResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="TraceResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="TraceResult" nillable="true" xmlns:q34="http://schemas.datacontract.org/2004/07/services" type="q34:ComputerInfo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -354,7 +389,7 @@
   <xs:element name="GenerateLoadResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="GenerateLoadResult" nillable="true" xmlns:q28="http://schemas.datacontract.org/2004/07/services" type="q28:StatisticInfo" />
+        <xs:element minOccurs="0" name="GenerateLoadResult" nillable="true" xmlns:q35="http://schemas.datacontract.org/2004/07/services" type="q35:StatisticInfo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -362,7 +397,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="refID" type="xs:int" />
-        <xs:element minOccurs="0" name="sleepTime" xmlns:q29="http://schemas.microsoft.com/2003/10/Serialization/" type="q29:duration" />
+        <xs:element minOccurs="0" name="sleepTime" xmlns:q36="http://schemas.microsoft.com/2003/10/Serialization/" type="q36:duration" />
         <xs:element minOccurs="0" name="input_data" nillable="true" type="xs:base64Binary" />
         <xs:element minOccurs="0" name="output_data_size" type="xs:int" />
       </xs:sequence>
@@ -371,7 +406,7 @@
   <xs:element name="GenerateLoadWithResponseDataResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="GenerateLoadWithResponseDataResult" nillable="true" xmlns:q30="http://schemas.datacontract.org/2004/07/services" type="q30:StatisticInfo" />
+        <xs:element minOccurs="0" name="GenerateLoadWithResponseDataResult" nillable="true" xmlns:q37="http://schemas.datacontract.org/2004/07/services" type="q37:StatisticInfo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -388,7 +423,7 @@
   <xs:element name="GenerateLoadWithInputFileResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="GenerateLoadWithInputFileResult" nillable="true" xmlns:q31="http://schemas.datacontract.org/2004/07/services" type="q31:StatisticInfo" />
+        <xs:element minOccurs="0" name="GenerateLoadWithInputFileResult" nillable="true" xmlns:q38="http://schemas.datacontract.org/2004/07/services" type="q38:StatisticInfo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -402,7 +437,7 @@
   <xs:element name="ServiceSideAsyncEchoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="ServiceSideAsyncEchoResult" nillable="true" xmlns:q32="http://schemas.datacontract.org/2004/07/services" type="q32:ComputerInfo" />
+        <xs:element minOccurs="0" name="ServiceSideAsyncEchoResult" nillable="true" xmlns:q39="http://schemas.datacontract.org/2004/07/services" type="q39:ComputerInfo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -415,25 +450,6 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="RunInprocSoaJobResult" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetCommonData">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="refID" type="xs:int" />
-        <xs:element minOccurs="0" name="sleepBeforeGet" xmlns:q33="http://schemas.microsoft.com/2003/10/Serialization/" type="q33:duration" />
-        <xs:element minOccurs="0" name="sleepAfterGet" xmlns:q34="http://schemas.microsoft.com/2003/10/Serialization/" type="q34:duration" />
-        <xs:element minOccurs="0" name="dataClientId" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="expectedMd5Hash" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="testActionId" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetCommonDataResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="GetCommonDataResult" nillable="true" xmlns:q35="http://schemas.datacontract.org/2004/07/services" type="q35:ComputerInfo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

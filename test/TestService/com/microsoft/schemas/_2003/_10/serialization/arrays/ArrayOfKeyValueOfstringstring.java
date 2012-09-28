@@ -45,7 +45,7 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class ArrayOfKeyValueOfstringstring {
 
-    @XmlElement(name = "KeyValueOfstringstring", namespace = "http://schemas.microsoft.com/2003/10/Serialization/Arrays")
+    @XmlElement(name = "KeyValueOfstringstring")
     protected List<ArrayOfKeyValueOfstringstring.KeyValueOfstringstring> keyValueOfstringstring;
 
     /**
@@ -105,9 +105,9 @@ public class ArrayOfKeyValueOfstringstring {
     })
     public static class KeyValueOfstringstring {
 
-        @XmlElement(name = "Key", namespace = "http://schemas.microsoft.com/2003/10/Serialization/Arrays", required = true, nillable = true)
+        @XmlElement(name = "Key", required = true, nillable = true)
         protected String key;
-        @XmlElement(name = "Value", namespace = "http://schemas.microsoft.com/2003/10/Serialization/Arrays", required = true, nillable = true)
+        @XmlElement(name = "Value", required = true, nillable = true)
         protected String value;
 
         /**

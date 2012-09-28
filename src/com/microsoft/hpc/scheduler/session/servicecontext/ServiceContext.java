@@ -84,6 +84,7 @@ public final class ServiceContext
      * @field the instance of logger to do the service tracing
      */
     public static LoggerContext Logger;
+    
 
     /**
      * @field lock object for bDataServerInfoInitialized
@@ -116,6 +117,23 @@ public final class ServiceContext
             Logger = new LoggerContext(traceLevel);
         }
     }
+    
+    private static JavaTraceLevelConverterEnum soaDiagTraceLevel = JavaTraceLevelConverterEnum.Off;
+    
+    public static void setSoaDiagTraceLevel(String traceLevel)
+    {
+        try {
+            soaDiagTraceLevel = JavaTraceLevelConverterEnum.valueOf(traceLevel); 
+        } catch (Exception e) {
+            // just swallow the enum parse exception, and fallback to Off trace level
+        }
+    }
+    
+    public static JavaTraceLevelConverterEnum getSoaDiagTraceLevel()
+    {
+        return soaDiagTraceLevel;
+    }
+
 
     /**
      * @description Used to manually fire Exiting event. Called within session

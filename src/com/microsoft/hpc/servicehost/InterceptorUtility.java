@@ -84,6 +84,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 import com.microsoft.hpc.scheduler.session.Constant;
+import com.microsoft.hpc.session.RetryOperationError;
 
 /**
  * @author t-junchw
@@ -100,17 +101,31 @@ public final class InterceptorUtility
      * @param namespace
      * @param data
      */
-    static public void addMessageHeader(SoapMessage message, String name,
+    static public void addOrUpdateMessageHeader(SoapMessage message, String name,
             String namespace, Object data)
     {
         Document document = DOMUtils.createDocument();
         Element root = document.createElementNS(namespace, name);
         root.setTextContent(data.toString());
-
-        List<Header> headers = message.getHeaders();
+        
         QName headname = new QName(namespace, name);
-        SoapHeader header = new SoapHeader(headname, root);
-        headers.add(header);
+        SoapHeader header = null; 
+        List<Header> headers = message.getHeaders();
+        for(Header h : headers) 
+        {
+            if (h.getName().getLocalPart() == name && 
+                    h.getName().getNamespaceURI() == namespace) {
+                header = (SoapHeader) h;
+                break;
+            }
+        }
+        if(header == null) {
+            header = new SoapHeader(headname, root);
+            headers.add(header);
+        } else {
+            ((Element)header.getObject()).setTextContent(data.toString());
+        }
+        
     }
 
     /**
@@ -145,6 +160,43 @@ public final class InterceptorUtility
                         .setValue(Constant.XMLSchemaInstanceNS);
                 DocImportedNode.getAttributes().setNamedItem(sessionAttr);
             }
+
+            // debug the jaxb convert result
+            TransformerFactory tfactory = TransformerFactory.newInstance();
+            Transformer transformer = tfactory.newTransformer();
+            DOMSource source = new DOMSource(doc);
+            transformer.transform(source, new StreamResult(System.out));
+
+            return detail;
+        } catch (Exception e)
+        {
+            return detail;
+        }
+    }
+    
+    /**
+     * @description create fault message detail
+     * @param sessionFault
+     * @return
+     */
+    public static Element createDetailElement(RetryOperationError error)
+    {
+        Element detail = null;
+        try
+        {
+            Document detailDocument = DOMUtils.createDocument();
+            detail = detailDocument.createElement("detail");
+            Document doc = DOMUtils.createDocument();
+            JAXBContext jaxbContext = JAXBContext
+                    .newInstance(RetryOperationError.class);
+
+            // Java Class converted to XML
+            Marshaller marshaller = jaxbContext.createMarshaller();
+            marshaller.marshal(error, doc);
+
+            Node DocImportedNode = detailDocument.importNode(
+                    doc.getDocumentElement(), true);
+            detail.appendChild(DocImportedNode);
 
             // debug the jaxb convert result
             TransformerFactory tfactory = TransformerFactory.newInstance();

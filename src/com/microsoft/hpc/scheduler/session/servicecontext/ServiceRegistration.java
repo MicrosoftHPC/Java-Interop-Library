@@ -96,11 +96,13 @@ public class ServiceRegistration
     private final String serviceTypeAttributeName = "ServiceType";
     private final String includeFaultedExceptionAttributeName = "includeFaultedException";
     private final String textEncodingPath = "//configuration/system.serviceModel/bindings/customBinding/binding[@name='Microsoft.Hpc.BackEndBinding']/textMessageEncoding[@messageVersion='Soap11WSAddressing10']";
+    private final String soaDiagTraceLevelAttributeName = "soaDiagTraceLevel";
     public Node serviceConfigNode = null;
     public String serviceAssemblyFullPath = null;
     public String traceLevel = "OFF";
     private boolean includeFaultedException;
     private boolean enableWSAddressing = false;
+    public String soaDiagTraceLevel = "Off";
 
 
     public boolean isIncludeFaultedException()
@@ -205,6 +207,16 @@ public class ServiceRegistration
 
                     } catch (Exception e)
                     {
+                        TraceHelper.traceError(e.toString());
+                    }
+                    
+                    try 
+                    {
+                        if(map.getNamedItem(soaDiagTraceLevelAttributeName) != null &&
+                                map.getNamedItem(soaDiagTraceLevelAttributeName).getNodeValue() != null) {
+                            soaDiagTraceLevel = map.getNamedItem(soaDiagTraceLevelAttributeName).getNodeValue().split(",")[0];
+                        }
+                    } catch(Exception e) {
                         TraceHelper.traceError(e.toString());
                     }
                 }

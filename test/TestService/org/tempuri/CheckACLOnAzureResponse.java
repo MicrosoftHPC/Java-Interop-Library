@@ -7,7 +7,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import org.datacontract.schemas._2004._07.services.ComputerInfo;
 
 
 /**
@@ -20,7 +19,7 @@ import org.datacontract.schemas._2004._07.services.ComputerInfo;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="TraceResult" type="{http://schemas.datacontract.org/2004/07/services}ComputerInfo" minOccurs="0"/>
+ *         &lt;element name="CheckACLOnAzureResult" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -31,36 +30,36 @@ import org.datacontract.schemas._2004._07.services.ComputerInfo;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "traceResult"
+    "checkACLOnAzureResult"
 })
-@XmlRootElement(name = "TraceResponse")
-public class TraceResponse {
+@XmlRootElement(name = "CheckACLOnAzureResponse")
+public class CheckACLOnAzureResponse {
 
-    @XmlElementRef(name = "TraceResult", namespace = "http://tempuri.org/", type = JAXBElement.class, required = false)
-    protected JAXBElement<ComputerInfo> traceResult;
+    @XmlElementRef(name = "CheckACLOnAzureResult", namespace = "http://tempuri.org/", type = JAXBElement.class, required = false)
+    protected JAXBElement<String> checkACLOnAzureResult;
 
     /**
-     * Gets the value of the traceResult property.
+     * Gets the value of the checkACLOnAzureResult property.
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link ComputerInfo }{@code >}
+     *     {@link JAXBElement }{@code <}{@link String }{@code >}
      *     
      */
-    public JAXBElement<ComputerInfo> getTraceResult() {
-        return traceResult;
+    public JAXBElement<String> getCheckACLOnAzureResult() {
+        return checkACLOnAzureResult;
     }
 
     /**
-     * Sets the value of the traceResult property.
+     * Sets the value of the checkACLOnAzureResult property.
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link ComputerInfo }{@code >}
+     *     {@link JAXBElement }{@code <}{@link String }{@code >}
      *     
      */
-    public void setTraceResult(JAXBElement<ComputerInfo> value) {
-        this.traceResult = ((JAXBElement<ComputerInfo> ) value);
+    public void setCheckACLOnAzureResult(JAXBElement<String> value) {
+        this.checkACLOnAzureResult = ((JAXBElement<String> ) value);
     }
 
 }

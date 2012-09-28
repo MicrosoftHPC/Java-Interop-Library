@@ -71,6 +71,7 @@ import org.w3c.dom.Element;
 import com.microsoft.hpc.scheduler.session.Constant;
 import com.microsoft.hpc.scheduler.session.servicecontext.Environment;
 import com.microsoft.hpc.scheduler.session.servicecontext.JavaTraceLevelConverterEnum;
+import com.microsoft.hpc.scheduler.session.servicecontext.ServiceContext;
 
 /**
  * @author t-hengz
@@ -84,6 +85,7 @@ public class ETWTraceEvent {
 	private UUID	messageid;
 	private UUID	dispatchid;
 	private int		sessionid;
+	private JavaTraceLevelConverterEnum traceLevel;
 	
     /**
      * @description get messageid dispatchid sessionid from headers
@@ -110,8 +112,7 @@ public class ETWTraceEvent {
                 	dispatchid = null;
                 }
             }
-			if (name.getLocalPart().equals(Constant.MESSAGEIDLOCALPART) &&
-	                name.getNamespaceURI().equals(Constant.HpcActionHeaderNS))
+			if (name.getLocalPart().equals(Constant.MESSAGEIDLOCALPART))
 			{
 				Element e = (Element) h.getObject();
 				//cause the format is urn:uuid:xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
@@ -126,45 +127,74 @@ public class ETWTraceEvent {
 	    
 	    //getsessionid
 	    sessionid = Integer.parseInt(Environment.getEnvironmentVariable(Constant.JobIDEnvVar));
+	    traceLevel = ServiceContext.getSoaDiagTraceLevel();
 	}
 	
-    /**
-     * @param message
-     */
-	public int TraceCritical(String msg)
+	/**
+	 * @param TraceLevel
+	 * @param id
+	 * @param message
+	 */
+	public int TraceEvent(JavaTraceLevelConverterEnum TraceLevel, int id, String message)
 	{
-		return UserEvent.WriteUserEvent(JavaTraceLevelConverterEnum.Critical, sessionid, messageid, dispatchid, msg);
+		return UserEvent.WriteUserEvent(TraceLevel, sessionid, messageid, dispatchid, message);
 	}
 	
-    /**
-     * @param message
-     */	
-	public int TraceError(String msg)
+	/**
+	 * 
+	 */
+	public void Flush()
 	{
-		return UserEvent.WriteUserEvent(JavaTraceLevelConverterEnum.Error, sessionid, messageid, dispatchid, msg);
+		return ;
 	}
 	
-    /**
-     * @param message
-     */	
-	public int TraceWarning(String msg)
+	/**
+	 * @param message
+	 */
+	public int TraceInformation(String message)
 	{
-		return UserEvent.WriteUserEvent(JavaTraceLevelConverterEnum.Warning, sessionid, messageid, dispatchid, msg);
+		return UserEvent.WriteUserEvent(JavaTraceLevelConverterEnum.Information, sessionid, messageid, dispatchid, message);
 	}
 	
-    /**
-     * @param message
-     */	
-	public int TraceInfo(String msg)
+	/**
+	 * @param TraceLevel
+	 * @param id
+	 * @param data
+	 */
+	public int TraceData(JavaTraceLevelConverterEnum TraceLevel, int id, Object data)
 	{
-		return UserEvent.WriteUserEvent(JavaTraceLevelConverterEnum.Information, sessionid, messageid, dispatchid, msg);
+		return TraceData(TraceLevel, id, new Object[]{data});
 	}
 	
-    /**
-     * @param message
-     */	
-	public int TraceVerbose(String msg)
+	/**
+	 * @param TraceLevel
+	 * @param id
+	 * @param data
+	 */
+	public int TraceData(JavaTraceLevelConverterEnum TraceLevel, int id, Object[] data)
 	{
-		return UserEvent.WriteUserEvent(JavaTraceLevelConverterEnum.Verbose, sessionid, messageid, dispatchid, msg);
+		String message = "";
+		boolean isfirst = true;
+		if (data!=null)
+		{
+			for (Object object : data)
+			{
+				if (object==null)
+					continue;
+				if (isfirst)
+					isfirst = false;
+				else
+					message += ",";
+				message += object.toString();
+
+			}
+		}
+		return UserEvent.WriteUserEvent(TraceLevel, sessionid, messageid, dispatchid, message);
 	}
+	
+	public int TraceTransfer(int id, String message, UUID relatedActivityId) 
+	{
+	    return UserEvent.WriteUserEvent(JavaTraceLevelConverterEnum.Information, sessionid, messageid, dispatchid, message);
+	}
+	
 }

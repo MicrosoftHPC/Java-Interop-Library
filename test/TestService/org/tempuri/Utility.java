@@ -13,19 +13,16 @@ package org.tempuri;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Date;
 
-import javax.xml.bind.JAXBElement;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import com.microsoft.hpc.aitestsvclib.session.RetryOperationError;
+import com.microsoft.hpc.session.RetryOperationError;
 
 class Utility {
-    private static com.microsoft.schemas._2003._10.serialization.ObjectFactory fact
-        = new com.microsoft.schemas._2003._10.serialization.ObjectFactory();
-    
-	public static boolean isNullOrEmpty(String str) {
+    public static boolean isNullOrEmpty(String str) {
 		return str == null || str.isEmpty();
 	}
 
@@ -42,8 +39,7 @@ class Utility {
 	    RetryOperationError err = new RetryOperationError();
 		err.setReason(fact.createRetryOperationErrorReason(reason));
 		ITestServiceEchoRetryOperationErrorFaultFaultMessage msg 
-			= new ITestServiceEchoRetryOperationErrorFaultFaultMessage(
-				"", err);
+			= new ITestServiceEchoRetryOperationErrorFaultFaultMessage("", err);
 		return msg;
 	}
 	
@@ -65,4 +61,23 @@ class Utility {
         XMLGregorianCalendar xcal = DatatypeFactory.newInstance().newXMLGregorianCalendar(gcal);
         return xcal;
     }
+    
+    public static XMLGregorianCalendar convertXMLGregorianCalendar(Date date) throws DatatypeConfigurationException
+    {
+        GregorianCalendar c = new GregorianCalendar();
+        c.setTime(date);
+        XMLGregorianCalendar cal = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
+        return cal;
+    }
+    
+    public static void sleep(long duration) 
+    {
+        try {
+            Thread.sleep(duration);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
 }

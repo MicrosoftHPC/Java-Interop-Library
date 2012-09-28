@@ -4,10 +4,7 @@ package com.microsoft.hpc.session;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -21,6 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
+ *         &lt;element name="lastFailedServiceId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="reason" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="retryCount" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *       &lt;/sequence>
@@ -31,21 +29,42 @@ import javax.xml.bind.annotation.XmlType;
  * 
  * 
  */
-@XmlRootElement(name="RetryOperationError",namespace="http://hpc.microsoft.com/session/")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RetryOperationError", propOrder = {
+    "lastFailedServiceId",
     "reason",
     "retryCount"
-}, namespace="http://hpc.microsoft.com/session/")
+})
 public class RetryOperationError {
-    
-    @XmlTransient
-    public static final String Action = "http://hpc.microsoft.com/session/RetryOperationError";
 
+    protected Integer lastFailedServiceId;
     @XmlElementRef(name = "reason", namespace = "http://hpc.microsoft.com/session/", type = JAXBElement.class, required = false)
     protected JAXBElement<String> reason;
-    @XmlElement(name = "retryCount", namespace = "http://hpc.microsoft.com/session/")
     protected Integer retryCount;
+
+    /**
+     * Gets the value of the lastFailedServiceId property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
+     */
+    public Integer getLastFailedServiceId() {
+        return lastFailedServiceId;
+    }
+
+    /**
+     * Sets the value of the lastFailedServiceId property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
+     */
+    public void setLastFailedServiceId(Integer value) {
+        this.lastFailedServiceId = value;
+    }
 
     /**
      * Gets the value of the reason property.

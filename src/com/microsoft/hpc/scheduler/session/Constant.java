@@ -305,6 +305,11 @@ public class Constant
      * @field MessageID LocalPart in Header
      **/
     final public static String MESSAGEIDLOCALPART = "MessageID";
+    
+    /**
+     * @field SoaDiagTraceLevel
+     */
+    final public static String SOADIAGTRACELEVEL = "SoaDiagTraceLevel";
  
     /**
      * @field The 5 trace level used to call .dll when using etw
