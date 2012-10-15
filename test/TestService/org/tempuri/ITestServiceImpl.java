@@ -16,6 +16,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.management.ManagementFactory;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.security.MessageDigest;
@@ -105,7 +106,8 @@ public class ITestServiceImpl implements ITestService
 
     private String                                                           logfile;
     private Object                                                           log                           = new Object();
-
+    private static int                                                       processId                     = -1;
+    
     static
     {
         String dummy = System.getenv(EnvVarNames.CCP_TASKSYSTEMID);
@@ -182,6 +184,10 @@ public class ITestServiceImpl implements ITestService
         {
             e.printStackTrace();
         }
+        
+        String pid = ManagementFactory.getRuntimeMXBean().getName();
+        int index = pid.indexOf("@");
+        processId = Integer.parseInt(pid.substring(0, index));
     }
 
     public ITestServiceImpl()
@@ -198,6 +204,7 @@ public class ITestServiceImpl implements ITestService
                 e.printStackTrace();
             }
         }
+        
     }
 
     private synchronized void writeLog(String logDir, int refID, String msg, Object... args)
@@ -1473,7 +1480,7 @@ public class ITestServiceImpl implements ITestService
         info.setJobID(jobid);
         info.setTaskID(taskid);
         info.setScheduler(svcObjFact.createComputerInfoScheduler(scheduler));
-
+        info.setProcessId(this.processId);
         try
         {
             info.setCallIn(Utility.getXMLCurrentTime());

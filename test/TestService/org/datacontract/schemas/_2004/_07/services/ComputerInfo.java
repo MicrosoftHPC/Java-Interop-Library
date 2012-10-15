@@ -28,6 +28,7 @@ import com.microsoft.schemas._2003._10.serialization.arrays.ArrayOfKeyValueOfstr
  *         &lt;element name="envs" type="{http://schemas.microsoft.com/2003/10/Serialization/Arrays}ArrayOfKeyValueOfstringstring" minOccurs="0"/>
  *         &lt;element name="jobID" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="onExitCalled" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
+ *         &lt;element name="processId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="refID" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="runAsUser" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="scheduler" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
@@ -50,6 +51,7 @@ import com.microsoft.schemas._2003._10.serialization.arrays.ArrayOfKeyValueOfstr
     "envs",
     "jobID",
     "onExitCalled",
+    "processId",
     "refID",
     "runAsUser",
     "scheduler",
@@ -71,6 +73,8 @@ public class ComputerInfo {
     protected Integer jobID;
     @XmlElement(name = "onExitCalled", namespace = "http://schemas.datacontract.org/2004/07/services")
     protected Boolean onExitCalled;
+    @XmlElement(name = "processId", namespace = "http://schemas.datacontract.org/2004/07/services")
+    protected Integer processId;
     @XmlElement(name = "refID", namespace = "http://schemas.datacontract.org/2004/07/services")
     protected Integer refID;
     @XmlElementRef(name = "runAsUser", namespace = "http://schemas.datacontract.org/2004/07/services", type = JAXBElement.class, required = false)
@@ -232,6 +236,30 @@ public class ComputerInfo {
      */
     public void setOnExitCalled(Boolean value) {
         this.onExitCalled = value;
+    }
+    
+    /**
+     * Gets the value of the processId property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
+     */
+    public Integer getProcessId() {
+        return processId;
+    }
+
+    /**
+     * Sets the value of the processId property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
+     */
+    public void setProcessId(Integer value) {
+        this.processId = value;
     }
 
     /**

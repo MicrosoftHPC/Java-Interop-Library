@@ -10,6 +10,7 @@
       <xs:element minOccurs="0" name="envs" nillable="true" xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" type="q1:ArrayOfKeyValueOfstringstring" />
       <xs:element minOccurs="0" name="jobID" type="xs:int" />
       <xs:element minOccurs="0" name="onExitCalled" type="xs:boolean" />
+      <xs:element minOccurs="0" name="processId" type="xs:int" />
       <xs:element minOccurs="0" name="refID" type="xs:int" />
       <xs:element minOccurs="0" name="runAsUser" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="scheduler" nillable="true" type="xs:string" />
@@ -98,6 +99,7 @@
       <xs:element minOccurs="0" name="instanceId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="refID" type="xs:int" />
       <xs:element minOccurs="0" name="responseData" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="responseDataSet" nillable="true" xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" type="q2:ArrayOfanyType" />
       <xs:element minOccurs="0" name="startTime" type="xs:dateTime" />
     </xs:sequence>
   </xs:complexType>
