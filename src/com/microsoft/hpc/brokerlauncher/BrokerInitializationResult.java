@@ -28,6 +28,7 @@ import com.microsoft.schemas._2003._10.serialization.arrays.ArrayOfstring;
  *         &lt;element name="MaxMessageSize" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/>
  *         &lt;element name="ResponseEpr" type="{http://schemas.microsoft.com/2003/10/Serialization/Arrays}ArrayOfstring" minOccurs="0"/>
  *         &lt;element name="ServiceOperationTimeout" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
+ *         &lt;element name="SupportsMessageDetails" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -45,7 +46,8 @@ import com.microsoft.schemas._2003._10.serialization.arrays.ArrayOfstring;
     "controllerEpr",
     "maxMessageSize",
     "responseEpr",
-    "serviceOperationTimeout"
+    "serviceOperationTimeout",
+    "supportsMessageDetails"
 })
 public class BrokerInitializationResult {
 
@@ -65,6 +67,8 @@ public class BrokerInitializationResult {
     protected JAXBElement<ArrayOfstring> responseEpr;
     @XmlElement(name = "ServiceOperationTimeout")
     protected Integer serviceOperationTimeout;
+    @XmlElement(name = "SupportsMessageDetails")
+    protected boolean supportsMessageDetails;
 
     /**
      * Gets the value of the brokerEpr property.
@@ -256,6 +260,27 @@ public class BrokerInitializationResult {
      */
     public void setServiceOperationTimeout(Integer value) {
         this.serviceOperationTimeout = value;
+    }
+    
+    /**
+     * Gets the value of the supportsMessageDetails property.
+     * @return
+     *    possible object is 
+     *    {@link boolean}
+     */
+    public boolean getSupportsMessageDetails() {
+        return this.supportsMessageDetails;
+    }
+    
+    /**
+     * Sets the value of the supportsMessageDetails property.
+     * 
+     * @param value
+     *     allowed object is 
+     *     {@link boolean}
+     */
+    public void setsupportsMessageDetails(boolean value) {
+        this.supportsMessageDetails = value;
     }
 
 }
