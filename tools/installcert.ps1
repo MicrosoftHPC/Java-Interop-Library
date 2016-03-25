@@ -249,6 +249,6 @@ $thumbprint = $certificates[2+($certChoice-1)*3]
 netsh.exe http add sslcert "ipport=0.0.0.0:$port" "certhash=$thumbprint" "appid=$appId"
 
 "Open a firewall exception for the  Web Service"
-netsh.exe firewall add portopening protocol=tcp "port=$port" name="soa Web Service"
+netsh advfirewall firewall add rule name="SOA Web Service" protocol=TCP dir=in localport="$port" action=allow
 
 

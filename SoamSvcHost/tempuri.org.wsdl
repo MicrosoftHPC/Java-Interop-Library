@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions name="SoamSvc"  targetNamespace="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://tempuri.org/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://tempuri.org/Imports">
+            <xsd:import namespace="http://tempuri.org/" schemaLocation="tempuri.org.xsd" />
+            <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" schemaLocation="schemas.microsoft.com.2003.10.Serialization.xsd" />
+        </xsd:schema>
+    </wsdl:types>
+
+    <wsdl:message name="ISoamSvc_SoamInvoke_InputMessage">
+        <wsdl:part name="parameters" element="tns:SoamInvoke" />
+    </wsdl:message>
+    <wsdl:message name="ISoamSvc_SoamInvoke_OutputMessage">
+        <wsdl:part name="parameters" element="tns:SoamInvokeResponse" />
+    </wsdl:message>
+    <wsdl:message name="ISoamSvc_SoamCommonData_InputMessage">
+        <wsdl:part name="parameters" element="tns:SoamCommonData" />
+    </wsdl:message>
+    <wsdl:message name="ISoamSvc_SoamCommonData_OutputMessage">
+        <wsdl:part name="parameters" element="tns:SoamCommonDataResponse" />
+    </wsdl:message>
+
+    <wsdl:portType name="ISoamSvc">
+        <wsdl:operation name="SoamInvoke">
+            <wsdl:input wsaw:Action="http://tempuri.org/ISoamSvc/SoamInvoke" message="tns:ISoamSvc_SoamInvoke_InputMessage" />
+            <wsdl:output wsaw:Action="http://tempuri.org/ISoamSvc/SoamInvokeResponse" message="tns:ISoamSvc_SoamInvoke_OutputMessage" />
+        </wsdl:operation>
+         <wsdl:operation name="SoamCommonData">
+            <wsdl:input wsaw:Action="http://tempuri.org/ISoamSvc/SoamCommonData" message="tns:ISoamSvc_SoamCommonData_InputMessage" />
+            <wsdl:output wsaw:Action="http://tempuri.org/ISoamSvc/SoamCommonDataResponse" message="tns:ISoamSvc_SoamCommonData_OutputMessage" />
+        </wsdl:operation>
+   </wsdl:portType>
+    
+    <wsdl:binding name="DefaultBinding_ISoamSvc_11" type="tns:ISoamSvc">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+        <wsdl:operation name="SoamInvoke">
+            <soap:operation soapAction="http://tempuri.org/ISoamSvc/SoamInvoke" style="document" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="SoamCommonData">
+            <soap:operation soapAction="http://tempuri.org/ISoamSvc/SoamCommonData" style="document" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:binding name="DefaultBinding_ISoamSvc_12" type="tns:ISoamSvc">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+        <wsdl:operation name="SoamInvoke">
+            <soap12:operation soapAction="http://tempuri.org/ISoamSvc/SoamInvoke" soapActionRequired="true" style="document" />
+            <wsdl:input>
+                <soap12:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="SoamCommonData">
+            <soap12:operation soapAction="http://tempuri.org/ISoamSvc/SoamCommonData" style="document" />
+            <wsdl:input>
+                <soap12:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="SoamSvc">
+        <wsdl:port name="DefaultBinding_ISoamSvc" binding="tns:DefaultBinding_ISoamSvc_11">
+            <soap:address location="https://localhost/Broker" />
+        </wsdl:port>
+        <wsdl:port name="DefaultBinding_ISoamSvc_12" binding="tns:DefaultBinding_ISoamSvc_12">
+            <soap12:address location="https://localhost/Broker" />
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

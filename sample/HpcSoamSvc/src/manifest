@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Class-Path: Microsoft-HpcSession-3.0.jar HpcSoam.jar file:///c:\java\apache-cxf-2.7.17\lib\cxf-manifest.jar
+

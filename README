@@ -2,104 +2,123 @@ Introduction
 ============
 
 	This is the Java library providing interop capability with the SOA feature
-	on Windows HPC cluster.
+	on Windows HPC cluster. 
 
-	All the source code reside in src\ folder. Samples are put under samples\.
-	
+	HpcServiceHost\	-	hpc host service and session contract. output : Microsoft-HpcServiceHost-3.0.jar and Microsoft-HpcSession-3.0.jar
+	sample\
+	  |-  HpcSoam\		-	common interfaces and classes for hpc soam service. output : HpcSoam.jar
+	  |-  HpcSoamSvc\	-	hpc soam host service. output : HpcSoamSvc.jar
+	  |-  SampleService\	-	sample soam service program. output : SampleService.jar
+	  |-  SampleClient\	-	sample Java client for sample soam service program. output : HelloWorld.class
+	  |-  CSharpClient\	-	sample C# client for sample soam service program. output : SampleClientSoam.exe
+	SoamSvcHost		-	%SOA_HOME% for running sample soam service program on Windows
+	SoamSvcHostLinux	-	${SOA_HOME} for running sample soam service program on Linux
+
+
 Prerequisites
 =============
 
-    1) JDK 1.6.0.23
-       Please follow JDK's instructions on how to install.
+	1) JDK 1.8.0.60
+	Download Jave SE from http://www.oracle.com/technetwork/java/javase/downloads/index-jsp-138363.html
        
-    2) CXF 2.4.0 (Warning: other versions of CXF may not work.)
-       Download apache-cxf-2.4.0.zip to home directory. unzip it there.
+	2) CXF 2.7.17 (Warning: 3.x versions of CXF does not work.)
+	Download Apache CXF from http://cxf.apache.org/download.html
+
 
 How to build
 ============
 
-	Assuming you are on Linux,
+	1) On compute nodes, download and install all "Prerequisites".
+	2) Switch to HpcServiceHost/src/ directory and edit makejar.sh .
+	   ( makejar.cmd if on Windows ).
+	3) Make sure JAVA_HOME, CXF_HOME, SOA_HOME point to the correct location.
+	   E.g.
+		export JAVA_HOME=/usr/java/jdk1.8.0_60
+		export CXF_HOME=/opt/apache-cxf-2.7.17
+		export SOA_HOME=/soa/SoamSvcHostLinux
+	4) Run "makejar.sh" without any argument. 
+	5) Do the same things in sample/HpcSoam/src/ , sample/HpcSoamSvc/src/ , sample/SampleService/src/ .
+	6) JAR files should be copied to SOA_HOME directory automatically. 
+	    You should see the following files added into your SOA_HOME directory.
+		Microsoft-HpcServiceHost-3.0.jar
+		Microsoft-HpcSession-3.0.jar
+		HpcSoam.jar
+		HpcSoamSvc.jar
+		SampleService.jar
 
-	1) On client machine download and install all "Prerequisites".
-	
-	2) Switch to src\ directory and edit makejar.sh 
-	   ( makejar.cmd if you are one Windows ).
-	
-	3) Make sure CXF_HOME points to the correct location.
-	   E.g., "export CXF_HOME=~/apache-cxf-2.4.0".
-	   
-	4) Run "makejar.sh" without any argument.
 
 How to setup the system
 =======================
+
+	1) On compute nodes, switch to SOA_HOME directory and edit SoamSvcLinux.config .
+	  ( SoamSvc.config if on Windows ).
+	2) In the section <microsoft.Hpc.Session.ServiceRegistration>, make sure all paths point to the correct locations.
+	  set ENABLE_BACKEND_SECURITY to "true" if you want to encrypt messages between broker and compute nodes.
+	3) Copy this config file to %CCP_HOME%\ServiceRegistration directory on your head node and broker nodes.
+	  ( The default path of %CCP_HOME% should be C:\Program Files\Microsoft HPC Pack 2012\ . )
+	4) if you set ENABLE_BACKEND_SECURITY to "true" in step 2, switch to SOA_HOME directory again and run createcert.sh .
+	  ( createcert.bat if on Windows ).
+	5) The script will create certificate files ( keystore ) for encryption between compute nodes and broker nodes. 
+	6) Install the created "brokerkey.pfx" and "brokertrust.cer" to Local Machine\Personal on your broker nodes.
+
+
+Add certificate for Java client  ( not necessary )
+=======================
+
+	Please note the below steps on linux client are only required when the preference file
+	 ~/.java/.userPrefs/com/microsoft/hpc/scheduler/session/prefs.xml exists and contains the following entry:
+		<map MAP_XML_VERSION="1.0">
+		  <entry key="RequireSSLValidation" value="true"/>
+		</map>
+	If the preference file does not exist or the value is "false" for the key "RequireSSLValidation", the certificates are not required.
+
 	On both head node and broker node, setup certificate. 
 	(NOTE: if your broker node is your head node, only do it for once.)
 	
 	a) make sure makecert.exe is in your PATH.
-	
 		NOTE: you might need to install Windows SDK to get makecert.exe.
 		Or install Visual Studio 2010 to get Windows SDK.
-
-	b) Create a self-signed certificate. Run the following command in 
-	   elevated console:
-	   
+	b) Create a self-signed certificate. Run the following command in elevated console:
 		createcert.cmd <nodename>
-		
-	   Createcert.cmd can be found under ~\tools\ directory.
-		
+		createcert.cmd can be found under ~\tools\ directory.
 	c) Install the certificate. In PowerShell, run as an admin user,
-	
 		- Set-ExecutionPolicy Unrestricted
 		- installcert.ps1 install
 		- select the new certificate just created above. It's the one named 
 		  "CN=<nodename>". Normally it should be the last one.
 
-
 	On java client (Linux) machine, set up SSL trust between Java client and Headnode/BrokerNode.
-            
-         - Create the environment variable JAVA_HOME and set it to the Java installation path. Compile the GetCert.java under ~/tools/
 
-                    - "$JAVA_HOME/bin/javac" GetCert.java
+	a) Create the environment variable JAVA_HOME and set it to the Java installation path. Compile the GetCert.java under ~/tools/
+	b) "$JAVA_HOME/bin/javac" GetCert.java
+	c) Create head node and broker node certificates.
+		- "$JAVA_HOME/bin/java" GetCert <HeadNode>
+		- The above should create a file called "cacerts_new"
+		- If broker node is a different node, call "$JAVA_HOME/bin/java" GetCert <BrokerNode>
+		- The above should update the file "cacerts_new" with the certificate for broker node
+		- copy ecacerts to overwrite $JAVA_HOME/jre/lib/security/cacerts
+		  (NOTE: You need administrate privilege on Vista/7)
 
-         a) Create head node and broker node certificates.
-            - "$JAVA_HOME/bin/java" GetCert <HeadNode>
-            - The above should create a file called "cacerts_new"
-            - If broker node is a different node, call "$JAVA_HOME/bin/java" GetCert <BrokerNode>
-            - The above should update the file "cacerts_new" with the certificate for broker node
-            - copy ecacerts to overwrite $JAVA_HOME/jre/lib/security/cacerts (NOTE: You need administrate privilege on Vista/7)
 
-	Please note the above step on linux client is only required when the preference file ~/.java/.userPrefs/com/microsoft/hpc/scheduler/session/prefs.xml exists and contains the following entry:
-	<map MAP_XML_VERSION="1.0">
-	  <entry key="RequireSSLValidation" value="true"/>
-	</map>
-
-	If the preference file does not exist or the value is "false" for the key "RequireSSLValidation", the certificates are not required.
-
-	
 How to use
 ==========
-
-	Refer to sample\helloworld\README.Linux.txt for how to use this library.
-
-How to get WSDL
-===============
-
-	Normally, WSDL is not needed since the Java Session API has already been
-	created. However, if you wish to develope your own client (e.g., a python
-	API), you need to configure the cluster to expose WSDL correctly. 
 	
-	To do this, on head node, edit %CCP_HOME%Bin\HpcSession.exe.config. Replace 
-	"localhost:443" with your <headnode>:443.
+	To run Java client :
 
-	For example, assume your headnode is called "HeadNode1"
-   
-	<services>
-		<service name="Microsoft.Hpc.Scheduler.Session.Internal.SessionLauncher.SessionLauncher" behaviorConfiguration="EnableMetadata">
-			<host>
-				<baseAddresses>
-					<add baseAddress="https://HeadNode1:443/SessionLauncher"/>
-				</baseAddresses>
-			</host>
-			...
-	</service>
-        
+	1) Go to sample/SampleClient/src .
+	2) Edit RunTest.sh for JAVA_HOME, CXF_HOME and SOA_HOME path.
+	  ( RunTest.cmd if on Windows ).
+	3) Edit RunTest.sh for Keystore_Password if necessary.
+	4) Edit HelloWorld.java for username, password, headnode, and service name.
+	5) Run "RunTest.sh src" to build.
+	6) Run "RunTest.sh run" to run.
+
+	To run C# client :
+
+	1) Go to sample/CSharpClient .
+	2) Open SampleClient.sln with Visual Studio.
+	4) Edit Program.cs for headnode, and service name.
+	5) Build the project.
+	6) Run "SampleClientSoam.exe" to run.
+
+

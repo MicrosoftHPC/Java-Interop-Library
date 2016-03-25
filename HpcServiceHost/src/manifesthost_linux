@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: com.microsoft.hpc.servicehost.Main
+Class-Path: . Microsoft-HpcSession-3.0.jar /opt/apache-cxf-2.7.17/lib/cxf-manifest.jar HpcSoam.jar jackson-all-1.9.0.jar
+
